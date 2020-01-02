@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/89cc030952.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="main.css"></script>
-    <title>ACAVUCAB - Nómina de Empleados</title>
+    <title>ACAVUCAB - Roles</title>
 </head>
 
 <body>
@@ -20,18 +20,18 @@
 
 
     <div class="container mt-2 pt-2">
-        <h2 class="display-4 text-center">Nómina </h2>
+        <h2 class="display-4 text-center">Roles</h2>
         <hr class="bg-warning">
             <table class="table table-hover">
                     <thead class="bg-warning">
                         <tr>
-                            <th scope="col" class="text-center">ddsa</th>
-                            <th scope="col" class="text-center">Nombre</th>
-                            <th scope="col" class="text-center">Apellido</th>
-                            <th scope="col" class="text-center">Fecha NAC</th>
-                            <th scope="col" class="text-center">Cargo</th>
-                            <th scope="col" class="text-center"></th>
-                            <th colspan="2">&nbsp;</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center" width='700px'>Nombre</th>
+                            <th colspan="1">&nbsp;</th>
+                            <th>
+                                <a href="{{ route('registrar.get.rol')}}" class="btn btn-md btn-warning pull-right" style="background-color:greenyellow">Crear Rol</a>
+                            
+                            </th>
                             <!--
                             <th scope="col" class="text-center">Cargo</th>
                             <th scope="col" class="text-center">Horas laborales</th>
@@ -40,26 +40,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach ($empleados as $item)
+                            @foreach ($roles as $item)
                         <tr>
-                                <th>{{$item->cedula_empleado}}</th>
-                                <th>{{$item->primer_nombre_empleado}}</th>
-                                <th>{{$item->primer_apellido_empleado}}</th>
-                                <th>{{$item->fecha_nacimiento}}</th>
-                                
-                                <th>{{$item->cargo->nombre_cargo}}</th>
+                                <th class="text-center">{{$item->id}}</th>
+                                <th class="text-center">{{$item->name}}</th>
+                              
 
-                            @can('ConsultarEmpleado')
-                            <td class="text-center"><a href="{{route('ConsultarEmpleado', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar datos</a></td>
+                            @can('consultar.rol')
+                            <td class="text-center"><a href="{{route('consultar.rol', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar datos</a></td>
                             @endcan 
                             
                             <td>
-                                @can('eliminar.empleado')
-                                <form action="{{route ('eliminar.empleado',     $item->cedula_empleado)}}" method="POST" class="d-inline">
+                                @can('eliminar.rol')
+                                <form action="{{route ('eliminar.rol',     $item->id)}}" method="POST" class="d-inline">
 
                                     @method('DELETE')
                                     @csrf
-                                    <button style="background-color: greenyellow"type="submit" class="btn btn-warning">Eliminar Empleado</button>
+                                    <button style="background-color: greenyellow"type="submit" class="btn btn-warning">Eliminar</button>
                         
                                 </form>
                                 @endcan
@@ -68,7 +65,7 @@
                              @endforeach
                     </tbody>
                 </table>
-                {{ $empleados->links() }}
+                {{ $roles->links() }}
     </div>
     
 <!-- Pagination -->

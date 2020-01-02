@@ -120,7 +120,7 @@ Route::get('inventario', function () {
 
 Route::get('menuAdministrador', function () {
     return view('menuAdministrador');
-});
+})->name('menuAdministrador');
 
 Route::get('menuClienteNatural', function () {
     return view('menuClienteNatural');
@@ -225,14 +225,55 @@ Route::get('ventaEntrada', function () {
     return view('ventaEntrada');
 });
 
+/*Route::get('registrarRol', function () {
+    return view('registrarRol');
+});
+*/
 // Crud de empleado
-Route::post('/', 'registrarEmpleadoCon@crear')->name('registrar.crear');
 
-Route::get('ConsultarEmpleado/{cedula_empleado?}','registrarEmpleadoCon@consultar')->name('ConsultarEmpleado');
 
-Route::put('ConsultarEmpleado/{cedula_empleado?}','registrarEmpleadoCon@editar')->name('editar.empleado');
+Route::middleware(['auth'])->group(function(){
 
-Route::delete('ConsultarEmpleado/{cedula_empleado?}', 'registrarEmpleadoCon@eliminar')->name('eliminar.empleado');
+    //Empleados
+    Route::post('/', 'registrarEmpleadoCon@crear')->name('registrar.crear')->middleware('can:registrar.crear');
+
+    Route::get('ConsultarEmpleado/{cedula_empleado?}','registrarEmpleadoCon@consultar')->name('ConsultarEmpleado')                              ->middleware('can:ConsultarEmpleado');
+
+    Route::put('ConsultarEmpleado/{cedula_empleado?}','registrarEmpleadoCon@editar')->name('editar.empleado')->middleware('can:editar.empleado');
+
+    Route::delete('ConsultarEmpleado/{cedula_empleado?}', 'registrarEmpleadoCon@eliminar')->name('eliminar.empleado')->middleware('can:eliminar.empleado');
+
+    //Usuariooos
+
+    Route::get('usuarios', 'UserController@index')->name('index.usuario')->middleware('can:index.usuario');
+
+    Route::get('consultarUsuario/{id?}','UserController@consultar')->name('consultar.usuario')                              ->middleware('can:consultar.usuario');
+
+    Route::put('consultarUsuario/{id?}','UserController@editar')->name('editar.usuario')->middleware('can:editar.usuario');
+
+    Route::delete('consultarUsuario/{id?}', 'UserController@eliminar')->name('eliminar.usuario')->middleware('can:eliminar.usuario');
+
+
+    
+    //Roles
+
+    Route::get('registrarRol', 'RoleController@formulario')->name('registrar.get.rol')->middleware('can:registrar.rol');
+    Route::post('registrarRol', 'RoleController@crear')->name('registrar.rol')->middleware('can:registrar.rol');
+
+    Route::get('roles', 'RoleController@index')->name('index.rol')->middleware('can:index.rol');
+
+    Route::get('consultarRol/{id?}','RoleController@consultar')->name('consultar.rol')                              ->middleware('can:consultar.rol');
+
+    Route::put('consultarRol/{id?}','RoleController@editar')->name('editar.rol')->middleware('can:editar.rol');
+
+    Route::delete('consultarRol/{id?}', 'RoleController@eliminar')->name('eliminar.rol')->middleware('can:eliminar.rol');
+
+
+
+
+
+});
+
 
 //Parte de registrar usuario 
 
@@ -253,7 +294,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Registrar empleado
+//Registrar cliente
 
 Route::get('registrarClienteNatural','clienteControlador@vista')->name('registrarClienteNatural');
 

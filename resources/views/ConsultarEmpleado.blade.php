@@ -151,13 +151,7 @@
 
         </form>
 
-        <form action="{{route ('eliminar.empleado',     $empleado->cedula_empleado)}}" method="POST" class="d-inline">
-
-            @method('DELETE')
-            @csrf
-            <button style="background-color: greenyellow"type="submit" class="btn btn-warning">Eliminar Empleado</button>
-
-        </form>
+       
         </div>
         
     </div>

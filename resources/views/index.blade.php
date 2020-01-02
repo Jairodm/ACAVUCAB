@@ -58,7 +58,7 @@
                             <?php 
                             
                                     use Illuminate\Support\Facades\Auth;
-                                   
+                                    
                                     if (auth::user()->name =='1')
                                     echo '<a class="dropdown-item" href="consultarClienteNatural">Mi cuenta</a>'
 
@@ -69,7 +69,11 @@
                             para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
                             ConsultarEmpleado o ConsultarProveedor-->
                             <a class="dropdown-item" href="miscompras">Mis compras</a>
+
+                            @can('ConsultarEmpleado')
                             <a class="dropdown-item" href="menuAdministrador">Administrador</a>
+                            @endcan
+
                             <a class="dropdown-item" href="menuProveedor">Proveedor</a>
                             <a class="dropdown-item" href="menuRegistro">Registrarse</a>
                             <div class="dropdown-divider"></div>

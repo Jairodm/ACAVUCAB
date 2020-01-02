@@ -108,7 +108,19 @@
                     style="position:absolute; top:63%; left:54%; height:100px; width:450px; font-size:30px; border-radius:20px;"
                     type="button" class="btn btn-warning">Registrar evento
                 </button>
-            </a>
+        </a>
+        <a href="usuarios">
+            <button
+                style="position:absolute; top:82%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
+                type="button" class="btn btn-warning">Usuarios
+            </button>
+        </a>
+        <a href="roles">
+            <button
+                style="position:absolute; top:82%; left:54%; height:100px; width:450px; font-size:30px; border-radius:20px;"
+                type="button" class="btn btn-warning">Roles
+            </button>
+        </a>
 
     </div>
 

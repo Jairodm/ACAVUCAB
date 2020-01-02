@@ -17,6 +17,7 @@ class registrarEmpleadoCon extends Controller
 
     public function nomina() {
         $empleados = Empleado::all();
+        $empleados = Empleado::paginate(5);
         return view('nómina', compact('empleados'));
     }
 
