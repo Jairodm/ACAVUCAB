@@ -17,8 +17,11 @@ class RoleController extends Controller
 
     public function consultar($id){
 
-        $permissions = Permission::get();
+
         $roles = Role::findOrFail($id);
+
+        $permissions = Permission::get();
+        
         return view('consultarRol',compact('roles','permissions'));
 
     }

@@ -56,8 +56,8 @@
 
                   <div class="form-group">
 
-                        <label>{{ Form::radio('special','all-access')}}  Acceso total</label>
-                        <label>{{ Form::radio('special','no-access')}}  Ningún Acceso</label>
+                        <label>{{ Form::radio('special','all-access', $roles->special == 'all-access')}}  Acceso total</label>
+                        <label>{{ Form::radio('special','no-access',$roles->special == 'no-access')}}  Ningún Acceso</label>
                   </div>
 
                 <h4>Lista de Permisos</h4>
@@ -70,8 +70,9 @@
                                 <li>
 
                                         <label>
-                                            {{  Form::checkbox('permissions[]',$permission->id,null)}}
+                                            {{  Form::checkbox('permissions[]',$permission->id,  $roles->permissions()->find($permission->id))}}
                                             {{ $permission->name}}
+                                       
                                         </label>
                                 </li>
                             @endforeach

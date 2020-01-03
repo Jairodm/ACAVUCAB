@@ -28,9 +28,15 @@
                         aria-haspopup="true" aria-expanded="false">
                         <span class="fas fa-user"></span>Mi cuenta</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="inicioSesion">Iniciar sesión</a>
-                        <a class="dropdown-item" href="#">Mi cuenta</a>
 
+                        @if(!auth()->user())
+                        <a class="dropdown-item" href="{{route('login')}}">Iniciar sesión</a>
+                        <a class="dropdown-item" href="menuRegistro">Registrarse</a>
+                        <div class="dropdown-divider"></div>
+                        @else
+                        
+                        <a class="dropdown-item" href="#">Mi cuenta</a>
+                        
 
                         <!--Aquí iría una comprobación del tipo de usuario logeado
                         para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
@@ -42,9 +48,22 @@
                         @endcan
 
                         <a class="dropdown-item" href="menuProveedor">Proveedor</a>
-                        <a class="dropdown-item" href="menuRegistro">Registrarse</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+           
+
+    
+                        <!-- Cerraaaar sesión -->
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Cerrar sesión') }}
+                        </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+
+
+                        @endif
                     </div>
                 </li>
                 <li class="nav-item">

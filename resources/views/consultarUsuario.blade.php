@@ -53,7 +53,7 @@
                                 <li>
 
                                         <label>
-                                            {{  Form::checkbox('roles[]',$rol->id,null)}}
+                                            {{  Form::checkbox('roles[]',$rol->id,$usuario->roles()->find($rol->id))}}
                                             {{ $rol->name}}
                                         </label>
                                 </li>
