@@ -17,9 +17,9 @@ class clienteControlador extends Controller
 {
     public function vista(){
       
-        $estado = lugar::where('fk_lugar',null)->pluck('nombre_lugar');
-        $municipio = lugar::where('tipo_lugar', 'Municipio')->pluck('nombre_lugar');
-        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->pluck('nombre_lugar');
+        $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $municipio = lugar::where('tipo_lugar', 'Municipio')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
 
         return view('registrarClienteNatural', compact('estado','municipio','parroquia'));
 
@@ -87,4 +87,15 @@ class clienteControlador extends Controller
  
      }
 
+
+
+     public function vistajuridico(){
+      
+        $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $municipio = lugar::where('tipo_lugar', 'Municipio')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+
+        return view('registrarClienteJuridico', compact('estado','municipio','parroquia'));
+
+    }
 }

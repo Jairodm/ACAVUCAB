@@ -225,10 +225,7 @@ Route::get('ventaEntrada', function () {
     return view('ventaEntrada');
 });
 
-/*Route::get('registrarRol', function () {
-    return view('registrarRol');
-});
-*/
+
 // Crud de empleado
 
 
@@ -301,6 +298,12 @@ Route::get('registrarClienteNatural','clienteControlador@vista')->name('registra
 Route::post('registrarClienteNatural', 'clienteControlador@crear')->name('cliente.natural.crear');
 
 Route::get('consultarClienteNatural','clienteControlador@consultar')->name('consultarClienteNatural');
+
+Route::get('registrarClienteJuridico','clienteControlador@vistajuridico')->name('registrarClienteJuridico');
+
+Route::post('registrarClienteJuridico', 'clienteControlador@crearjuridico')->name('cliente.juridico.crear');
+
+
 
 
 //cervezaa
