@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Usuario;
+use App\Empleado;
+use Illuminate\Support\Facades\Hash;
 use Caffeinated\Shinobi\Models\Role;
 
 class UserController extends Controller
@@ -43,4 +46,33 @@ class UserController extends Controller
         
         return redirect()->route('index.usuario');
     }
+
+    public function usuarioEmpleado(Request $request)
+    {
+        $request->all();
+        $usuario = new Usuario;
+        $usuario->nombre_usuario = $request->email;
+        $usuario->contraseña = $request->password;
+        $usuario->fk_rol = 1;
+        $usuario->fk_empleado = $request->get('cedula');
+        $usuario->save();
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        
+        $user->roles()->attach(Role::where('name', 'Cliente')->first());
+
+        return redirect('usuarios');
+    }
+
+    public function viewRegistrarUsuario() {
+        
+        $empleados = Empleado::orderby('cedula_empleado','ASC')->get();
+
+        return view('registrarUsuario', compact('empleados'));
+    }
+
 }

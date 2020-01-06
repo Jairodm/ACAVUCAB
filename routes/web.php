@@ -11,6 +11,7 @@
 |
 */
 
+use PHPJasper\PHPJasper as JasperPHP; 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -144,6 +145,8 @@ Route::get('modificarDivisa', function () {
 
 Route::get('nómina', 'registrarEmpleadoCon@nomina')->name('nómina');
 
+Route::get('divisas', 'consultarDivisa@consultar')->name('divisas');
+
 Route::get('olvidoContrasena', function () {
     return view('olvidoContrasena');
 });
@@ -266,9 +269,6 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('consultarRol/{id?}', 'RoleController@eliminar')->name('eliminar.rol')->middleware('can:eliminar.rol');
 
 
-
-
-
 });
 
 
@@ -282,6 +282,11 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+
+
+Route::get('registrarUsuario', 'UserController@viewRegistrarUsuario')->name('registrarUsuario');
+Route::post('crearUsuario', 'UserController@usuarioEmpleado')->name('usuario.empleado');
+
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -303,6 +308,11 @@ Route::get('registrarClienteJuridico','clienteControlador@vistajuridico')->name(
 
 Route::post('registrarClienteJuridico', 'clienteControlador@crearjuridico')->name('cliente.juridico.crear');
 
+//utilizo el mismo controlador de cliente pero no deberia
+Route::get('registrarProveedor','clienteControlador@vistaproveedor')->name('registrarProveedor');
+
+Route::post('registrarProveedor', 'clienteControlador@crearproveedor')->name('proveedor.crear');
+
 
 
 
@@ -320,4 +330,29 @@ Route::get('ConsultarProductoCliente/{codigo_cerveza?}','consultarProductoClient
 
 Route::get('inventario','inventarioControlador@inventario')->name('inventario');
 
+
+Route::get('/reporte', function () {
+    //require base_path() . '/vendor/autoload.php';
+
+ // Crear el objeto JasperPHP
+ $jasper = new JasperPHP;
+    
+ // Generar el Reporte
+ $jasper->process(
+     // Ruta y nombre de archivo de entrada del reporte
+     base_path() . '/vendor/geekcom/phpjasper/examples/carnet.jasper', 
+     base_path() . '/vendor/geekcom/phpjasper/examples/ejemplo', // Ruta y nombre de archivo de salida del reporte (sin extensión)
+     array('pdf', 'rtf'), // Formatos de salida del reporte
+     array('php_version' => phpversion()), // Parámetros del reporte
+     array(
+        'driver' => 'postgres',
+        'username' => 'postgres',
+        'host' => '127.0.0.1',
+        'database' => 'ProyectoACAVUCAB',
+        'port' => '5432',
+      )
+ )->execute();
+
+ return view('welcome');
+});
 

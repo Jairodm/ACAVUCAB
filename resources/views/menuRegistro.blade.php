@@ -41,6 +41,16 @@
             type="button" class="btn btn-warning">Registrar proveedor
         </button>
         </a>
+
+        @can('registrar.usuario')
+        <a href = "{{route('registrarUsuario')}}">
+            <button
+                style="position:absolute; top:82%; left:35%; height:100px; width:450px; font-size:30px; border-radius:20px;"
+                type="button" class="btn btn-warning">Registrar Empleado
+            </button>
+        </a>
+        @endcan
+
         
     </div>
 

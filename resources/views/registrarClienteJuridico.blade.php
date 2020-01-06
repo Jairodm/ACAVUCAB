@@ -33,12 +33,12 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="denominacionComercial">Denominación comercial</label>
-                      <input type="text" class="form-control" id="denominacionComercial" placeholder="" value="" required>
+                      <input type="text" class="form-control" name="denominacionComercial" placeholder="" value="" required>
                       
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="razonSocial">Razón social</label>
-                      <input type="text" class="form-control" id="razonSocial" placeholder="" value="">                    
+                      <input type="text" class="form-control" name="razonSocial" placeholder="" value="">                    
                     </div>
                   </div>
 
@@ -53,45 +53,36 @@
                                       <option value="J">J</option>
                                       <option value="C">C</option>
                                     </select> 
-                                <input type="text" class="form-control" id="rifJuridico" placeholder="" value="" required>                   
+                                <input type="text" class="form-control" name="rifJuridico" placeholder="" value="" required>                   
                             </div>
                         <div class="col-md-6 mb-3">
                           <label for="capitalDisponible">Capital disponible</label>
-                          <input type="text" class="form-control" id="capitalDisponible" placeholder="" value="" required>                    
+                          <input type="text" class="form-control" name="capitalDisponible" placeholder="" value="" required>                    
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="paginaWeb">Dirección de su página web</label>
-                             <input type="text" class="form-control" id="paginaWeb" placeholder="" value="" required>                          
+                             <input type="text" class="form-control" name="paginaWeb" placeholder="" value="" required>                          
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                          <label for="codigotelefonoNatural">Código telefónico</label>
+                          <input type="text" class="form-control" name="codigotelefono" maxlength="4" placeholder="" value="" required> 
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="numerosTelefonicos">Números telefónicos</label>
-                            <input type="text" class="form-control" id="numerosTelefonicos" placeholder="Ej: 02125552323, 04147773344, ..." value="" required>                    
+                            <label for="numerosTelefonicos">Número de teléfono</label>
+                            <input type="text" class="form-control" name="numerosTelefonicos"maxlength="7" placeholder="Ej: 5552323" value="" required>                    
                         </div>
                         
                     </div>
 
-                  <div class="row">
-                      
-                        <div class="col-md-6 mb-3">
-                          <label for="CorreoElectronico">Correo Electronico</label>
-                          <input type="text" class="form-control" id="CorreoElectronico" placeholder="" value="" required>                    
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="passwordJuridico">Contraseña</label>
-                            <input type="password" class="form-control" id="passwordJuridico" placeholder="" value="" required>                              
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="confirmarJuridico">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="confirmarJuridico" placeholder="" value="" required>                    
-                        </div>
-                    </div>
+                
 
                     <h1 style="font-size:30px"class="display-4">Dirección física</h1>
                     <hr class="bg-warning">
@@ -129,7 +120,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                           <label for="parroquia">Parroquia</label>
-                          <select class="custom-select d-block w-100" id="parroquia" required>
+                          <select class="custom-select d-block w-100" name="parroquia" required>
 
                             <option value="">Escoger...</option>
                             @foreach ($parroquia as $item)
@@ -146,7 +137,7 @@
                       <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="passwordJuridico">Detalle de la dirección</label>
-                            <input type="text" class="form-control" id="passwordJuridico" placeholder="" value="" required>                              
+                            <input type="text" class="form-control" name="detalleDireccionFisica" placeholder="" value="" required>                              
                         </div>
                       </div>
 
@@ -188,7 +179,7 @@
                         <div class="col-md-3 mb-3">
                           <label for="parroquia">Parroquia</label>
 
-                          <select class="custom-select d-block w-100" id="parroquia" required>
+                          <select class="custom-select d-block w-100" name="parroquia2" required>
 
                             <option value="">Escoger...</option>
                             @foreach ($parroquia as $item)
@@ -206,7 +197,7 @@
                       <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="passwordJuridico">Detalle de la dirección</label>
-                            <input type="text" class="form-control" id="passwordJuridico" placeholder="" value="" required>                              
+                            <input type="text" class="form-control" name="detalleDireccionFiscal" placeholder="" value="" required>                              
                         </div>
                       </div>
 
