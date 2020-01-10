@@ -8,6 +8,7 @@ use App\Usuario;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Caffeinated\Shinobi\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -61,6 +62,7 @@ class RegisterController extends Controller
      *
      * @param  array  $data
      * @return \App\User
+     * 
      */
     protected function create(array $data)
     {
@@ -68,16 +70,19 @@ class RegisterController extends Controller
         $usuario = new Usuario;
         $usuario->nombre_usuario = $data['email'];
         $usuario->contraseña = $data['password'];
-        $usuario->fk_rol = 3;
+        $usuario->fk_rol = 1;
         $usuario->save();
 
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
         
+        $user->roles()->attach(Role::where('name', 'Cliente')->first());
 
-
+        return $user;
     }
+
+
 }

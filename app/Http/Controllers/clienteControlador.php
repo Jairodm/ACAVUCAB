@@ -7,6 +7,7 @@ use App\Cliente;
 use App\lugar; 
 use App\telefono; 
 use App\Usuario;
+use App\proveedor;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -17,9 +18,9 @@ class clienteControlador extends Controller
 {
     public function vista(){
       
-        $estado = lugar::where('fk_lugar',null)->pluck('nombre_lugar');
-        $municipio = lugar::where('tipo_lugar', 'Municipio')->pluck('nombre_lugar');
-        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->pluck('nombre_lugar');
+        $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $municipio = lugar::where('tipo_lugar', 'Municipio')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
 
         return view('registrarClienteNatural', compact('estado','municipio','parroquia'));
 
@@ -87,4 +88,126 @@ class clienteControlador extends Controller
  
      }
 
+
+
+     public function crearjuridico(Request $request) {
+        //return $request->all();
+
+        $clienteNuevo = new Cliente;
+
+        $clienteNuevo->denominacion_comercial = $request->denominacionComercial;
+
+        $clienteNuevo->razon_social = $request->razonSocial;
+
+        $clienteNuevo->rif_cliente = $request->rifJuridico;
+
+        $clienteNuevo->capital_disponible = $request->capitalDisponible;
+
+        $clienteNuevo->pagina_web = $request->paginaWeb;
+
+        $clienteNuevo->tipo_cliente = 'Juridico';
+
+        $clienteNuevo->cantidad_puntos = 0;
+
+        $clienteNuevo->direccion_fisica = $request->detalleDireccionFisica;
+
+        $variable = $request->get('parroquia');
+       
+        $clienteNuevo->fk_lugar_fisica= DB::table('lugar')
+                         ->select(DB::raw('codigo_lugar'))
+                         ->where('nombre_lugar', '=', $variable)->value('codigo_lugar');;
+
+        $variable2 = $request->get('parroquia2');
+
+        $clienteNuevo->fk_lugar_fiscal= DB::table('lugar')
+                         ->select(DB::raw('codigo_lugar'))
+                         ->where('nombre_lugar', '=', $variable2)->value('codigo_lugar');;
+
+        $clienteNuevo->direccion_fiscal = $request->detalleDireccionFiscal;
+
+
+        $clienteNuevo->save();
+
+        $telefonoNuevo = new telefono;
+
+        $telefonoNuevo->numero = $request->numerosTelefonicos;
+        $telefonoNuevo->codigo_area = $request->codigotelefono;
+        $telefonoNuevo->fk_cliente = $request->rifJuridico;
+        $telefonoNuevo->save();
+
+        $user = Auth::user();
+        $usuario = Usuario::where('nombre_usuario',$user->email)->first();
+        $usuario->fk_cliente =$request->rifJuridico;
+        $usuario->save();
+
+        return redirect()->route('index');;
+
+    }
+
+     public function vistajuridico(){
+      
+        $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $municipio = lugar::where('tipo_lugar', 'Municipio')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+
+        return view('registrarClienteJuridico', compact('estado','municipio','parroquia'));
+
+    }
+
+
+
+    public function crearproveedor(Request $request) {
+
+        $proveedor = new proveedor;
+
+        $proveedor->denominacion_comercial = $request->denominacionComercial;
+
+        $proveedor->razon_social = $request->razonSocial;
+
+        $proveedor->rif_proveedor = $request->rifProveedor;
+
+        $proveedor->direccion_fisica = $request->detalleDireccionFisica;
+
+        $variable = $request->get('parroquia');
+       
+        $proveedor->fk_lugar_fisica= DB::table('lugar')
+                         ->select(DB::raw('codigo_lugar'))
+                         ->where('nombre_lugar', '=', $variable)->value('codigo_lugar');;
+
+        $variable2 = $request->get('parroquia2');
+
+        $proveedor->fk_lugar_fiscal= DB::table('lugar')
+                         ->select(DB::raw('codigo_lugar'))
+                         ->where('nombre_lugar', '=', $variable2)->value('codigo_lugar');;
+
+        $proveedor->direccion_fiscal = $request->detalleDireccionFiscal;
+
+
+        $proveedor->save();
+
+        $telefonoNuevo = new telefono;
+
+        $telefonoNuevo->numero = $request->numerosTelefonicos;
+        $telefonoNuevo->codigo_area = $request->codigotelefono;
+        $telefonoNuevo->fk_proveedor = $request->rifProveedor;
+        $telefonoNuevo->save();
+
+        $user = Auth::user();
+        $usuario = Usuario::where('nombre_usuario',$user->email)->first();
+        $usuario->fk_proveedor =$request->rifProveedor;
+        $usuario->save();
+
+        return redirect()->route('index');;
+
+    }
+
+     public function vistaproveedor(){
+      
+        $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $municipio = lugar::where('tipo_lugar', 'Municipio')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+
+        return view('registrarProveedor', compact('estado','municipio','parroquia'));
+
+    }
 }

@@ -28,11 +28,7 @@
                             <th class="text-center">ID</th>
                             <th class="text-center" width='700px'>Email</th>
                             <th colspan="2">&nbsp;</th>
-                            <!--
-                            <th scope="col" class="text-center">Cargo</th>
-                            <th scope="col" class="text-center">Horas laborales</th>
-                            <th scope="col" class="text-center">Beneficios</th>
-                            <th scope="col" class="text-center">Vacaciones</th>-->
+                            
                         </tr>
                     </thead>
                     <tbody>

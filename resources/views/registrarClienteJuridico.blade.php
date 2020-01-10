@@ -16,57 +16,8 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-warning navbar-light sticky-top">
+      @include('plantilla')
 
-        <div id="navb" class="navbar-collapse collapse hide">
-            <ul class="nav navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <span class="fas fa-bars"></span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="productos">Nuestros productos</a>
-                        <a class="dropdown-item" href="eventos">Eventos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="diarioCerveza">Diario de una cerveza</a>
-                    </div>
-                </li>
-            </ul>
-
-            <div id="navb" class="navbar-collapse collapse hide">
-                <ul class="navbar-nav">
-                    <li class="nav-item ">
-                        <a class="nav-brand" href="index"><img class="logo" src="logooo.png" height="58rem"></a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <span class="fas fa-user"></span>Mi cuenta</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="inicioSesion">Iniciar sesión</a>
-                            <a class="dropdown-item" href="#">Mi cuenta</a>
-                            <!--Aquí iría una comprobación del tipo de usuario logeado
-                            para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
-                            ConsultarEmpleado o ConsultarProveedor-->
-                            <a class="dropdown-item" href="miscompras">Mis compras</a>
-                            <a class="dropdown-item" href="menuAdministrador">Administrador</a>
-                            <a class="dropdown-item" href="menuProveedor">Proveedor</a>
-                            <a class="dropdown-item" href="menuRegistro">Registrarse</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Cerrar sesión</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrito"><span class="fas fa-shopping-cart">
-                            </span>Carrito</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <div class="container mt-2 pt-2">
         <h1 class="display-4 text-center">Registro cliente jurídico </h1>
@@ -74,16 +25,20 @@
         
         <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Información del cliente</h4>
-                <form class="needs-validation" novalidate>
+
+                <form method="POST" action="{{ route('cliente.juridico.crear') }}" validate>
+                    @csrf
+
+
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="denominacionComercial">Denominación comercial</label>
-                      <input type="text" class="form-control" id="denominacionComercial" placeholder="" value="" required>
+                      <input type="text" class="form-control" name="denominacionComercial" placeholder="" value="" required>
                       
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="razonSocial">Razón social</label>
-                      <input type="text" class="form-control" id="razonSocial" placeholder="" value="">                    
+                      <input type="text" class="form-control" name="razonSocial" placeholder="" value="">                    
                     </div>
                   </div>
 
@@ -98,45 +53,36 @@
                                       <option value="J">J</option>
                                       <option value="C">C</option>
                                     </select> 
-                                <input type="text" class="form-control" id="rifJuridico" placeholder="" value="" required>                   
+                                <input type="text" class="form-control" name="rifJuridico" placeholder="" value="" required>                   
                             </div>
                         <div class="col-md-6 mb-3">
                           <label for="capitalDisponible">Capital disponible</label>
-                          <input type="text" class="form-control" id="capitalDisponible" placeholder="" value="" required>                    
+                          <input type="text" class="form-control" name="capitalDisponible" placeholder="" value="" required>                    
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="paginaWeb">Dirección de su página web</label>
-                             <input type="text" class="form-control" id="paginaWeb" placeholder="" value="" required>                          
+                             <input type="text" class="form-control" name="paginaWeb" placeholder="" value="" required>                          
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                          <label for="codigotelefonoNatural">Código telefónico</label>
+                          <input type="text" class="form-control" name="codigotelefono" maxlength="4" placeholder="" value="" required> 
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="numerosTelefonicos">Números telefónicos</label>
-                            <input type="text" class="form-control" id="numerosTelefonicos" placeholder="Ej: 02125552323, 04147773344, ..." value="" required>                    
+                            <label for="numerosTelefonicos">Número de teléfono</label>
+                            <input type="text" class="form-control" name="numerosTelefonicos"maxlength="7" placeholder="Ej: 5552323" value="" required>                    
                         </div>
                         
                     </div>
 
-                  <div class="row">
-                      
-                        <div class="col-md-6 mb-3">
-                          <label for="CorreoElectronico">Correo Electronico</label>
-                          <input type="text" class="form-control" id="CorreoElectronico" placeholder="" value="" required>                    
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="passwordJuridico">Contraseña</label>
-                            <input type="password" class="form-control" id="passwordJuridico" placeholder="" value="" required>                              
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="confirmarJuridico">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="confirmarJuridico" placeholder="" value="" required>                    
-                        </div>
-                    </div>
+                
 
                     <h1 style="font-size:30px"class="display-4">Dirección física</h1>
                     <hr class="bg-warning">
@@ -146,7 +92,12 @@
                           <label for="estado">Estado</label>
                           <select class="custom-select d-block w-100" id="estado" required>
                             <option value="">Escoger...</option>
-                            <option>DIstrito Capital</option>
+
+                            @foreach ($estado as $item)
+                              
+                              <option>{{$item}}</option>
+                             @endforeach
+
                           </select>
                           <div class="invalid-feedback">
                             Por favor escoja un estado válido.
@@ -155,8 +106,13 @@
                         <div class="col-md-4 mb-3">
                           <label for="municipio">Municipio</label>
                           <select class="custom-select d-block w-100" id="municipio" required>
+
                             <option value="">Escoger...</option>
-                            <option>Libertador</option>
+                            @foreach ($municipio as $item)
+                              
+                              <option>{{$item}}</option>
+                            @endforeach
+
                           </select>
                           <div class="invalid-feedback">
                             Por favor escoja un municipio válido.
@@ -164,9 +120,14 @@
                         </div>
                         <div class="col-md-3 mb-3">
                           <label for="parroquia">Parroquia</label>
-                          <select class="custom-select d-block w-100" id="parroquia" required>
+                          <select class="custom-select d-block w-100" name="parroquia" required>
+
                             <option value="">Escoger...</option>
-                            <option>El Recreo</option>
+                            @foreach ($parroquia as $item)
+                              
+                            <option>{{$item}}</option>
+                            @endforeach
+
                           </select>
                           <div class="invalid-feedback">
                             Por favor escoja una parroquia válida.
@@ -176,7 +137,7 @@
                       <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="passwordJuridico">Detalle de la dirección</label>
-                            <input type="text" class="form-control" id="passwordJuridico" placeholder="" value="" required>                              
+                            <input type="text" class="form-control" name="detalleDireccionFisica" placeholder="" value="" required>                              
                         </div>
                       </div>
 
@@ -187,8 +148,13 @@
                         <div class="col-md-5 mb-3">
                           <label for="estado">Estado</label>
                           <select class="custom-select d-block w-100" id="estado" required>
+
                             <option value="">Escoger...</option>
-                            <option>DIstrito Capital</option>
+                            @foreach ($estado as $item)
+                              
+                              <option>{{$item}}</option>
+                             @endforeach
+
                           </select>
                           <div class="invalid-feedback">
                             Por favor escoja un estado válido.
@@ -197,19 +163,32 @@
                         <div class="col-md-4 mb-3">
                           <label for="municipio">Municipio</label>
                           <select class="custom-select d-block w-100" id="municipio" required>
+
                             <option value="">Escoger...</option>
-                            <option>Libertador</option>
+                            @foreach ($municipio as $item)
+                              
+                              <option>{{$item}}</option>
+                            @endforeach
+
                           </select>
+
                           <div class="invalid-feedback">
                             Por favor escoja un municipio válido.
                           </div>
                         </div>
                         <div class="col-md-3 mb-3">
                           <label for="parroquia">Parroquia</label>
-                          <select class="custom-select d-block w-100" id="parroquia" required>
+
+                          <select class="custom-select d-block w-100" name="parroquia2" required>
+
                             <option value="">Escoger...</option>
-                            <option>El Recreo</option>
+                            @foreach ($parroquia as $item)
+                              
+                            <option>{{$item}}</option>
+                            @endforeach
+
                           </select>
+
                           <div class="invalid-feedback">
                             Por favor escoja una parroquia válida.
                           </div>
@@ -218,14 +197,14 @@
                       <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="passwordJuridico">Detalle de la dirección</label>
-                            <input type="text" class="form-control" id="passwordJuridico" placeholder="" value="" required>                              
+                            <input type="text" class="form-control" name="detalleDireccionFiscal" placeholder="" value="" required>                              
                         </div>
                       </div>
 
                   
         <br>
         
-        <button style="margin-bottom: 80px;" type="button" class="btn btn-warning">Continuar</button>
+        <button type="submit" class="btn btn-warning">Continuar</button>
     </div>
 
 <!-- Optional JavaScript -->
