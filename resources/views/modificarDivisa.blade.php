@@ -47,7 +47,7 @@
                     <div id="navb" class="navbar-collapse collapse hide">
                         <ul class="navbar-nav">
                             <li class="nav-item ">
-                                <a class="nav-brand" href="index"><img class="logo" src="logooo.png" height="58rem"></a>
+                                <a class="nav-brand" href="{{route ('index')}}"><img class="logo" src="{{asset('logooo.png')}}" height="58rem"></a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav ml-auto">
@@ -81,42 +81,50 @@
 
     <div class="container">
         <h1 class="display-4 text-center">Divisa</h1>
+        @error('valor_divisa')
+        <div class="alert alert-danger">El valor es obligatorio</div>
+        @enderror
         <hr class="bg-warning">
 
 
         <div class="container center_div">
-
-            <form class="form" novalidate>
-
-
+   
+        <form class="form" method="POST"action="{{route('actualizaDivisa', $modDivisa->codigo_divisa)}}" style="display:inline" novalidate>
+            @method('PUT')
+            @csrf
                 <hr class="mb-4">
 
                 <div class="col-md-6 mb-3">
                     <label for="nombretarjeta">Nombre de Divisa:</label>
-                    <input type="text" class="form-control" id="nombretarjeta" placeholder="" readonly>
+                    <input type="text" class="form-control" id="nombretarjeta" name="nombre_divisa" placeholder="" value ="{{$modDivisa->nombre_divisa}}" readonly>
 
 
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label for="vencimiento">Valor de Divisa en Bs:</label>
-                    <input type="text" class="form-control" id="valorDivisa" placeholder="" required>
+                <input type="text" class="form-control" id="valorDivisa" name="valor_divisa" placeholder="" value ="{{$modDivisa->valor_divisa}}" required>
                     <div class="invalid-feedback">
                         Valor requerido
                     </div>
 
                 </div>
-
-
                 <hr class="mb-4">
                 <div class="col md-4 text-center">
-                    <button class="btn btn-warning btn-lg "
-                        style="margin-right:70px; background-color: maroon; color:white; border-color: maroon;"
-                        type="submit">Eliminar divisa</button>
                     <button class="btn btn-warning btn-lg " type="submit">Guardar cambios</button>
                 </div>
             </form>
-
+     
+            <div>
+            <form class="form" method="POST"action="{{route('eliminaDivisa',$modDivisa->codigo_divisa)}}" novalidate>
+                @method('DELETE')
+                @csrf
+                <button class="btn btn-warning btn-lg "
+                    style="margin-right:70px; background-color: maroon; color:white; border-color: maroon;"
+                    type="submit">Eliminar divisa
+                </button>
+            </form>
+            </div>
         </div>
 
     </div>

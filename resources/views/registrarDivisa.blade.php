@@ -46,7 +46,7 @@
                     <div id="navb" class="navbar-collapse collapse hide">
                         <ul class="navbar-nav">
                             <li class="nav-item ">
-                                <a class="nav-brand" href="index"><img class="logo" src="logooo.png" height="58rem"></a>
+                                <a class="nav-brand" href="{{route ('index')}}"><img class="logo" src="{{asset('logooo.png')}}" height="58rem"></a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav ml-auto">
@@ -80,26 +80,31 @@
 
     <div class="container">
             <h1 class="display-4 text-center">Divisa</h1>
+            @error('nombre_divisa')
+            <div class="alert alert-danger">El nombre es obligatorio</div>
+            @enderror
+            @error('valor_divisa')
+            <div class="alert alert-danger">El valor es obligatorio</div>
+            @enderror
              <hr class="bg-warning">
       
             
                 <div class="container center_div">
               
-                <form class="form" novalidate>
-                  
-                   
+                <form class="form" method="POST" action="{{route('registrar.Divisa')}}" novalidate>
+                    @csrf
                   <hr class="mb-4">
 
                     <div class="col-md-6 mb-3">
                       <label for="nombretarjeta">Nombre de Divisa:</label>
-                      <input type="text" class="form-control" id="nombretarjeta" placeholder="" required>
+                      <input name ="nombre_divisa" type="text" class="form-control" id="nombreDivisa" placeholder="" required value = "{{old('nombre_divisa')}}">
                      
                       
                     </div>
                 
                     <div class="col-md-6 mb-3">
                       <label for="vencimiento">Valor de Divisa en Bs:</label>
-                      <input type="text" class="form-control" id="valorDivisa" placeholder="" required>
+                    <input name="valor_divisa" type="text" class="form-control" id="valorDivisa" placeholder="" required value = "{{old('valor_divisa')}}">
                       <div class="invalid-feedback">
                         Valor requerido
                       </div>
@@ -117,7 +122,7 @@
 
           </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>

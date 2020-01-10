@@ -93,7 +93,6 @@
                             <select class="custom-select d-block w-100" name="proveedor" required>
                                 <option value="">Escoger...</option>
                                 @foreach ($proveedor as $item)
-                                  
                                   <option>{{$item}}</option>
                                 @endforeach
                               </select>  
@@ -118,68 +117,21 @@
                             </a>
                             </div>
                     </div>
-
-                    <h1 style="font-size:30px; margin-top:30px"class="display-4">Receta </h1>
-                    <hr class="bg-warning">
-
                     <div class="row">
-                        <div class="col-md-5 mb-3">
-                          <label for="ingrediente">Ingrediente</label>
-                          <select class="custom-select d-block w-100" id="ingrediente" >
-                            <option value="">Escoger...</option>
-                            <option></option>
-                          </select>
-                          <div class="invalid-feedback">
-                            Por favor escoja un ingrediente válido.
-                          </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="cantidad">Cantidad</label>
-                          <input type="text" class="form-control" id="cantidad" placeholder="" value="" >   
-                          <div class="invalid-feedback">
-                            Por favor escoja una cantidad válida.
-                          </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                          <label for="unidad">Unidad</label>
-                          <select class="custom-select d-block w-100" id="unidad" >
-                            <option value="">Escoger...</option>
-                            <option>mg</option>
-                            <option>gr</option>
-                            <option>ml</option>
-                            <option>lit</option>
-                          </select>
-                          <div class="invalid-feedback">
-                            Por favor escoja una unidad válida.
-                          </div>
-                        </div>
-                      </div>
+                      <div class="col-md-6 mb-3">
+                              <label for="tipoCerveza">Foto</label>
+                              <br>
+                              <select class="custom-select d-block w-100" name="fotoCerveza" required>
+                                  <option value="">Escoger...</option>
+                                  @foreach ($fotoCerveza as $item)
+                                    
+                                    <option>{{$item}}</option>
+                                  @endforeach
+                                </select>  
+                    </div>
+                  </div>
 
-                  
-        <br>
-        
-        <button style="background-color: greenyellow" type="button" class="btn btn-warning">Agregar ingrediente</button>
 
-        <div class="container mt-4 pt-4">
-                <table id = "dataTable" class="table table-hover">
-                    <thead class="bg-warning">
-                        <tr>
-                            <th scope="col" class="text-center">Ingrediente</th>
-                            <th scope="col" class="text-center">Cantidad</th>
-                            <th scope="col" class="text-center">Unidad</th>
-                            <td class="text-center"></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="text-center"></th>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">Eliminar ingrediente</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
 
             <button style="margin-bottom:50px"type="submit" class="btn btn-warning">Registrar producto</button>
                 </form>

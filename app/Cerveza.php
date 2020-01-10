@@ -5,25 +5,24 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property float $codigo_cerveza
- * @property float $fk_tipo_de_cerveza
+ * @property int $codigo_cerveza
+ * @property int $fk_tipo_de_cerveza
  * @property string $fk_proveedor
  * @property string $nombre_cerveza
- * @property float $cantidad_en_stock
- * @property string $historia
+ * @property string $imagen_cerveza
  * @property float $precio
  * @property TipoDeCerveza $tipoDeCerveza
  * @property Proveedor $proveedor
  * @property Ofertum[] $ofertas
  * @property OfertaYCerveza[] $ofertaYCervezas
- * @property CaracteristicaYTipoDeCerveza[] $caracteristicaYTipoDeCervezas
  * @property Recetum[] $recetas
- * @property DetalleCompra[] $detalleCompras
- * @property DetalleVentum[] $detalleVentas
- * @property DetalleVentaEvento[] $detalleVentaEventos
  * @property DetallePresupuesto[] $detallePresupuestos
+ * @property DetalleVentaEvento[] $detalleVentaEventos
+ * @property DetalleVentum[] $detalleVentas
+ * @property DetalleCompra[] $detalleCompras
  * @property InventarioEvento[] $inventarioEventos
  * @property Inventario[] $inventarios
+ * @property Carrito[] $carritos
  */
 class Cerveza extends Model
 {
@@ -40,33 +39,19 @@ class Cerveza extends Model
      * @var string
      */
     protected $primaryKey = 'codigo_cerveza';
-    public $timestamps = false;
-
-    /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'float';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
+    public $timestamps=false;
 
     /**
      * @var array
      */
-    protected $fillable = ['fk_tipo_de_cerveza', 'fk_proveedor', 'nombre_cerveza', 'cantidad_en_stock', 'historia', 'precio'];
+    protected $fillable = ['fk_tipo_de_cerveza', 'fk_proveedor', 'nombre_cerveza', 'imagen_cerveza', 'precio'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function tipoDeCerveza()
     {
-        return $this->belongsTo('App\Tipo_De_Cerveza', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
+        return $this->belongsTo('App\TipoDeCerveza', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
     }
 
     /**
@@ -96,14 +81,6 @@ class Cerveza extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function caracteristicaYTipoDeCervezas()
-    {
-        return $this->hasMany('App\CaracteristicaYTipoDeCerveza', 'codigo_cerveza', 'codigo_cerveza');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function recetas()
     {
         return $this->hasMany('App\Recetum', 'codigo_cerveza', 'codigo_cerveza');
@@ -112,17 +89,9 @@ class Cerveza extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function detalleCompras()
+    public function detallePresupuestos()
     {
-        return $this->hasMany('App\DetalleCompra', 'cerveza', 'codigo_cerveza');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function detalleVentas()
-    {
-        return $this->hasMany('App\DetalleVentum', 'cerveza', 'codigo_cerveza');
+        return $this->hasMany('App\DetallePresupuesto', 'fk_cerveza', 'codigo_cerveza');
     }
 
     /**
@@ -136,9 +105,17 @@ class Cerveza extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function detallePresupuestos()
+    public function detalleVentas()
     {
-        return $this->hasMany('App\DetallePresupuesto', 'fk_cerveza', 'codigo_cerveza');
+        return $this->hasMany('App\DetalleVentum', 'cerveza', 'codigo_cerveza');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detalleCompras()
+    {
+        return $this->hasMany('App\DetalleCompra', 'cerveza', 'codigo_cerveza');
     }
 
     /**
@@ -155,5 +132,13 @@ class Cerveza extends Model
     public function inventarios()
     {
         return $this->hasMany('App\Inventario', 'fk_cerveza', 'codigo_cerveza');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function carritos()
+    {
+        return $this->hasMany('App\Carrito', 'fk_cerveza', 'codigo_cerveza');
     }
 }

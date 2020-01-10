@@ -5,13 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property float $codigo_tipo_cerveza
- * @property float $fk_tipo_de_cerveza
+ * @property int $codigo_tipo_cerveza
+ * @property int $fk_tipo_de_cerveza
  * @property string $nombre_tipo_cerveza
+ * @property string $historia
  * @property TipoDeCerveza $tipoDeCerveza
- * @property Cerveza[] $cervezas
  * @property CaracteristicaYTipoDeCerveza[] $caracteristicaYTipoDeCervezas
  * @property Comentario[] $comentarios
+ * @property Cerveza[] $cervezas
  */
 class Tipo_de_cerveza extends Model
 {
@@ -30,23 +31,9 @@ class Tipo_de_cerveza extends Model
     protected $primaryKey = 'codigo_tipo_cerveza';
 
     /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'float';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
      * @var array
      */
-    protected $fillable = ['fk_tipo_de_cerveza', 'nombre_tipo_cerveza'];
+    protected $fillable = ['fk_tipo_de_cerveza', 'nombre_tipo_cerveza', 'historia'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -54,14 +41,6 @@ class Tipo_de_cerveza extends Model
     public function tipoDeCerveza()
     {
         return $this->belongsTo('App\TipoDeCerveza', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function cervezas()
-    {
-        return $this->hasMany('App\Cerveza', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
     }
 
     /**
@@ -78,5 +57,13 @@ class Tipo_de_cerveza extends Model
     public function comentarios()
     {
         return $this->hasMany('App\Comentario', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cervezas()
+    {
+        return $this->hasMany('App\Cerveza', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
     }
 }

@@ -11,6 +11,7 @@
 |
 */
 
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,9 +59,7 @@ Route::get('ConsultarProductoCliente', function () {
     return view('ConsultarProductoCliente');
 });
 
-Route::get('ConsultarProductoProveedor', function () {
-    return view('ConsultarProductoProveedor');
-});
+
 
 Route::get('consultarProveedor', function () {
     return view('consultarProveedor');
@@ -82,9 +81,11 @@ Route::get('diarioCerveza', function () {
     return view('diarioCerveza');
 });
 
-Route::get('divisas', function () {
+/*Route::get('divisas', function () {
     return view('divisas');
-});
+});*/
+
+
 
 Route::get('EscogerMetodoDePagoCompraDigital', function () {
     return view('escogerMetodoDePagoCompraDigital');
@@ -138,9 +139,7 @@ Route::get('miscompras', function () {
     return view('miscompras');
 });
 
-Route::get('modificarDivisa', function () {
-    return view('modificarDivisa');
-});
+
 
 Route::get('nómina', 'registrarEmpleadoCon@nomina')->name('nómina');
 
@@ -180,10 +179,15 @@ Route::get('registrarClienteJuridico', function () {
     return view('registrarClienteJuridico');
 })->name('registrarClienteJuridico');
 
+/* DIVISAS */
+Route::get('divisas','consultarDivisa@consultar')->name('divisas');
+Route::get('modificarDivisa/{codigo_divisa}','consultarDivisa@modificarValor')->name('modificarDivisa');
+Route::post('registroDivisa', 'consultarDivisa@crear')->name('registrar.Divisa');
+Route::get('registrarDivisa','consultarDivisa@index')->name('registrarDivisa');
+Route::put('modificarDivisa/{codigo_divisa}','consultarDivisa@actualizaValor')->name('actualizaDivisa');
+Route::delete('modificarDivisa/{codigo_divisa}','consultarDivisa@eliminaDivisa')->name('eliminaDivisa');
 
-Route::get('registrarDivisa', function () {
-    return view('registrarDivisa');
-});
+
 
 Route::get('registrarEmpleado', function () {
     return view('registrarEmpleado');
@@ -204,10 +208,6 @@ Route::get('registrarProducto', function () {
 Route::get('registrarProveedor', function () {
     return view('registrarProveedor');
 })->name('registrarProveedor');
-
-Route::get('registrarTipoCerveza', function () {
-    return view('registrarTipoCerveza');
-});
 
 Route::get('RegistrarVacacion', function () {
     return view('RegistrarVacacion');
@@ -262,14 +262,11 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('roles', 'RoleController@index')->name('index.rol')->middleware('can:index.rol');
 
-    Route::get('consultarRol/{id?}','RoleController@consultar')->name('consultar.rol')                              ->middleware('can:consultar.rol');
+    Route::get('consultarRol/{id?}','RoleController@consultar')->name('consultar.rol')->middleware('can:consultar.rol');
 
     Route::put('consultarRol/{id?}','RoleController@editar')->name('editar.rol')->middleware('can:editar.rol');
 
     Route::delete('consultarRol/{id?}', 'RoleController@eliminar')->name('eliminar.rol')->middleware('can:eliminar.rol');
-
-
-
 
 
 });
@@ -307,11 +304,29 @@ Route::get('consultarClienteNatural','clienteControlador@consultar')->name('cons
 
 Route::get('productos','CatalogoControlador@productos')->name('productos');
 Route::post('/registrarProducto', 'CervezaControlador@crear')->name('cerveza.crear');
-
 Route::get('registrarProducto','CervezaControlador@vista')->name('registrarProducto');
-
 Route::get('ConsultarProductoCliente/{codigo_cerveza?}','consultarProductoClienteControlador@consultar')->name('ConsultarProductoCliente');
+Route::get('Listadodeproductos','CervezaControlador@listado')->name('Listadodeproductos');
+//Route::get('registrarReceta/{codigo_cerveza}','CervezaControlador@consultar')->name('registrarReceta');
 
+
+/* Tipo de cerveza */
+//Route::get('registrarTipoCerveza',
+
+
+// Receta
+
+Route::get('registrarReceta/{codigo_cerveza?}','RecetaControlador@vista')->name('registrarReceta');
+
+
+
+
+// Ingredientes
+Route::get('ingredientes','IngredienteControlador@vista')->name('ingredientes');
+Route::post('registrarIngrediente','IngredienteControlador@crear')->name('registrarIngrediente');
+Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@modifica')->name('modificaIngrediente');
+Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
+Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
 //inventario
 
 
