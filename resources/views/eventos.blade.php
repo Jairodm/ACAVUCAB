@@ -27,7 +27,11 @@
                         <tr>
                             <th class="text-center">ID</th>
                             <th class="text-center" width='700px'>Nombre del Evento</th>
-                            <th colspan="2">&nbsp;</th>
+                            <th colspan="1">&nbsp;</th>
+                            <th>
+                              <a href="{{ route('registrar.get.evento')}}" class="btn btn-md btn-warning pull-right" style="background-color:greenyellow">Crear Evento</a>
+                          
+                          </th>
                             
                         </tr>
                     </thead>
@@ -39,7 +43,7 @@
                               
 
                             @can('consultar.usuario')
-                            <td class="text-center"><a href="{{route('consultar.usuario', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar datos</a></td>
+                            <td class="text-center"><a href="{{route('consultar.evento', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar datos</a></td>
                             @endcan 
                             
                             <td>

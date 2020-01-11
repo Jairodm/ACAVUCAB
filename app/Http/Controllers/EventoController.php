@@ -27,6 +27,48 @@ class EventoController extends Controller
         return redirect()->route('index.evento');
     }
 
+    public function consultar($id){
+
+
+        $evento = Evento::findOrFail($id);
+
+        $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $municipio = lugar::where('tipo_lugar', 'Municipio')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $eventoProveedor = $evento->proveedor;
+        
+        return view('consultarEvento',compact('evento','estado','municipio','parroquia','eventoProveedor'));
+
+    }
+
+    public function editar(Request $request, $id){
+
+        $evento = Evento::findOrFail($id);
+        $evento->nombre_evento = $request->nombreEvento;
+        $evento->descripcion_evento = $request->descripcionEvento;
+
+        $evento->fecha_inicio_evento = $request->fechaInicioEvento;
+
+        $evento->fecha_fin_evento = $request->fechaFinEvento;
+
+        $evento->hora_inicio_evento = $request->inicioEvento;
+
+        $evento->hora_fin_evento = $request->finalEvento;
+
+        $evento->precio_entrada = $request->precioEvento;
+
+        $variable = $request->get('parroquia');
+       
+        $evento->fk_lugar= DB::table('lugar')
+                         ->select(DB::raw('codigo_lugar'))
+                         ->where('nombre_lugar', '=', $variable)->value('codigo_lugar');;
+
+        $evento->direccion_evento = $request->detalleDireccionEvento;
+        $evento->save();
+
+        return redirect()->route('registrarEventoProveedor',$evento);
+    }
+
     public function formulario(){
 
         $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');

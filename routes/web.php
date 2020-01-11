@@ -36,16 +36,8 @@ Route::get('consultarClienteJuridico', function () {
     return view('consultarClienteJuridico');
 });
 
-/*Route::get('consultarClienteNatural', function () {
-    redirect()->route('consultarClienteNatural');
-});*/
-
 Route::get('ConsultarEmpleado', function () {
     return view('ConsultarEmpleado');
-});
-
-Route::get('consultarEvento', function () {
-    return view('consultarEvento');
 });
 
 Route::get('consultarEventoEmpleado', function () {
@@ -80,12 +72,6 @@ Route::get('detalleCompra', function () {
 Route::get('diarioCerveza', function () {
     return view('diarioCerveza');
 });
-
-/*Route::get('divisas', function () {
-    return view('divisas');
-});*/
-
-
 
 Route::get('EscogerMetodoDePagoCompraDigital', function () {
     return view('escogerMetodoDePagoCompraDigital');
@@ -326,6 +312,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('eventos', 'EventoController@index')->name('index.evento')->middleware('can:index.evento');
     
     Route::delete('eventos/{id?}', 'EventoController@eliminar')->name('eliminar.evento')->middleware('can:eliminar.evento');
+
+    Route::get('consultarEvento/{id?}','EventoController@consultar')->name('consultar.evento')                              ->middleware('can:consultar.evento');
+    
+    Route::put('consultarEvento/{id?}','EventoController@editar')->name('editar.evento')->middleware('can:editar.evento');
 
 
 });
