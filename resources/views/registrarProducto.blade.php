@@ -93,7 +93,10 @@
                             <select class="custom-select d-block w-100" name="proveedor" required>
                                 <option value="">Escoger...</option>
                                 @foreach ($proveedor as $item)
+<<<<<<< HEAD
                                   
+=======
+>>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                                   <option>{{$item}}</option>
                                 @endforeach
                               </select>  
@@ -118,6 +121,7 @@
                             </a>
                             </div>
                     </div>
+<<<<<<< HEAD
 
                     <h1 style="font-size:30px; margin-top:30px"class="display-4">Receta </h1>
                     <hr class="bg-warning">
@@ -180,6 +184,23 @@
                     </tbody>
                 </table>
             </div>
+=======
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                              <label for="tipoCerveza">Foto</label>
+                              <br>
+                              <select class="custom-select d-block w-100" name="fotoCerveza" required>
+                                  <option value="">Escoger...</option>
+                                  @foreach ($fotoCerveza as $item)
+                                    
+                                    <option>{{$item}}</option>
+                                  @endforeach
+                                </select>  
+                    </div>
+                  </div>
+
+
+>>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
 
             <button style="margin-bottom:50px"type="submit" class="btn btn-warning">Registrar producto</button>
                 </form>

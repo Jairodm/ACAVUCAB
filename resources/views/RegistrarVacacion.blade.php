@@ -85,15 +85,23 @@
             
                 <div class="container center_div">
               
+<<<<<<< HEAD
                     <form method="POST" action="{{ route('registrar.vacacion', $empleado->cedula_empleado) }}" validate>
                         @csrf
+=======
+                <form class="form" novalidate>
+>>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                   
                    
                   <hr class="mb-4">
 
                     <div class="col-md-6 mb-3">
                       <label for="nombretarjeta">Fecha de inicio</label>
+<<<<<<< HEAD
                       <input type="date" class="form-control" name="fechaInicio" placeholder="" required>
+=======
+                      <input type="date" class="form-control" id="nombretarjeta" placeholder="" required>
+>>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                       <div class="invalid-feedback">
                             Valor requerido
                           </div>
@@ -102,7 +110,11 @@
                 
                     <div class="col-md-6 mb-3">
                       <label for="vencimiento">Fecha de finalización:</label>
+<<<<<<< HEAD
                       <input type="date" class="form-control" name="fechaFin" placeholder="" required>
+=======
+                      <input type="date" class="form-control" id="valorDivisa" placeholder="" required>
+>>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                       <div class="invalid-feedback">
                         Valor requerido
                       </div>

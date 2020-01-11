@@ -37,7 +37,7 @@
                     <div id="navb" class="navbar-collapse collapse hide">
                         <ul class="navbar-nav">
                             <li class="nav-item ">
-                                <a class="nav-brand" href="index"><img class="logo" src="logooo.png" height="58rem"></a>
+                                <a class="nav-brand" href="{{route ('index')}}"><img class="logo" src="{{asset('logooo.png')}}" height="58rem"></a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav ml-auto">
@@ -79,21 +79,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($divisa as $divisas)
                         <tr>
-                            <td class="text-center"><a href="#">Dolar</a></td>
-                            <td class="text-center">44000</td>
-                            <td class="text-center"><a href="modificarDivisa">Modificar valor</a></td>
+                            <td class="text-center">{{$divisas->nombre_divisa}}</td>
+                            <td class="text-center">{{$divisas->valor_divisa}}</td>
+                        <td class="text-center"><a href="{{ route ('modificarDivisa', $divisas) }}">Modificar valor</a></td>
                         </tr>
-                        <tr>
-                                <td class="text-center"><a href="#">Euro</a></td>
-                                <td class="text-center">46000</td>
-                                <td class="text-center"><a href="modificarDivisa">Modificar valor</a></td>
-                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
-        <a href="registrarDivisa">
-        <button type="button" class="btn btn-warning">Añadir Divisa</button>
+        <a href="{{ route ('registrarDivisa') }}">
+        <button type="button" class="btn btn-warning" type="submit">Añadir Divisa</button>
         </a>
+   
     </div>
 <!-- Pagination -->
     <ul class="pagination justify-content-center mt-2 pt-2">

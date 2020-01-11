@@ -52,7 +52,11 @@
                              <div class="row">
                                    <div class="col-md-6 mb-3">
                                      <label for="CedulaEmpleado">Cédula de identidad</label>
+<<<<<<< HEAD
                                      <select name="tipo_documento">
+=======
+                                     <select>
+>>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                                            <option value="V">V</option>
                                            <option value="E">E</option>
                                          </select> 
@@ -66,6 +70,7 @@
                                </div>
            
                                <div class="row">
+<<<<<<< HEAD
                                 <div class="col-md-6 mb-3">
                                     <label for="fnacEmpleado">Fecha de nacimiento</label>
                                     <input type="date" name="fecha_nacimiento" class="form-control" placeholder="" required>                              
@@ -82,6 +87,17 @@
                                    </select>                   
                                 </div>
                             </div>
+=======
+                                   <div class="col-md-6 mb-3">
+                                       <label for="fnacEmpleado">Fecha de nacimiento</label>
+                                       <input type="text" name="fecha_nacimiento" class="form-control" placeholder="" required>                              
+                                   </div>
+                                   <div class="col-md-6 mb-3">
+                                       <label for="cargoEmpleado">Cargo</label>
+                                       <input type="text" name="fk_cargo"  class="form-control" placeholder="" required>                    
+                                   </div>
+                               </div>
+>>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
            
                                <div class="row">
                                    <!--<div class="col-md-6 mb-3">

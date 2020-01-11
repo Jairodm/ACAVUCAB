@@ -18,7 +18,7 @@ class divisa extends Model
      * 
      * @var string
      */
-    protected $table = 'Divisa';
+    protected $table = 'divisa';
 
     /**
      * The primary key for the model.
@@ -26,6 +26,7 @@ class divisa extends Model
      * @var string
      */
     protected $primaryKey = 'codigo_divisa';
+    public $timestamps = false;
 
     /**
      * The "type" of the auto-incrementing ID.

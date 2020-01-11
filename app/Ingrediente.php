@@ -18,6 +18,7 @@ class Ingrediente extends Model
      * @var string
      */
     protected $table = 'ingrediente';
+    public $timestamps=false;
 
     /**
      * The primary key for the model.
