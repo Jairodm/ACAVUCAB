@@ -1,0 +1,52 @@
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.container {
+    position: relative;
+    height: 913px;
+    
+}
+
+.form-signin {
+    width: 350px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+/* Estilos de Cuota de Afiliación */
+#contenedor{
+     
+        width:700px;
+        height:500px;
+        margin:0 auto;
+        background-size: cover;
+        background-position: 50% 50%;
+        border-radius: 16px 16px 16px 16px;
+        -moz-border-radius: 16px 16px 16px 16px;
+        -webkit-border-radius: 16px 16px 16px 16px;
+        border: 4px solid #fab700;
+}
+/* Estilos de Producto */
+.md-v-line {
+    position: absolute;
+    border-left: 1px solid rgba(0,0,0,.125);
+    height: 50px;
+    top:0px;
+    left:54px;
+    }
