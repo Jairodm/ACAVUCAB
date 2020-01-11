@@ -51,7 +51,7 @@ class Cerveza extends Model
      */
     public function tipoDeCerveza()
     {
-        return $this->belongsTo('App\TipoDeCerveza', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
+        return $this->belongsTo('App\Tipo_de_cerveza', 'fk_tipo_de_cerveza', 'codigo_tipo_cerveza');
     }
 
     /**

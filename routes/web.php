@@ -194,10 +194,6 @@ Route::get('registrarEmpleado', function () {
     return view('registrarEmpleado');
 });
 
-Route::get('registrarEvento', function () {
-    return view('registrarEvento');
-});
-
 Route::get('registrarmetodoPago', function () {
     return view('registrarmetodoPago');
 });
@@ -209,10 +205,6 @@ Route::get('registrarProducto', function () {
 Route::get('registrarProveedor', function () {
     return view('registrarProveedor');
 })->name('registrarProveedor');
-
-Route::get('RegistrarVacacion', function () {
-    return view('RegistrarVacacion');
-});
 
 Route::get('RegistroUsuario', function () {
     return view('RegistroUsuario');

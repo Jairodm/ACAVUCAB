@@ -17,63 +17,9 @@
 
 <body>
 
-<<<<<<< HEAD
 
     @include('plantilla')
 
-=======
-        <nav class="navbar navbar-expand-lg bg-warning navbar-light sticky-top">
-
-                <div id="navb" class="navbar-collapse collapse hide">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <span class="fas fa-bars"></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="productos">Nuestros productos</a>
-                                <a class="dropdown-item" href="eventos">Eventos</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="diarioCerveza">Diario de una cerveza</a>
-                            </div>
-                        </li>
-                    </ul>
-        
-                    <div id="navb" class="navbar-collapse collapse hide">
-                        <ul class="navbar-nav">
-                            <li class="nav-item ">
-                                <a class="nav-brand" href="index"><img class="logo" src="logooo.png" height="58rem"></a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span class="fas fa-user"></span>Mi cuenta</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="inicioSesion">Iniciar sesión</a>
-                                    <a class="dropdown-item" href="#">Mi cuenta</a>
-                                    <!--Aquí iría una comprobación del tipo de usuario logeado
-                                    para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
-                                    ConsultarEmpleado o ConsultarProveedor-->
-                                    <a class="dropdown-item" href="miscompras">Mis compras</a>
-                                    <a class="dropdown-item" href="menuAdministrador">Administrador</a>
-                                    <a class="dropdown-item" href="menuProveedor">Proveedor</a>
-                                    <a class="dropdown-item" href="menuRegistro">Registrarse</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Cerrar sesión</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="carrito"><span class="fas fa-shopping-cart">
-                                    </span>Carrito</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
 
     <div class="container mt-2 pt-2">
         <h1 class="display-4 text-center">Registrar evento </h1>
@@ -81,7 +27,6 @@
 
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Información del evento</h4>
-<<<<<<< HEAD
             <form method="POST" action="{{ route('registrar.evento') }}" validate>
                 @csrf
 
@@ -89,29 +34,17 @@
                     <div class="col-md-6 mb-3">
                         <label for="nombreEvento">Nombre del evento</label>
                         <input type="text" class="form-control" name="nombreEvento" placeholder="" value=""
-=======
-            <form class="needs-validation" novalidate>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="nombreEvento">Nombre del evento</label>
-                        <input type="text" class="form-control" id="nombreEvento" placeholder="" value=""
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                             required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="descripcionEvento">Descripción</label>
-<<<<<<< HEAD
                         <input type="text" class="form-control" name="descripcionEvento" placeholder="" value=""
-=======
-                        <input type="text" class="form-control" id="descripcionEvento" placeholder="" value=""
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                             required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-<<<<<<< HEAD
                         <label for="fechaInicioEvento">Fecha Inicio</label>
                         <input type="date" class="form-control" name="fechaInicioEvento" placeholder="" value=""
                             required>
@@ -120,36 +53,18 @@
                         <label for="fechaFinEvento">Fecha Fin</label>
                         <input type="date" class="form-control" name="fechaFinEvento" placeholder="" value=""
                             required>
-=======
-                        <label for="fechaEvento">Fecha</label>
-                        <input type="date" class="form-control" id="fechaEvento" placeholder="" value=""
-                            required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="capacidadEvento">Capacidad</label>
-                        <input type="text" class="form-control" id="capacidadEvento"
-                            placeholder="Capacidad de personas." value="" required>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="inicioEvento">Hora de inicio</label>
-<<<<<<< HEAD
                         <input type="time" class="form-control" name="inicioEvento" placeholder=""
-=======
-                        <input type="time" class="form-control" id="inicioEvento" placeholder=""
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                             value="" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="finalEvento">Hora de finalización</label>
-<<<<<<< HEAD
                         <input type="time" class="form-control" name="finalEvento" placeholder=""
-=======
-                        <input type="time" class="form-control" id="finalEvento" placeholder=""
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                             value="" required>
                     </div>
                 </div>
@@ -157,13 +72,8 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="precioEvento">Precio de la entrada</label>
-<<<<<<< HEAD
                         <input type="text" class="form-control" name="precioEvento" placeholder="Monto en Bs."
                             value="">
-=======
-                        <input type="text" class="form-control" id="precioEvento" placeholder="Monto en Bs."
-                            value="" required>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                     </div>
                 </div>
 
@@ -173,7 +83,6 @@
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="estado">Estado</label>
-<<<<<<< HEAD
 
                         <select class="custom-select d-block w-100" name="estado" required>
                             <option value="">Escoger...</option>
@@ -184,19 +93,12 @@
 
                         </select>
 
-=======
-                        <select class="custom-select d-block w-100" id="estado" required>
-                            <option value="">Escoger...</option>
-                            <option>Distrito Capital</option>
-                        </select>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                         <div class="invalid-feedback">
                             Por favor escoja un estado válido.
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="municipio">Municipio</label>
-<<<<<<< HEAD
 
                         <select class="custom-select d-block w-100" name="municipio" required>
                             <option value="">Escoger...</option>
@@ -206,19 +108,12 @@
                             @endforeach
                         </select>
 
-=======
-                        <select class="custom-select d-block w-100" id="municipio" required>
-                            <option value="">Escoger...</option>
-                            <option>Libertador</option>
-                        </select>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                         <div class="invalid-feedback">
                             Por favor escoja un municipio válido.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="parroquia">Parroquia</label>
-<<<<<<< HEAD
 
                         <select class="custom-select d-block w-100" name="parroquia" required>
                             <option value="">Escoger...</option>
@@ -228,17 +123,10 @@
                             @endforeach
                         </select>
 
-=======
-                        <select class="custom-select d-block w-100" id="parroquia" required>
-                            <option value="">Escoger...</option>
-                            <option>El Recreo</option>
-                        </select>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                         <div class="invalid-feedback">
                             Por favor escoja una parroquia válida.
                         </div>
                     </div>
-<<<<<<< HEAD
 
                 </div>
                 <div class="row">
@@ -252,52 +140,6 @@
 
             </form>
 
-=======
-                </div>
-
-                <h1 style="font-size:30px" class="display-4">Proveedores que atenderán </h1>
-                <hr class="bg-warning">
-
-                <div class="row">
-                    <div class="col-md-5 mb-3">
-                        <label for="proveedorEvento">Proveedor</label>
-                        <select class="custom-select d-block w-100" id="proveedorEvento" required>
-                            <option value="">Escoger...</option>
-                            <option>Polar</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor escoja un proveedor válido.
-                        </div>
-                    </div>
-                </div>
-
-                <button style="background-color: greenyellow" type="button" class="btn btn-warning">Agregar
-                    proveedor</button>
-
-                <div class="container mt-4 pt-4">
-                    <table class="table table-hover">
-                        <thead class="bg-warning">
-                            <tr>
-                                <th scope="col" class="text-center">Proveedor</th>
-                                <td class="text-center"></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row" class="text-center">Polar</th>
-                                <td class="text-center">Eliminar proveedor</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="text-center">No se</th>
-                                <td class="text-center">Eliminar proveedor</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <button style="margin-top:30px; margin-bottom:50px" type="button" class="btn btn-warning">Registrar evento</button>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
         </div>
 
 <!-- Optional JavaScript -->

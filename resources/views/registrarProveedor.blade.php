@@ -43,11 +43,7 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                             <label for="rifProveedor">RIF</label>
-<<<<<<< HEAD
-                            <select name = "tipoRif">
-=======
                             <select>
->>>>>>> c14f3a3cd0783e63f7facc8c7a7aa0ece3b2d474
                                   <option value="V">V</option>
                                   <option value="E">E</option>
                                   <option value="P">P</option>
