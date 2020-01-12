@@ -305,7 +305,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('roles', 'RoleController@index')->name('index.rol')->middleware('can:index.rol');
 
-    Route::get('consultarRol/{id?}','RoleController@consultar')->name('consultar.rol')                              ->middleware('can:consultar.rol');
+    Route::get('consultarRol/{id?}','RoleController@consultar')->name('consultar.rol')->middleware('can:consultar.rol');
 
     Route::put('consultarRol/{id?}','RoleController@editar')->name('editar.rol')->middleware('can:editar.rol');
 
@@ -390,11 +390,11 @@ Route::get('Listadodeproductos','CervezaControlador@listado')->name('Listadodepr
 
 
 // Receta
-
 Route::get('registrarReceta/{codigo_cerveza?}','RecetaControlador@vista')->name('registrarReceta');
-
-
-
+Route::post('registrarReceta/{codigo_cerveza?}','RecetaControlador@añadirReceta')->name('añadirReceta');
+Route::get('modificarReceta/{codigo_receta}','RecetaControlador@vistaModifica')->name('modifica');
+Route::put('modificarReceta/{codigo_receta}','RecetaControlador@modificar')->name('modificar');
+Route::delete('modificarReceta/{codigo_receta}','RecetaControlador@elimina')->name('eliminarReceta');
 
 // Ingredientes
 Route::get('ingredientes','IngredienteControlador@vista')->name('ingredientes');
@@ -402,13 +402,12 @@ Route::post('registrarIngrediente','IngredienteControlador@crear')->name('regist
 Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@modifica')->name('modificaIngrediente');
 Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
 Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
+
 //inventario
-
-
 Route::get('inventario','inventarioControlador@inventario')->name('inventario');
 
 
-
+/*
 Route::get('/reporte', function () {
     require base_path() . '/vendor/autoload.php';
 
@@ -435,4 +434,4 @@ $jasper = new PHPJasper;
             $options
         )->execute();
 
-});
+});*/

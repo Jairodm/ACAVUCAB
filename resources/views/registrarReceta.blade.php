@@ -20,11 +20,21 @@
 <h1 style="font-size:30px; margin-top:30px"class="display-4">Receta </h1>
 <hr class="bg-warning">
 <h3 class="mb-3">Cerveza: {{$cerveza->nombre_cerveza}}</h3>
-
+            @error('nombre_ingrediente')
+            <div class="alert alert-danger">El nombre es obligatorio</div>
+            @enderror
+            @error('cantidad_ingrediente')
+            <div class="alert alert-danger">La cantidad es obligatorio</div>
+            @enderror
+            @error('unidad_ingrediente')
+            <div class="alert alert-danger">La unidad es obligatoria</div>
+            @enderror
+<form action="{{ route('añadirReceta', $cerveza->codigo_cerveza)}}" method="post">
+    @csrf
     <div class="row">
-        <div class="col-md-5 mb-3">
+        <div class="col-md-3 mb-3">
             <label for="ingrediente">Ingrediente</label>
-            <select class="custom-select d-block w-100" id="ingrediente" name='ingrediente' >
+            <select class="custom-select d-block w-100"  name='nombre_ingrediente' >
                 <option value="">Escoger...</option>
                 @foreach ($listadoIngredientes as $item)
                 <option>{{$item->nombre_ingrediente}}</option>
@@ -34,16 +44,23 @@
                 Por favor escoja un ingrediente válido.
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <label for="cantidad">Cantidad</label>
-            <input type="text" class="form-control" id="cantidad" placeholder="" value="" >   
+        <div class="col-md-3 mb-3">
+            <label for="cantidad">Descripción</label>
+            <input type="text" class="form-control"  placeholder="" value="" name="descripcion_receta" >   
             <div class="invalid-feedback">
                 Por favor escoja una cantidad válida.
             </div>
         </div>
-        <div class="col-md-3 mb-3">
+        <div class="col-md-2 mb-3">
+            <label for="cantidad">Cantidad</label>
+            <input type="text" class="form-control"  placeholder="" value="" name="cantidad_ingrediente" >   
+            <div class="invalid-feedback">
+                Por favor escoja una cantidad válida.
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
             <label for="unidad">Unidad</label>
-            <select class="custom-select d-block w-100" id="unidad" name="receta">
+            <select class="custom-select d-block w-100" name="unidad_ingrediente">
                 <option value="">Escoger...</option>
                 @foreach ($receta as $item)
                     <option>{{$item->unidad_ingrediente}}</option>
@@ -53,8 +70,13 @@
                 Por favor escoja una unidad válida.
             </div>
         </div>
+        <div class="col-md-2 mt-4">
+            <button type="submit" class="btn btn-warning">Añadir a la receta</button>
+        </div>
     </div>
-<a href="{{ route ('ingredientes')}}" class="btn btn-warning">Añadir ingrediente</a>
+   
+</form>
+<a href="{{ route ('ingredientes')}}" class="btn btn-warning">Crear ingrediente</a>
     <hr class="bg-warning">
     <div class="container mt-4 pt-4">
         <table id = "dataTable" class="table table-hover">
@@ -77,8 +99,7 @@
                     <td class="text-center">{{$item->cantidad_ingrediente}}</td>
                     <td class="text-center">{{$item->unidad_ingrediente}}</td>
                     <td class="text-right">
-                        <a href="" class="btn btn-warning  btn-sm ">Editar</a>
-                        <a href="" class="btn btn-danger  btn-sm d-inline">Eliminar</a>
+                    <a href="{{route ('modifica',$item->codigo_receta)}}" class="btn btn-warning  btn-sm ">Editar</a>
                     </td>
                 </tr>
                     
@@ -101,7 +122,7 @@
     </script>
     
 </body>
-
+</html>
 
 
 
