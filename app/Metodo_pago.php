@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $numero_tarjeta_credito
  * @property string $fecha_vencimiento
  * @property float $valor_punto
+ * @property string $cedula_titular
+ * @property string $nombre_titular
+ * @property string $cvv
  * @property Divisa $divisa
  * @property Cliente $cliente
  * @property ProveedorYCuotum[] $proveedorYCuotas
@@ -31,7 +34,7 @@ class Metodo_pago extends Model
      * 
      * @var string
      */
-    protected $table = 'Metodo_pago';
+    protected $table = 'metodo_pago';
 
     /**
      * The primary key for the model.
@@ -54,10 +57,12 @@ class Metodo_pago extends Model
      */
     public $incrementing = false;
 
+    public $timestamps = false;
+
     /**
      * @var array
      */
-    protected $fillable = ['fk_divisa', 'fk_cliente', 'denominacion', 'banco', 'tipo_metodo_pago', 'numero_cheque', 'numero_cuenta', 'numero_tarjeta_debito', 'tipo_tarjeta_credito', 'numero_tarjeta_credito', 'fecha_vencimiento', 'valor_punto'];
+    protected $fillable = ['fk_divisa', 'fk_cliente', 'cvv', 'denominacion', 'banco', 'tipo_metodo_pago', 'numero_cheque', 'numero_cuenta', 'numero_tarjeta_debito', 'tipo_tarjeta_credito', 'numero_tarjeta_credito', 'fecha_vencimiento', 'valor_punto', 'cedula_titular', 'nombre_titular'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -43,7 +43,7 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                             <label for="rifProveedor">RIF</label>
-                            <select>
+                            <select name="tipoDocumento">
                                   <option value="V">V</option>
                                   <option value="E">E</option>
                                   <option value="P">P</option>
@@ -56,26 +56,23 @@
                 </div>
 
                     <div class="row">
-                      <div class="col-md-3 mb-3">
-                        <label for="codigotelefonoNatural">Código telefónico</label>
-                        <input type="text" class="form-control" name="codigotelefono" maxlength="4" placeholder="" value="" required> 
-                      </div>
-
                       <div class="col-md-6 mb-3">
-                          <label for="numerosTelefonicos">Número de teléfono</label>
-                          <input type="text" class="form-control" name="numerosTelefonicos"maxlength="7" placeholder="Ej: 5552323" value="" required>                    
+                          <label for="numerosTelefonicos">Números telefónicos (separados por un espacio)</label>
+                          <input type="text" class="form-control" name="numerosTelefonicos" placeholder="Ej: 0212-5516677 0414-2724561..." value="" required>                    
                       </div>
-                        
+                      <div class="col-md-6 mb-3">
+                        <label for="codigotelefonoNatural">Direcciones de correo electrónico (separados por un espacio)</label>
+                        <input style="box-shadow: none" type="text" class="form-control" name="correosElectronicos" placeholder="" value="" required> 
+                      </div>
                     </div>
-
-                    <h1 style="font-size:30px"class="display-4">Dirección </h1>
+                    <h1 style="font-size:30px"class="display-4">Dirección física </h1>
                     <hr class="bg-warning">
 
                     <div class="row">
                       <div class="col-md-5 mb-3">
                         <label for="estado">Estado</label>
 
-                        <select class="custom-select d-block w-100" id="estado" required>
+                        <select class="custom-select d-block w-100" name="estadoFisica" required>
                           <option value="">Escoger...</option>
                           @foreach ($estado as $item)
                               
@@ -90,7 +87,7 @@
                       <div class="col-md-4 mb-3">
                         <label for="municipio">Municipio</label>
 
-                        <select class="custom-select d-block w-100" id="municipio" required>
+                        <select class="custom-select d-block w-100" name="municipioFisica" required>
                           <option value="">Escoger...</option>
                           @foreach ($municipio as $item)
                               
@@ -106,7 +103,7 @@
                       <div class="col-md-3 mb-3">
                         <label for="parroquia">Parroquia</label>
 
-                        <select class="custom-select d-block w-100" name="parroquia" required>
+                        <select class="custom-select d-block w-100" name="parroquiaFisica" required>
                           <option value="">Escoger...</option>
                           @foreach ($parroquia as $item)
                               
@@ -122,7 +119,7 @@
                     <div class="row">
                       <div class="col-md-6 mb-3">
                           <label for="passwordJuridico">Detalle de la dirección</label>
-                          <input type="text" class="form-control" name="detalleDireccionFisica" placeholder="" value="" required>                              
+                          <input type="text" class="form-control" name="detalleFisica" placeholder="" value="" required>                              
                       </div>
                     </div>
 
@@ -133,7 +130,7 @@
                       <div class="col-md-5 mb-3">
                         <label for="estado">Estado</label>
 
-                        <select class="custom-select d-block w-100" id="estado" required>
+                        <select class="custom-select d-block w-100" name="estadoFiscal" required>
                           <option value="">Escoger...</option>
                           @foreach ($estado as $item)
                               
@@ -148,7 +145,7 @@
                       <div class="col-md-4 mb-3">
                         <label for="municipio">Municipio</label>
 
-                        <select class="custom-select d-block w-100" id="municipio" required>
+                        <select class="custom-select d-block w-100" name="municipioFiscal" required>
                           <option value="">Escoger...</option>
                           @foreach ($municipio as $item)
                               
@@ -163,7 +160,7 @@
                       <div class="col-md-3 mb-3">
                         <label for="parroquia">Parroquia</label>
 
-                        <select class="custom-select d-block w-100" name="parroquia2" required>
+                        <select class="custom-select d-block w-100" name="parroquiaFiscal" required>
                           <option value="">Escoger...</option>
                           @foreach ($parroquia as $item)
                               
@@ -179,7 +176,7 @@
                     <div class="row">
                       <div class="col-md-6 mb-3">
                           <label for="passwordJuridico">Detalle de la dirección</label>
-                          <input type="text" class="form-control" name="detalleDireccionFiscal" placeholder="" value="" required>                              
+                          <input type="text" class="form-control" name="detalleFiscal" placeholder="" value="" required>                              
                       </div>
                     </div>
 

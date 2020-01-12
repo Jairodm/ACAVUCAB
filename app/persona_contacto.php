@@ -22,7 +22,7 @@ class persona_contacto extends Model
      * 
      * @var string
      */
-    protected $table = 'Persona_contacto';
+    protected $table = 'persona_contacto';
 
     /**
      * The primary key for the model.
@@ -49,6 +49,8 @@ class persona_contacto extends Model
      * @var array
      */
     protected $fillable = ['fk_cliente', 'fk_proveedor', 'nombre_contacto', 'apellido_contacto'];
+
+    public $timestamps = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -21,6 +21,7 @@ class Venta_entrada extends Model
      * @var string
      */
     protected $table = 'venta_entrada';
+    public $timestamps=false;
 
     /**
      * The primary key for the model.
@@ -46,7 +47,7 @@ class Venta_entrada extends Model
     /**
      * @var array
      */
-    protected $fillable = ['fk_evento', 'fk_cliente', 'precio_entrada', 'fecha_venta_entrada'];
+    protected $fillable = ['fk_evento', 'fk_cliente', 'precio_entrada', 'fecha_venta_entrada', 'total'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

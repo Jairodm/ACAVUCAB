@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $denominacion_comercial
  * @property string $direccion_fiscal
  * @property string $direccion_fisica
- * @property Lugar $lugar
- * @property Lugar $lugar
+ * @property Lugar $lugarFisica
+ * @property Lugar $lugarFiscal
  * @property PersonaContacto[] $personaContactos
  * @property Telefono[] $telefonos
  * @property CorreoElectronico[] $correoElectronicos
@@ -62,7 +62,12 @@ class proveedor extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function lugar()
+    public function lugarFiscal()
+    {
+        return $this->belongsTo('App\Lugar', 'fk_lugar_fiscal', 'codigo_lugar');
+    }
+
+    public function lugarFisica()
     {
         return $this->belongsTo('App\Lugar', 'fk_lugar_fisica', 'codigo_lugar');
     }
@@ -129,11 +134,6 @@ class proveedor extends Model
      */
     public function eventoYProveedors()
     {
-        return $this->hasMany('App\Evento_y_proveedor', 'fk_proveedor', 'rif_proveedor');
-    }
-
-    public function evento()
-    {
-        return $this->belongsToMany('App\Evento', 'evento_y_proveedor', 'fk_proveedor', 'fk_evento');
+        return $this->hasMany('App\EventoYProveedor', 'fk_proveedor', 'rif_proveedor');
     }
 }

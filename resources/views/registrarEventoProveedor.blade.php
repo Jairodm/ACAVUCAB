@@ -85,7 +85,7 @@
                     </table>
                 </div>
                 <form method="GET" action="{{ route('index.evento')}}" >
-                    <button style="background-color: greenyellow"type="submit" class="btn btn-warning">Registrar evento</button>
+                    <button style="background-color: greenyellow"type="submit" class="btn btn-warning">Guardar</button>
 
 
                 </form>

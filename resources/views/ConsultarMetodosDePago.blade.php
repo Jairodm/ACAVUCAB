@@ -73,6 +73,7 @@
             <table class="table table-hover">
                     <thead class="bg-warning">
                         <tr>
+                            <th scope="col" class="text-center">Tipo</th>
                             <th scope="col" class="text-center">Número de la tarjeta de crédito</th>
                             <th scope="col" class="text-center">Nombre del titular</th>
                             <th scope="col" class="text-center">Fecha de vencimiento</th>
@@ -80,15 +81,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($metodo_pago as $item)
                         <tr>
-                            <td class="text-center">1111222233334444</td>
-                            <td class="text-center">Pedro Rodriguez</td>
-                            <td class="text-center">25/12/2021 </td>
-                            <td class="text-center">Eliminar</td>
-                        </tr>
+                                <th class="text-center">{{$item->tipo_tarjeta_credito}}</th>
+                                <th class="text-center">{{$item->numero_tarjeta_credito}}</th>
+                                <th class="text-center">{{$item->nombre_titular}}</th>
+                                <th class="text-center">{{$item->fecha_vencimiento}}</th>    
+                                <td class="text-center"><a href="{{route('consultarMetodoCliente', $item->codigo_metodo_pago)}}">Consultar</a></td>                        
+                </tr>
+                @endforeach  
                     </tbody>
                 </table>
-        <a href="registrarmetodoPago"><button type="button" class="btn btn-warning">Añadir método de pago</button></a>
+                <a href="{{route('registrarMetodoCliente', $cliente->rif_cliente)}}">
+                    <button style="margin-right:30px" type="button" class="btn btn-warning">Agregar método de pago</button>
+                </a>
     </div>
 <!-- Pagination -->
     <ul class="pagination justify-content-center mt-2 pt-2">

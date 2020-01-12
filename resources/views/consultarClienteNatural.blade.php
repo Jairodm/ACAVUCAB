@@ -74,62 +74,63 @@
         
         <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Información del cliente</h4>
-                <form class="needs-validation" novalidate>
+                <form action="{{route ('editar.natural', $cliente->rif_cliente)}}" class="needs-validation" method="POST" novalidate>
+
+                  @method('PUT')
+                  @csrf
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="primerNombreNatural">Primer nombre</label>
                       
-                      <input type="text" class="form-control" id="primerNombreNatural" placeholder="" value="{{$cliente->primer_nombre}}" readonly>
+                      <input type="text" class="form-control" name="primerNombreNatural" placeholder="" value="{{$cliente->primer_nombre}}" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="segundoNombreNatural">Segundo nombre</label>
-                      <input type="text" class="form-control" id="segundoNombreNatural" placeholder="" value="{{$cliente->segundo_nombre}}" readonly>                    
+                      <input type="text" class="form-control" name="segundoNombreNatural" placeholder="" value="{{$cliente->segundo_nombre}}" required>                    
                     </div>
                   </div>
 
                   <div class="row">
                         <div class="col-md-6 mb-3">
                           <label for="primerApellidoNatural">Primer apellido</label>
-                          <input type="text" class="form-control" id="primerApellidoNatural" placeholder="" value="{{$cliente->primer_apellido}}" readonly>
+                          <input type="text" class="form-control" name="primerApellidoNatural" placeholder="" value="{{$cliente->primer_apellido}}" required>
                           
                         </div>
                         <div class="col-md-6 mb-3">
                           <label for="segundoApellidoNatural">Segundo apellido</label>
-                          <input type="text" class="form-control" id="segundoApellidoNatural" placeholder="" value="{{$cliente->segundo_apellido}}" readonly>                    
+                          <input type="text" class="form-control" name="segundoApellidoNatural" placeholder="" value="{{$cliente->segundo_apellido}}" required>                    
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                           <label for="CedulaNatural">Cédula de identidad</label>
-                          <input type="text" class="form-control" id="CedulaNatural" placeholder="" value="{{$cliente->cedula_natural}}" readonly>
+                          <input type="text" class="form-control" name="CedulaNatural" placeholder="" value="{{$cliente->cedula_natural}}" readonly>
                           
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="rifNatural">RIF</label>
-                            <input type="text" class="form-control" id="rifNatural" placeholder="" value="{{$cliente->rif_cliente}}" readonly>                   
+                            <input type="text" class="form-control" name="rifNatural" placeholder="" value="{{$cliente->rif_cliente}}" readonly>                   
                         </div>
                     </div>
 
                   <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="telefonoNatural">Número telefónico</label>
-                        <input type="text" class="form-control" id="telefonoNatural" placeholder="" value="{{$cliente->telefonos}}" required>                    
+                        @foreach ($telefono as $item2)
+                        <input type="text" class="form-control" name="telefonoNatural" placeholder="" value="{{$item2->codigo_area}}-{{$item2->numero}}" required>                    
+                        @endforeach
                       </div>
                         <div class="col-md-6 mb-3">
                           <label for="CorreoNatural">Correo Electronico</label>
-                          <input type="text" class="form-control" id="CorreoNatural" placeholder="" value="{{$cliente->usuarios->first()->nombre_usuario}}" readonly>                    
+                          <input type="text" class="form-control" name="CorreoNatural" placeholder="" value="{{$cliente->usuarios->first()->nombre_usuario}}" readonly>                    
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="passwordNatural">Contraseña</label>
-                            <input type="password" class="form-control" id="passwordNatural" placeholder="" value="{{$cliente->usuarios->first()->contraseña}}" required>                              
-                        </div>
-                        <div class="col-md-6 mb-3">
                             <label for="puntosNatural">Puntos disponibles</label>
-                            <input type="text" class="form-control" id="puntosNatural" placeholder="" value="{{$cliente->cantidad_puntos}}" readonly>                    
+                            <input type="text" class="form-control" name="puntosNatural" placeholder="" value="{{$cliente->cantidad_puntos}}" readonly>                    
                         </div>
                     </div>
 
@@ -140,8 +141,11 @@
                         <div class="col-md-5 mb-3">
                           <label for="estado">Estado</label>
                           <select class="custom-select d-block w-100" id="estado" required>
-                            <option value="">{{$cliente->lugar->lugar->lugar->nombre_lugar}}</option>
-                            <option>DIstrito Capital</option>
+                            <option value="">{{$cliente->lugarFisica->lugar->lugar->nombre_lugar}}</option>
+                            @foreach ($estado as $item)
+                              
+                              <option>{{$item}}</option>
+                          @endforeach
                           </select>
                           <div class="invalid-feedback">
                             Por favor escoja un estado válido.
@@ -150,8 +154,11 @@
                         <div class="col-md-4 mb-3">
                           <label for="municipio">Municipio</label>
                           <select class="custom-select d-block w-100" id="municipio" required>
-                            <option value="">{{$cliente->lugar->lugar->nombre_lugar}}</option>
-                            <option>Libertador</option>
+                            <option value="">{{$cliente->lugarFisica->lugar->nombre_lugar}}</option>
+                            @foreach ($municipio as $item)
+                              
+                              <option>{{$item}}</option>
+                          @endforeach
                           </select>
                           <div class="invalid-feedback">
                             Por favor escoja un municipio válido.
@@ -159,9 +166,12 @@
                         </div>
                         <div class="col-md-3 mb-3">
                           <label for="parroquia">Parroquia</label>
-                          <select class="custom-select d-block w-100" id="parroquia" required>
-                            <option value="">{{$cliente->lugar->nombre_lugar}}</option>
-                            <option>El Recreo</option>
+                          <select class="custom-select d-block w-100" name="parroquia" required>
+                            <option selected>{{$cliente->lugarFisica->nombre_lugar}}</option>
+                            @foreach ($parroquia as $item)
+                              
+                              <option>{{$item}}</option>
+                          @endforeach
                           </select>
                           <div class="invalid-feedback">
                             Por favor escoja una parroquia válida.
@@ -169,11 +179,25 @@
                         </div>
                       </div>
 
+                      <div class="col-md-6 mb-3">
+                        <label for="direccionFiscal">Dirección física</label>
+                        <input type="text" class="form-control" name="direccionFisica" placeholder="" value="{{$cliente->direccion_fisica}}" required>                    
+                      </div>
+
                   
         <br>
-        <a href="ConsultarMetodosDePago">
-        <button style="margin-right:30px" type="button" class="btn btn-warning">Métodos de pago</button></a>
-        <button style="background-color: greenyellow"type="button" class="btn btn-warning">Guardar cambios</button>
+        <a href="{{route('ConsultarMetodosDePago', $cliente->rif_cliente)}}">
+          <button style="margin-right:30px" type="button" class="btn btn-warning">Métodos de pago</button>
+        </a>
+        <button style="background-color: greenyellow"type="submit" class="btn btn-warning">Guardar cambios</button>
+        </form>
+        <form action="{{route ('eliminar.natural',$cliente->rif_cliente)}}" method="POST" class="d-inline">
+            
+          @method('DELETE')
+          @csrf
+          <button style="margin-bottom:50px; background-color: red; color:white"type="submit" class="btn btn-warning">Eliminar cliente</button>
+
+      </form>
     </div>
 
 <!-- Optional JavaScript -->

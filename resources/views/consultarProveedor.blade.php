@@ -74,92 +74,219 @@
         
         <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Información del proveedor</h4>
-                <form class="needs-validation" novalidate>
+                <form action="{{route ('editar.proveedor', $proveedor->rif_proveedor)}}" class="needs-validation" method="POST" novalidate>
+
+                  @method('PUT')
+                  @csrf
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="denominacionComercial">Denominación comercial</label>
-                      <input type="text" class="form-control" id="denominacionComercial" placeholder="" value="" required>
+                      <input type="text" class="form-control"name="denominacionComercial" placeholder="" value="{{$proveedor->denominacion_comercial}}" required>
                       
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="razonSocial">Razón social</label>
-                      <input type="text" class="form-control" id="razonSocial" placeholder="" value="">                    
+                      <input type="text" class="form-control" name="razonSocial" placeholder="" value="{{$proveedor->razon_social}}">                    
                     </div>
                   </div>
 
                   <div class="row">
                         <div class="col-md-6 mb-3">
                                 <label for="rifProveedor">RIF</label>
-                                <input type="text" class="form-control" id="rifProveedor" placeholder="" value="" readonly>                   
+                                <input type="text" class="form-control" name="rifProveedor" placeholder="" value="{{$proveedor->rif_proveedor}}" readonly>                   
                             </div>
-                        <div class="col-md-6 mb-3">
-                          <label for="direccionFiscal">Dirección fiscal</label>
-                          <input type="text" class="form-control" id="direccionFiscal" placeholder="" value="" required>                    
-                        </div>
                     </div>
 
                     <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="direccionFiscal">Dirección física</label>
+                        <input type="text" class="form-control" name="direccionFisica" placeholder="" value="{{$proveedor->direccion_fisica}}" required>                    
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="direccionFiscal">Dirección fiscal</label>
+                        <input type="text" class="form-control" name="direccionFiscal" placeholder="" value="{{$proveedor->direccion_fiscal}}" required>                    
+                      </div>
+                  </div>
+                  <hr class="bg-warning">
+                    <div class="row">
+                      
+                      <div class="col-md-6 mb-3">
+                        <label for="numerosTelefonicos">Números telefónicos</label>
+                        <table class="table table-hover">
+                          <thead class="bg-warning">
+                              <tr>
+                                  <th scope="col" class="text-center">Número de teléfono</th>
+                                  <th scope="col" class="text-center"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach ($telefono as $item)
+                              <tr>
+                                      <th class="text-center">{{$item->codigo_area}}-{{$item->numero}}</th>
+                                      <td class="text-center"><a href="{{route('consultarTelefono', $item->codigo_telefono)}}">Consultar</a></td>     
+                              </tr>
+                      @endforeach  
+                          </tbody>
+                      </table>
+                      
+                      </div>
                         <div class="col-md-6 mb-3">
                             <label for="correosElectronicos">Correos electrónicos</label>
-                             <input type="text" class="form-control" id="correosElectronicos" placeholder="email1@abc.com, email2@xyz.com, ....." value="" required>                          
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="numerosTelefonicos">Números telefónicos</label>
-                            <input type="text" class="form-control" id="numerosTelefonicos" placeholder="Ej: 02125552323, 04147773344, ......" value="" required>                    
+                            <table class="table table-hover">
+                              <thead class="bg-warning">
+                                  <tr>
+                                      <th scope="col" class="text-center">Dirección de correo</th>
+                                      <th scope="col" class="text-center"></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  @foreach ($correo as $item)
+                                  <tr>
+                                          <th class="text-center">{{$item->direccion_correo}}</th>
+                                          <td class="text-center"><a href="{{route('consultarCorreo', $item->codigo_correo)}}">Consultar</a></td>                        
+                                  </tr>
+                          @endforeach  
+                              </tbody>
+                          </table>
+                          
                         </div>
                         
+                        
                     </div>
-
-
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="passwordProveedor">Contraseña</label>
-                            <input type="password" class="form-control" id="passwordProveedor" placeholder="" value="" required>                              
-                        </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="numerosTelefonicos">Agregar teléfonos (separados por un espacio)</label>
+                        <input type="text" class="form-control" name="numerosTelefonicos" placeholder="" value="" required>                    
                     </div>
-
-                    <h1 style="font-size:30px"class="display-4">Dirección </h1>
+                      <div class="col-md-6 mb-3">
+                        <label for="codigotelefonoNatural">Agregar correos (separados por un espacio)</label>
+                        <input style="box-shadow: none" type="text" class="form-control" name="correosElectronicos" placeholder="" value="" required> 
+                      </div>
+                    </div>
+                    <h1 style="font-size:30px"class="display-4">Dirección física </h1>
                     <hr class="bg-warning">
 
                     <div class="row">
-                        <div class="col-md-5 mb-3">
-                          <label for="estado">Estado</label>
-                          <select class="custom-select d-block w-100" id="estado" required>
-                            <option value="">Escoger...</option>
-                            <option>DIstrito Capital</option>
-                          </select>
-                          <div class="invalid-feedback">
-                            Por favor escoja un estado válido.
-                          </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="municipio">Municipio</label>
-                          <select class="custom-select d-block w-100" id="municipio" required>
-                            <option value="">Escoger...</option>
-                            <option>Libertador</option>
-                          </select>
-                          <div class="invalid-feedback">
-                            Por favor escoja un municipio válido.
-                          </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                          <label for="parroquia">Parroquia</label>
-                          <select class="custom-select d-block w-100" id="parroquia" required>
-                            <option value="">Escoger...</option>
-                            <option>El Recreo</option>
-                          </select>
-                          <div class="invalid-feedback">
-                            Por favor escoja una parroquia válida.
-                          </div>
+                      <div class="col-md-5 mb-3">
+                        <label for="estado">Estado</label>
+
+                        <select class="custom-select d-block w-100" name="estadoFisica" required>
+                          <option value="">{{$proveedor->lugarFisica->lugar->lugar['nombre_lugar']}}</option>
+                          @foreach ($estado as $item)
+                              
+                              <option>{{$item}}</option>
+                          @endforeach
+                        </select>
+
+                        <div class="invalid-feedback">
+                          Por favor escoja un estado válido.
                         </div>
                       </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="municipio">Municipio</label>
+
+                        <select class="custom-select d-block w-100" name="municipioFisica" required>
+                          <option value="">{{$proveedor->lugarFisica->lugar['nombre_lugar']}}</option>
+                          @foreach ($municipio as $item)
+                              
+                              <option>{{$item}}</option>
+                          @endforeach
+
+                        </select>
+
+                        <div class="invalid-feedback">
+                          Por favor escoja un municipio válido.
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="parroquia">Parroquia</label>
+
+                        <select class="custom-select d-block w-100" name="parroquiaFisica" required>
+                          <option selected>
+                            {{$proveedor->lugarFisica['nombre_lugar']}}
+                        </option>
+                          @foreach ($parroquia as $item)
+                              
+                            <option>{{$item}}</option>
+                          @endforeach
+                        </select>
+
+                        <div class="invalid-feedback">
+                          Por favor escoja una parroquia válida.
+                        </div>
+                      </div>
+                    </div>
+
+                    <h1 style="font-size:30px"class="display-4">Dirección fiscal</h1>
+                  <hr class="bg-warning">
+
+                  <div class="row">
+                      <div class="col-md-5 mb-3">
+                        <label for="estado">Estado</label>
+
+                        <select class="custom-select d-block w-100" name="estadoFiscal" required>
+                          <option value="">{{$proveedor->lugarFiscal->lugar->lugar['nombre_lugar']}}</option>
+                          @foreach ($estado as $item)
+                              
+                              <option>{{$item}}</option>
+                          @endforeach
+                        </select>
+                        
+                        <div class="invalid-feedback">
+                          Por favor escoja un estado válido.
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="municipio">Municipio</label>
+
+                        <select class="custom-select d-block w-100" name="municipioFiscal" required>
+                          <option value="">{{$proveedor->lugarFiscal->lugar['nombre_lugar']}}</option>
+                          @foreach ($municipio as $item)
+                              
+                              <option>{{$item}}</option>
+                          @endforeach
+                        </select>
+
+                        <div class="invalid-feedback">
+                          Por favor escoja un municipio válido.
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="parroquia">Parroquia</label>
+
+                        <select class="custom-select d-block w-100" name="parroquiaFiscal" required>
+                          <option selected>
+                            {{$proveedor->lugarFiscal['nombre_lugar']}}
+                        </option>
+                          @foreach ($parroquia as $item)
+                              
+                            <option>{{$item}}</option>
+                            @endforeach
+                        </select>
+
+                        <div class="invalid-feedback">
+                          Por favor escoja una parroquia válida.
+                        </div>
+                      </div>
+                    </div>
 
                   
         <br>
+
+        <a href="{{route('ContactoProveedor', $proveedor->rif_proveedor)}}">
+          <button style="margin-right:30px" type="button" class="btn btn-warning">Personas de contacto</button>
+        </a>
         
-        <button style="background-color: greenyellow; margin-bottom: 50px;"type="button" class="btn btn-warning">Guardar cambios</button>
-    </div>
+        <button style="background-color: greenyellow;;"type="submit" class="btn btn-warning">Guardar cambios</button>
+                    </form>
+                    <form action="{{route ('eliminar.proveedor',$proveedor->rif_proveedor)}}" method="POST" class="d-inline">
+            
+                      @method('DELETE')
+                      @csrf
+                      <button style="margin-bottom:50px; background-color: red; color:white"type="submit" class="btn btn-warning">Eliminar proveedor</button>
+          
+                  </form>
+      </div>
 
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

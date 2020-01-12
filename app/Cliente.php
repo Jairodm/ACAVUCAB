@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $direccion_fisica
  * @property string $tipo_cliente
  * @property Lugar $lugar
- * @property Lugar $lugar
  * @property PersonaContacto[] $personaContactos
  * @property Telefono[] $telefonos
  * @property CorreoElectronico[] $correoElectronicos
@@ -73,9 +72,14 @@ class Cliente extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function lugar()
+    public function lugarFisica()
     {
         return $this->belongsTo('App\Lugar', 'fk_lugar_fisica', 'codigo_lugar');
+    }
+
+    public function lugarFiscal()
+    {
+        return $this->belongsTo('App\Lugar', 'fk_lugar_fiscal', 'codigo_lugar');
     }
 
     /**
