@@ -11,7 +11,6 @@
 |
 */
 
-
 use PHPJasper\PHPJasper;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +50,6 @@ Route::get('consutarMetodosDePago', function () {
 Route::get('ConsultarProductoCliente', function () {
     return view('ConsultarProductoCliente');
 });
-
 
 Route::get('consultarProveedor', function () {
     return view('consultarProveedor');
@@ -180,8 +178,8 @@ Route::get('registrarEmpleado', function () {
     return view('registrarEmpleado');
 });
 
-Route::get('registrarmetodoPago', function () {
-    return view('registrarmetodoPago');
+Route::get('registrarMetodoPago', function () {
+    return view('registrarMetodoPago');
 });
 
 Route::get('registrarProducto', function () {
@@ -203,6 +201,23 @@ Route::get('tarjetas', function () {
 Route::get('ventaEntrada', function () {
     return view('ventaEntrada');
 });
+
+Route::get('/consultarTelefono', function () {
+    return view('consultarTelefono');
+});
+
+Route::get('/consultarCorreo', function () {
+    return view('consultarCorreo');
+});
+
+Route::get('registrarContactoProveedor', function () {
+    return view('registrarContactoProveedor');
+});
+
+Route::get('contactoProveedor', function () {
+    return view('contactoProveedor');
+});
+
 
 
 // Crud de empleado
@@ -259,6 +274,56 @@ Route::get('asistenciasEmpleado/{cedula_empleado?}', 'horarioAsistenciaCon@consu
 
 Route::get('registrarEmpleado','registrarEmpleadoCon@vista')->name('registrarEmpleado');
 Route::post('nómina', 'registrarEmpleadoCon@leerAsistencias')->name('leerAsistencias');
+
+//Correos y teléfonos
+
+Route::delete('consultarTelefono/{codigo_telefono?}', 'CorreoTelefonoCon@eliminarTelefono')->name('eliminar.telefono');
+
+Route::get('consultarTelefono/{codigo_telefono?}','CorreoTelefonoCon@consultarTelefono')->name('consultarTelefono');
+
+Route::put('consultarTelefono/{codigo_telefono?}','CorreoTelefonoCon@editarTelefono')->name('editar.telefono');
+
+Route::delete('consultarCorreo/{codigo_correo?}', 'CorreoTelefonoCon@eliminarCorreo')->name('eliminar.correo');
+
+Route::get('consultarCorreo/{codigo_correo?}','CorreoTelefonoCon@consultarCorreo')->name('consultarCorreo');
+
+Route::put('consultarCorreo/{codigo_correo?}','CorreoTelefonoCon@editarCorreo')->name('editar.correo');
+
+//Método de pago
+
+Route::get('ConsultarMetodosDePago/{rif_cliente?}','MetodoPagoCon@consultarMetodosDePago')->name('ConsultarMetodosDePago');
+
+Route::get('consultarMetodoCliente/{codigo_metodo_pago?}','MetodoPagoCon@consultarMetodoCliente')->name('consultarMetodoCliente');
+
+Route::get('registrarMetodoPago/{rif_cliente?}','MetodoPagoCon@regMetodoCliente')->name('registrarMetodoCliente');
+
+Route::post('registrarMetodoPago/{rif_cliente?}','MetodoPagoCon@RegistrarMetodoCliente')->name('registrar.metodoCliente');
+
+Route::delete('consultarMetodoCliente/{codigo_metodo_pago?}', 'MetodoPagoCon@eliminarMetodoCliente')->name('eliminar.metodoCliente');
+
+Route::put('consultarMetodoCliente/{codigo_metodo_pago?}','MetodoPagoCon@editarMetodoCliente')->name('editar.metodoCliente');
+
+//Persona de contacto
+
+Route::get('contactoProveedor/{rif_proveedor?}','ContactoCon@consultarProveedor')->name('ContactoProveedor');
+
+Route::get('consultarContactoProveedor/{codigo_persona_contacto?}','ContactoCon@consultarContactoProveedor')->name('consultarContactoProveedor');
+
+Route::get('registrarContactoProveedor/{rif_proveedor?}','ContactoCon@regContactoProveedor')->name('registrarContactoProveedor');
+
+Route::post('registrarContactoProveedor/{rif_proveedor?}','ContactoCon@RegistrarContactoProveedor')->name('registrar.contactoProveedor');
+
+Route::delete('consultarContactoProveedor/{codigo_persona_contacto?}', 'ContactoCon@eliminarContactoProveedor')->name('eliminar.contactoProveedor');
+
+Route::put('consultarContactoProveedor/{codigo_persona_contacto?}','ContactoCon@editarContactoProveedor')->name('editar.contactoProveedor');
+
+
+Route::get('contactoJuridico/{rif_cliente?}','ContactoCon@consultarJuridico')->name('ContactoJuridico');
+
+Route::get('registrarContactoJuridico/{rif_cliente?}','ContactoCon@regContactoJuridico')->name('registrarContactoJuridico');
+
+Route::post('registrarContactoJuridico/{rif_cliente?}','ContactoCon@RegistrarContactoJuridico')->name('registrar.contactoJuridico');
+
 
 
 Route::middleware(['auth'])->group(function(){
@@ -363,10 +428,28 @@ Route::get('registrarClienteJuridico','clienteControlador@vistajuridico')->name(
 
 Route::post('registrarClienteJuridico', 'clienteControlador@crearjuridico')->name('cliente.juridico.crear');
 
-//utilizo el mismo controlador de cliente pero no deberia
-Route::get('registrarProveedor','clienteControlador@vistaproveedor')->name('registrarProveedor');
+Route::put('consultarClienteNatural/{rif_cliente?}','clienteControlador@editarNatural')->name('editar.natural');
 
-Route::post('registrarProveedor', 'clienteControlador@crearproveedor')->name('proveedor.crear');
+Route::delete('consultarClienteNatural/{rif_cliente?}', 'clienteControlador@eliminarNatural')->name('eliminar.natural');
+
+Route::get('consultarClienteJuridico','clienteControlador@consultarJuridico')->name('consultarClienteJuridico');
+
+Route::put('consultarClienteJuridico/{rif_cliente?}','clienteControlador@editarJuridico')->name('editar.juridico');
+
+Route::delete('consultarClienteJuridico/{rif_cliente?}', 'clienteControlador@eliminarJuridico')->name('eliminar.juridico');
+
+//Proveedor
+Route::get('registrarProveedor','proveedorCon@vista')->name('registrarProveedor');
+
+Route::post('registrarProveedor', 'proveedorCon@crearproveedor')->name('proveedor.crear');
+
+Route::get('consultarProveedor/{rif_proveedor?}','proveedorCon@consultar')->name('consultarProveedor');
+
+Route::put('consultarProveedor/{rif_proveedor?}','proveedorCon@editar')->name('editar.proveedor');
+
+Route::delete('consultarProveedor/{rif_proveedor?}', 'proveedorCon@eliminar')->name('eliminar.proveedor');
+
+Route::get('proveedores', 'proveedorCon@proveedores')->name('proveedores');
 
 
 

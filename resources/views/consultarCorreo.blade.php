@@ -12,7 +12,17 @@
     <script src="https://kit.fontawesome.com/89cc030952.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="main.css"></script>
-    <title>ACAVUCAB - Métodos de pago</title>
+    <title>ACAVUCAB - Consulta de correo</title>
+
+    <style>
+        .center_div {
+            margin: 0 auto;
+            width: 60%
+                /* value of your choice which suits your alignment */
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -67,72 +77,55 @@
                     </div>
                 </div>
             </nav>
-    <div class="container mt-2 pt-2">
-        <h2 class="display-4 text-center">Mis métodos de pago </h2>
-        <hr class="bg-warning">
-            <table class="table table-hover">
-                    <thead class="bg-warning">
-                        <tr>
-                            <th scope="col" class="text-center">Tipo</th>
-                            <th scope="col" class="text-center">Número de la tarjeta de crédito</th>
-                            <th scope="col" class="text-center">Nombre del titular</th>
-                            <th scope="col" class="text-center">Fecha de vencimiento</th>
-                            <th scope="col" class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($metodo_pago as $item)
-                        <tr>
-                                <th class="text-center">{{$item->tipo_tarjeta_credito}}</th>
-                                <th class="text-center">{{$item->numero_tarjeta_credito}}</th>
-                                <th class="text-center">{{$item->nombre_titular}}</th>
-                                <th class="text-center">{{$item->fecha_vencimiento}}</th>    
-                                <td class="text-center"><a href="{{route('consultarMetodoCliente', $item->codigo_metodo_pago)}}">Consultar</a></td>                        
-                </tr>
-                @endforeach  
-                    </tbody>
-                </table>
-                <a href="{{route('registrarMetodoCliente', $cliente->rif_cliente)}}">
-                    <button style="margin-right:30px" type="button" class="btn btn-warning">Agregar método de pago</button>
-                </a>
-    </div>
-<!-- Pagination -->
-    <ul class="pagination justify-content-center mt-2 pt-2">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous" style="color:#fab700;">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next" style="color:#fab700;">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-    </ul>
 
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <div class="container">
+        <h1 class="display-4 text-center">Correo</h1>
+        <hr class="bg-warning">
+
+
+        <div class="container center_div">
+
+            <form action="{{route ('editar.correo', $correo->codigo_correo)}}" class="needs-validation" method="POST" novalidate>
+
+                @method('PUT')
+                @csrf
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="vencimiento">Dirección de correo:</label>
+                            <input type="text" class="form-control" name="direccionCorreo"  value="{{$correo->direccion_correo}}" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Valor requerido
+                            </div>
+        
+                        </div>
+
+
+                <hr class="mb-4">
+                    <button class="btn btn-warning  btn-lg " type="submit">Guardar cambios</button>
+                    
+            </form>
+            <form action="{{route ('eliminar.correo',     $correo->codigo_correo)}}" method="POST" class="d-inline">
+
+                @method('DELETE')
+                @csrf
+                <button class="btn btn-warning btn-lg " style="background-color:red; color:white" type="submit">Eliminar correo</button>
+    
+            </form>
+
+        </div>
+
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

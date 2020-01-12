@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/89cc030952.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="main.css"></script>
-    <title>ACAVUCAB - Métodos de pago</title>
+    <title>ACAVUCAB - Personas de contacto</title>
 </head>
 
 <body>
@@ -67,60 +67,32 @@
                     </div>
                 </div>
             </nav>
+    
     <div class="container mt-2 pt-2">
-        <h2 class="display-4 text-center">Mis métodos de pago </h2>
+        <h2 class="display-4 text-center">Personas de contacto </h2>
         <hr class="bg-warning">
             <table class="table table-hover">
                     <thead class="bg-warning">
                         <tr>
-                            <th scope="col" class="text-center">Tipo</th>
-                            <th scope="col" class="text-center">Número de la tarjeta de crédito</th>
-                            <th scope="col" class="text-center">Nombre del titular</th>
-                            <th scope="col" class="text-center">Fecha de vencimiento</th>
+                            <th scope="col" class="text-center">Nombre</th>
+                            <th scope="col" class="text-center">Apellido</th>
                             <th scope="col" class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($metodo_pago as $item)
+                        @foreach ($persona_contacto as $item)
                         <tr>
-                                <th class="text-center">{{$item->tipo_tarjeta_credito}}</th>
-                                <th class="text-center">{{$item->numero_tarjeta_credito}}</th>
-                                <th class="text-center">{{$item->nombre_titular}}</th>
-                                <th class="text-center">{{$item->fecha_vencimiento}}</th>    
-                                <td class="text-center"><a href="{{route('consultarMetodoCliente', $item->codigo_metodo_pago)}}">Consultar</a></td>                        
+                                <th class="text-center">{{$item->nombre_contacto}}</th>
+                                <th class="text-center">{{$item->apellido_contacto}}</th>    
+                                <td class="text-center"><a href="{{route('consultarContactoProveedor', $item)}}">Consultar</a></td>                        
                 </tr>
                 @endforeach  
                     </tbody>
                 </table>
-                <a href="{{route('registrarMetodoCliente', $cliente->rif_cliente)}}">
-                    <button style="margin-right:30px" type="button" class="btn btn-warning">Agregar método de pago</button>
+                <a href="{{route('registrarContactoJuridico', $cliente->rif_cliente)}}">
+                    <button style="margin-right:30px" type="button" class="btn btn-warning">Agregar persona de contacto</button>
                 </a>
     </div>
-<!-- Pagination -->
-    <ul class="pagination justify-content-center mt-2 pt-2">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous" style="color:#fab700;">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next" style="color:#fab700;">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-    </ul>
-
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

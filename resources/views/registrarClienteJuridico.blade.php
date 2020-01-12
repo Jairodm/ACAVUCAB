@@ -45,7 +45,7 @@
                   <div class="row">
                         <div class="col-md-6 mb-3">
                                 <label for="rifJuridico">RIF</label>
-                                <select name = "tipoRif">
+                                <select name="tipoRif">
                                       <option value="V">V</option>
                                       <option value="E">E</option>
                                       <option value="P">P</option>
@@ -70,15 +70,10 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 mb-3">
-                          <label for="codigotelefonoNatural">Código telefónico</label>
-                          <input type="text" class="form-control" name="codigotelefono" maxlength="4" placeholder="" value="" required> 
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="numerosTelefonicos">Número de teléfono</label>
-                            <input type="text" class="form-control" name="numerosTelefonicos"maxlength="7" placeholder="Ej: 5552323" value="" required>                    
-                        </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="numerosTelefonicos">Números telefónicos (separados por un espacio)</label>
+                        <input type="text" class="form-control" name="numerosTelefonicos" placeholder="Ej: 0212-5516677 0414-2724561..." value="" required>                    
+                    </div>
                         
                     </div>
 
