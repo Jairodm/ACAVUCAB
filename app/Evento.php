@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $descripcion_evento
  * @property string $direccion_evento
  * @property float $precio_entrada
+ * @property float $cantidad_entradas
  * @property Lugar $lugar
  * @property Evento_y_proveedor[] $eventoYProveedors
  */
@@ -39,7 +40,7 @@ class Evento extends Model
     /**
      * @var array
      */
-    protected $fillable = ['fk_lugar', 'fecha_inicio_evento', 'fecha_fin_evento', 'hora_inicio_evento', 'hora_fin_evento', 'nombre_evento', 'descripcion_evento', 'direccion_evento', 'precio_entrada'];
+    protected $fillable = ['fk_lugar', 'fecha_inicio_evento', 'fecha_fin_evento', 'hora_inicio_evento', 'hora_fin_evento', 'nombre_evento', 'descripcion_evento', 'direccion_evento', 'precio_entrada', 'cantidad_entradas'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -60,5 +61,10 @@ class Evento extends Model
     public function proveedor()
     {
         return $this->belongsToMany('App\proveedor', 'evento_y_proveedor', 'fk_evento', 'fk_proveedor');
+    }
+
+    public function clientes()
+    {
+        return $this->belongsToMany('App\Cliente', 'Venta_entrada', 'fk_evento', 'fk_cliente');
     }
 }

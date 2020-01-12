@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {
-
-
-
     public function index() {
         $eventos = Evento::paginate(5);
         return view('eventos', compact('eventos'));
@@ -94,6 +91,8 @@ class EventoController extends Controller
         $evento->hora_fin_evento = $request->finalEvento;
 
         $evento->precio_entrada = $request->precioEvento;
+
+        $evento->cantidad_entradas= $request->cantidadEntradas;
 
         $variable = $request->get('parroquia');
        

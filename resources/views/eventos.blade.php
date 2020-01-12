@@ -26,12 +26,15 @@
                     <thead class="bg-warning">
                         <tr>
                             <th class="text-center">ID</th>
-                            <th class="text-center" width='700px'>Nombre del Evento</th>
-                            <th colspan="1">&nbsp;</th>
-                            <th>
+                            <th class="text-center" width='300px'>Nombre del Evento</th>
+                            <th class="text-center" width='200px'>Precio Entrada</th>
+                            <th width ='150px'>
                               <a href="{{ route('registrar.get.evento')}}" class="btn btn-md btn-warning pull-right" style="background-color:greenyellow">Crear Evento</a>
                           
-                          </th>
+                             </th>
+                            <th colspan="2">&nbsp;</th>
+                            
+                            
                             
                         </tr>
                     </thead>
@@ -40,9 +43,18 @@
                         <tr>
                                 <th class="text-center">{{$item->codigo_evento}}</th>
                                 <th class="text-center">{{$item->nombre_evento}}</th>
-                              
 
-                            @can('consultar.usuario')
+                                @if( $item->precio_entrada == null)
+                                  <th class="text-center">Gratis</th>
+                                @else 
+                                  <th class="text-center">{{$item->precio_entrada}}</th>
+                                @endif
+
+
+                          @can('consultar.entradas')                           <!-- Consultar de cliente -->
+                                <td class="text-center"><a href="{{route('consultar.entradas', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar Evento</a></td>
+                          @endcan 
+                            @can('consultar.evento')                           <!-- Consultar de administrador -->
                             <td class="text-center"><a href="{{route('consultar.evento', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar datos</a></td>
                             @endcan 
                             

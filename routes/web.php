@@ -297,7 +297,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::delete('consultarRol/{id?}', 'RoleController@eliminar')->name('eliminar.rol')->middleware('can:eliminar.rol');
 
-    //Evento
+    //Evento  - Administrador
 
     Route::get('registrarEvento', 'EventoController@formulario')->name('registrar.get.evento')->middleware('can:registrar.evento');
     Route::post('registrarEvento', 'EventoController@crear')->name('registrar.evento')->middleware('can:registrar.evento');
@@ -316,6 +316,12 @@ Route::middleware(['auth'])->group(function(){
     Route::get('consultarEvento/{id?}','EventoController@consultar')->name('consultar.evento')                              ->middleware('can:consultar.evento');
     
     Route::put('consultarEvento/{id?}','EventoController@editar')->name('editar.evento')->middleware('can:editar.evento');
+
+    // Entrada Evento - Incluye la consulta de cliente
+
+    Route::get('consultarEntradas/{id?}', 'entradaController@consultar')->name('consultar.entradas')->middleware('can:comprar.entradas');
+    Route::get('ventaEntrada/{id?}', 'entradaController@comprarView')->name('comprar.entradas')->middleware('can:comprar.entradas');
+    Route::post('EscogerMetodoDePagoEntrada/{id?}', 'entradaController@asociarEntrada')->name('pagar.entrada')->middleware('can:comprar.entradas');
 
 
 });

@@ -16,66 +16,21 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg bg-warning navbar-light sticky-top">
+        @include('plantilla')
 
-                <div id="navb" class="navbar-collapse collapse hide">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <span class="fas fa-bars"></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="productos">Nuestros productos</a>
-                                <a class="dropdown-item" href="eventos">Eventos</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="diarioCerveza">Diario de una cerveza</a>
-                            </div>
-                        </li>
-                    </ul>
-        
-                    <div id="navb" class="navbar-collapse collapse hide">
-                        <ul class="navbar-nav">
-                            <li class="nav-item ">
-                                <a class="nav-brand" href="index"><img class="logo" src="logooo.png" height="58rem"></a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span class="fas fa-user"></span>Mi cuenta</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="inicioSesion">Iniciar sesión</a>
-                                    <a class="dropdown-item" href="#">Mi cuenta</a>
-                                    <!--Aquí iría una comprobación del tipo de usuario logeado
-                                    para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
-                                    ConsultarEmpleado o ConsultarProveedor-->
-                                    <a class="dropdown-item" href="miscompras">Mis compras</a>
-                                    <a class="dropdown-item" href="menuAdministrador">Administrador</a>
-                                    <a class="dropdown-item" href="menuProveedor">Proveedor</a>
-                                    <a class="dropdown-item" href="menuRegistro">Registrarse</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Cerrar sesión</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="carrito"><span class="fas fa-shopping-cart">
-                                    </span>Carrito</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
     <div class="container mt-2 pt-2">
         <h2 class="display-4 text-center">Comprar Entradas</h2>
         <hr class="bg-warning">
+        
+          <form method="POST" action="{{ route('pagar.entrada',$evento) }}" validate>
+            @csrf
             <ul class="list-unstyled">
                     <li class="media">
-                        <a href="#"><img src="Cerveza5.jpg" class="mr-3" alt="" style="height: 150px; width: 120px"></a>                      <div class="media-body">
-                        <a href="#" style="color:black;"><h4 class="mt-0 mb-1">Título del Evento</h4></a>
-                        <h6>Fecha del Evento DD/MM/AAAA </h6>
-                        <h6>Entradas disponibles: nnn</h6>
+                        <a href="#"><img src="Cerveza5.jpg" class="mr-3" alt="" style="height: 150px; width: 120px"></a>                      
+                      <div class="media-body">
+                        <a href="#" style="color:black;"><h4 class="mt-0 mb-1">Nombre del Evento: {{$evento->nombre_evento}}</h4></a>
+                        <h6>Fecha del Evento: {{$evento->fecha_inicio_evento}}</h6>
+                        <h6>Entradas disponibles: {{$evento->cantidad_entradas}}</h6>
                       </div>
                       
                     </li>
@@ -84,7 +39,6 @@
             <table class="table table-hover">
                     <thead class="bg-warning">
                         <tr>
-                            <th scope="col" class="text-center">Nº de Entrada</th>
                             <th scope="col" class="text-center">Precio</th>
                             <th scope="col" class="text-center">Cantidad</th>
                             <th scope="col" class="text-center">Total</th>
@@ -92,20 +46,29 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row" class="text-center">8745922463</th>
-                            <td class="text-center">2</td>
-                            <td class="text-center"><input type="text" value="5"></td>
-                            <td class="text-center">58.685</td>
+
+                            <td class="text-center"><input type="text" id="precio" name= "precio" value="{{$evento->precio_entrada}}" hidden>{{$evento->precio_entrada}}</td>
+
+                            <td class="text-center"><input type="text" id="cantidadEnt" name="cantidadEnt"></td>
+                            <td class="text-center" id="total" name="total"></td>
+                            
                         </tr>
                     </tbody>
                 </table>
-        <a href="EscogerMetodoDePagoEntrada">
-        <button type="submit" class="btn btn-warning float-right">Pagar</button>
-    </a>
+                <hr class="bg-warning">
+                <a href="EscogerMetodoDePagoEntrada">
+               <button type="submit" class="btn btn-warning float-right">Pagar</button>
+               </a>
+            </form>
+        
+         
+
+                <button onclick="calculate()" class="btn btn-warning float-left">Calcular monto</button>
+            
     </div>
 
+  
 
-      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -116,6 +79,23 @@
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <script>
+        function calculate()
+            { 
+            var field1=document.getElementById("precio").value;
+            var field2=document.getElementById("cantidadEnt").value;
+
+            var resultado = parseFloat(field1)*parseFloat(field2);
+
+            if(!isNaN(resultado))
+            {
+                document.getElementById("total").innerHTML=resultado;
+            }
+
+        }
+    
     </script>
 </body>
 

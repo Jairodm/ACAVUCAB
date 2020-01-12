@@ -157,4 +157,9 @@ class Cliente extends Model
     {
         return $this->hasMany('App\Presupuesto', 'fk_cliente', 'rif_cliente');
     }
+
+    public function eventos()
+    {
+        return $this->belongsToMany('App\Evento', 'Venta_entrada', 'fk_cliente', 'fk_evento');
+    }
 }

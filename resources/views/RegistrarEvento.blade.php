@@ -71,8 +71,13 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="precioEvento">Precio de la entrada</label>
+                        <label for="precioEvento">Precio de la entrada(opcional)</label>
                         <input type="text" class="form-control" name="precioEvento" placeholder="Monto en Bs."
+                            value="">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="precioEvento">Cantidad de Entradas(opcional)</label>
+                        <input type="text" class="form-control" name="cantidadEntradas" placeholder=""
                             value="">
                     </div>
                 </div>
