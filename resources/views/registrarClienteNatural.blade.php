@@ -62,15 +62,11 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="rifNatural">RIF</label>
-<<<<<<< HEAD
 
                             <select name = "tipoRif">
 
                             
 
-=======
-                            <select name="tipoRif">
->>>>>>> 089f4b11c781cb00cb8bc38654e178e54f894b8b
                                   <option value="V">V</option>
                                   <option value="E">E</option>
                                   <option value="P">P</option>
