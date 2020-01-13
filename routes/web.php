@@ -486,7 +486,7 @@ Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlado
 Route::get('inventario','inventarioControlador@inventario')->name('inventario');
 
 
-/*
+
 Route::get('/reporte', function () {
     require base_path() . '/vendor/autoload.php';
 
@@ -513,4 +513,4 @@ $jasper = new PHPJasper;
             $options
         )->execute();
 
-});*/
+});
