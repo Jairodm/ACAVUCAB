@@ -53,30 +53,6 @@
                 {{ $empleados->links() }}
     </div>
     
-<!-- Pagination -->
-    <ul class="pagination justify-content-center mt-2 pt-2">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous" style="color:#fab700;">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next" style="color:#fab700;">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-    </ul>
 
     <form method="POST" action="{{ route('leerAsistencias') }}" validate>
       @csrf
@@ -84,7 +60,12 @@
       <div class="col md-4 text-center">
           <button class="btn btn-warning btn-lg " type="submit">Leer asistencias</button>
           </div>
-  </form>
+     </form>
+     <div  class="col md-4 text-center" style="margin-bottom:50px">
+      <a href="{{route('reporte.asistencia')}}">
+      <button style="" type="button" class="btn btn-warning btn-lg ">Generar Reporte de asistencia</button>
+      </a>
+    </div>
 
       
     <!-- Optional JavaScript -->

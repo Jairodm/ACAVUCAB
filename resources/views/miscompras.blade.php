@@ -74,41 +74,20 @@
             <thead class="bg-warning">
                 <tr>
                     <th scope="col" class="text-center">Nº de Factura</th>
-                    <th scope="col" class="text-center">Cantidad de Productos</th>
                     <th scope="col" class="text-center">Fecha de Compra</th>
-                    <th scope="col" class="text-center">Total</th>
-                    <th scope="col" class="text-center">Detalle de Factura</th>
+                    <th scope="col" class="text-center">Monto pagado</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row" class="text-center">8745922463</th>
-                    <td class="text-center">2</td>
-                    <td class="text-center">11/02/1999</td>
-                    <td class="text-center">58.685</td>
-                    <td class="text-center"><a href="detalleCompra">Hola</a></td>
+                @foreach ($venta as $item)
+                        <tr>
+                                <th class="text-center">{{$item->numero_factura}}</th>
+                                <th class="text-center">{{$item->fecha_venta}}</th>  
+                                <th class="text-center">{{$item->monto_total_venta}}</th>  
+                                <td class="text-center"><a href="{{route('consultarVenta', $item)}}">Consultar compra</a></td>                        
                 </tr>
-                <tr>
-                    <th scope="row" class="text-center">8745922463</th>
-                    <td class="text-center">2</td>
-                    <td class="text-center">11/02/1999</td>
-                    <td class="text-center">58.685</td>
-                    <td class="text-center"><a href="#">Hola</a></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="text-center">8745922463</th>
-                    <td class="text-center">2</td>
-                    <td class="text-center">11/02/1999</td>
-                    <td class="text-center">58.685</td>
-                    <td class="text-center"><a href="#">Hola</a></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="text-center">8745922463</th>
-                    <td class="text-center">2</td>
-                    <td class="text-center">11/02/1999</td>
-                    <td class="text-center">58.685</td>
-                    <td class="text-center"><a href="#">Hola</a></td>
-                </tr>
+                @endforeach  
             </tbody>
         </table>
     </div>

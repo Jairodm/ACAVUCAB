@@ -26,6 +26,8 @@ class Estatus extends Model
      */
     protected $primaryKey = 'codigo_estatus';
 
+    public $timestamps = false;
+
     /**
      * The "type" of the auto-incrementing ID.
      * 

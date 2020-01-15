@@ -28,6 +28,9 @@ class Estatus_y_venta extends Model
      */
     protected $primaryKey = 'codigo_estatus_y_venta';
 
+    public $timestamps = false;
+
+
     /**
      * The "type" of the auto-incrementing ID.
      * 

@@ -55,6 +55,8 @@ class Venta extends Model
      */
     public $incrementing = false;
 
+    public $timestamps = false;
+
     /**
      * @var array
      */
@@ -82,7 +84,7 @@ class Venta extends Model
      */
     public function metodoPago()
     {
-        return $this->belongsTo('App\MetodoPago', 'fk_metodo_pago', 'codigo_metodo_pago');
+        return $this->belongsTo('App\Metodo_pago', 'fk_metodo_pago', 'codigo_metodo_pago');
     }
 
     /**
@@ -122,6 +124,6 @@ class Venta extends Model
      */
     public function detalleVentas()
     {
-        return $this->hasMany('App\DetalleVentum', 'venta', 'numero_factura');
+        return $this->hasMany('App\Detalle_venta', 'venta', 'numero_factura');
     }
 }

@@ -19,7 +19,7 @@
                             <div class="col-md-6">
 
                                 <div class="col-md-6">
-                                    <input id="name" type="hidden" class="form-control @error('name') is-invalid @enderror" name="name" value="1" required autocomplete="name" autofocus>
+                                    <input id="name" type="hidden" class="form-control @error('name') is-invalid @enderror" name="name" value="4" required autocomplete="name" autofocus>
     
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">

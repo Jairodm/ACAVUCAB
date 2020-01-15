@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/89cc030952.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="main.css"></script>
-    <title>ACAVUCAB - Escoger método de pago</title>
+    <title>ACAVUCAB - Personas de contacto</title>
 </head>
 
 <body>
@@ -67,61 +67,40 @@
                     </div>
                 </div>
             </nav>
-            <div class="container mt-2 pt-2">
-                <h2 class="display-4 text-center">Mis métodos de pago </h2>
-                <hr class="bg-warning">
-                    <table class="table table-hover">
-                            <thead class="bg-warning">
-                                <tr>
-                                    <th scope="col" class="text-center">Tipo</th>
-                                    <th scope="col" class="text-center">Número de la tarjeta de crédito</th>
-                                    <th scope="col" class="text-center">Nombre del titular</th>
-                                    <th scope="col" class="text-center">Fecha de vencimiento</th>
-                                    <th scope="col" class="text-center"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($metodo_pago as $item)
-                                <tr>
-                                        <th class="text-center">{{$item->tipo_tarjeta_credito}}</th>
-                                        <th class="text-center">{{$item->numero_tarjeta_credito}}</th>
-                                        <th class="text-center">{{$item->nombre_titular}}</th>
-                                        <th class="text-center">{{$item->fecha_vencimiento}}</th>    
-                                        <td class="text-center"><a href="{{route('digitalProcesar', [$item->codigo_metodo_pago, $total])}}">Escoger método</a></td>                        
-                        </tr>
-                        @endforeach  
-                            </tbody>
-                        </table>
-                        <a href="{{route('registrarMetodoCliente', $cliente)}}">
-                            <button style="margin-right:30px" type="button" class="btn btn-warning">Agregar método de pago</button>
-                        </a>
-            </div>
-<!-- Pagination -->
-    <ul class="pagination justify-content-center mt-2 pt-2">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous" style="color:#fab700;">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next" style="color:#fab700;">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-    </ul>
 
-      
+            <div class="container">
+                <h1 class="display-4 text-center">Resumen de la compra</h1>
+                 <hr class="bg-warning">
+          
+                
+                    <div class="container center_div">
+                  
+                        <form method="POST" action="{{ route('digitalProcesada', [$codigo_metodo_pago, $total] ) }}" validate>
+                            @csrf
+                      
+                      
+                       
+                      <hr class="mb-4">
+                    
+                        <div class="col-md-6 mb-3">
+                          <label for="vencimiento">Monto a pagar:</label>
+                        <input type="text" class="form-control" name="totals" placeholder="" value='{{$total}}' readonly>
+
+                       
+                        </div>
+    
+                    
+                      <hr class="mb-4">
+                      <div class="col md-4 text-center">
+                        <button type="submit" class="btn btn-warning">Procesar compra</button>
+                            </div>
+                    </form>
+                  
+                </div>
+    
+              </div>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

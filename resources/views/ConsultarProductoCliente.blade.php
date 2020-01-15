@@ -74,7 +74,10 @@
         
         <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Información del producto</h4>
-                <form class="needs-validation" novalidate>
+                <form action="{{route ('registrarEnCarrito', $cerveza->codigo_cerveza)}}" class="needs-validation" method="POST" novalidate>
+
+                    @method('POST')
+                    @csrf
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="nombreCerveza">Nombre de la cerveza</label>
@@ -100,35 +103,45 @@
                     <h1 style="font-size:30px; margin-top:30px"class="display-4">Características del tipo de cerveza </h1>
                     <hr class="bg-warning">    
 
-                    
 
                     <h1 style="font-size:30px; margin-top:30px"class="display-4">Receta </h1>
                     <hr class="bg-warning">
 
-        <div class="container mt-4 pt-4">
-                <table class="table table-hover">
-                    <thead class="bg-warning">
-                        <tr>
-                            <th scope="col" class="text-center">Ingrediente</th>
-                            <th scope="col" class="text-center">Cantidad</th>
-                            <th scope="col" class="text-center">Unidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+                    <table id = "dataTable" class="table table-hover">
+                        <thead class="bg-warning">
+                            <tr>
+                                <th scope="col" class="text-center">Ingrediente</th>
+                                <th scope="col" class="text-center">Descripción</th>
+                                <th scope="col" class="text-center">Cantidad</th>
+                                <th scope="col" class="text-center">Unidad</th>
+                                <td class="text-center"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($receta as $item)
+                               
+                            <tr>
+                                <th scope="row" class="text-center">{{$item->ingrediente->nombre_ingrediente}}</th>
+                                <td class="text-center">{{$item->descripcion_receta}} </td>
+                                <td class="text-center">{{$item->cantidad_ingrediente}}</td>
+                                <td class="text-center">{{$item->unidad_ingrediente}}</td>
+                            </tr>
+                                
+                            @endforeach
+                        </tbody>
+                    </table>
             
             <div class="row">
                     <div class="col-md-6 mb-3">
                             <label for="cantidad">Cantidad</label>
-                            <input type="numeric" class="form-control" id="cantidad" placeholder="" value="" required>
+                            <input type="numeric" class="form-control" name="cantidadProducto" placeholder="" value="" required>
                             
                   </div>
                     <div class="col-md-6 mb-3">
-                            <button style="margin-top:32px"type="button" class="btn btn-warning">Agregar a mi carrito</button>      
+                            <button style="margin-top:32px"type="submit" class="btn btn-warning">Agregar a mi carrito</button>      
                     </div>
                 </div>
+            </form>
 
     </div>
 

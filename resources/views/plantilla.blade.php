@@ -34,29 +34,35 @@
                         <a class="dropdown-item" href="menuRegistro">Registrarse</a>
                         <div class="dropdown-divider"></div>
                         @else
-                        
-                        <a class="dropdown-item" href="#">Mi cuenta</a>
-                        
+                            @if(auth()->user()->name == 1)
+                            <a class="dropdown-item" href="{{route('consultarClienteNatural')}}">Mi cuenta</a>
+                            @elseif(auth()->user()->name == 2)
+                            <a class="dropdown-item" href="{{route('consultarClienteJuridico')}}">Mi cuenta</a>
+                            @elseif(auth()->user()->name == 3)
+                            <a class="dropdown-item" href="{{route('consultarPerfilProveedor')}}">Mi cuenta</a>
+                            @else
+                            <a class="dropdown-item" href="{{route('Empleado')}}">Mi cuenta</a>
+                            @endif
 
-                        <!--Aquí iría una comprobación del tipo de usuario logeado
-                        para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
-                        ConsultarEmpleado o ConsultarProveedor-->
-                        <a class="dropdown-item" href="miscompras">Mis compras</a>
+                            <!--Aquí iría una comprobación del tipo de usuario logeado
+                            para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
+                            ConsultarEmpleado o ConsultarProveedor-->
+                            <a class="dropdown-item" href="miscompras">Mis compras</a>
 
-                        @can('ConsultarEmpleado')
-                        <a class="dropdown-item" href="{{route('menuAdministrador')}}">Administrador</a>
-                        @endcan
+                            @can('ConsultarEmpleado')
+                            <a class="dropdown-item" href="{{route('menuAdministrador')}}">Administrador</a>
+                            @endcan
 
                         <a class="dropdown-item" href="menuProveedor">Proveedor</a>
                             
 
-    
-                        <!-- Cerraaaar sesión -->
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar sesión') }}
-                        </a>
+        
+                            <!-- Cerraaaar sesión -->
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Cerrar sesión') }}
+                            </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
