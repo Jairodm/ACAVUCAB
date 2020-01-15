@@ -21,6 +21,12 @@
     <div class="container mt-2 pt-2">
         <h2 class="display-4 text-center">Comprar Entradas</h2>
         <hr class="bg-warning">
+
+        @if (session('alert'))
+            <div class="alert alert-success">
+                {{ session('alert') }}
+            </div>
+        @endif
         
           <form method="POST" action="{{ route('pagar.entrada',$evento) }}" validate>
             @csrf
