@@ -388,7 +388,42 @@ Route::middleware(['auth'])->group(function(){
     Route::get('ventaEntrada/{id?}', 'entradaController@comprarView')->name('comprar.entradas')->middleware('can:comprar.entradas');
     Route::post('EscogerMetodoDePagoEntrada/{id?}', 'entradaController@asociarEntrada')->name('pagar.entrada')->middleware('can:comprar.entradas');
 
+    // Reportes
 
+                //carnet
+                Route::get('reporteCarnet/{id?}', 'reporteController@carnet')->name('reporte.carnet')->middleware('can:reporte.carnet');
+                Route::post('reporteTop10Cerveza/', 'reporteController@top10Cerveza')->name('reporte.top10.cerveza')->middleware('can:reporte.cerveza');
+                Route::get('reporteTop10Cerveza', function () {
+                    return view('reporteTop10Cerveza');
+                });
+                            //ficha de afiliacion
+                Route::get('reporteFicha/{id?}', 'reporteController@ficha')->name('reporte.ficha');
+            
+                            //top 10 cliente
+                Route::get('reporteTop10Cliente', function () {
+                    return view('reporteTop10Cliente');
+                });
+            
+                Route::post('reporteTop10Cliente/', 'reporteController@top10Cliente')->name('reporte.top10.cliente')->middleware('can:reporte.cliente');
+            
+                            //inventariooo
+                    
+                 Route::get('reporteInventario', function () {
+                                return view('reporteInventario');
+                 });
+                        
+                 Route::post('reporteInventario/', 'reporteController@inventario')->name('reporte.inventario')->middleware('can:reporte.inventario');
+            
+                            //tipo de cerveza
+            
+                 Route::get('reporteTipoCerveza', function () {
+                                return view('reporteTipoCerveza');
+                 });
+                        
+                 Route::post('reporteTipoCerveza/', 'reporteController@tipoCerveza')->name('reporte.tipoCerveza')->middleware('can:reporte.tipoCerveza');
+            
+                            //reporte asistencia 
+                  Route::get('reporteAsistencia/', 'reporteController@asistencia')->name('reporte.asistencia');
 });
 
 
@@ -444,6 +479,7 @@ Route::get('registrarProveedor','proveedorCon@vista')->name('registrarProveedor'
 Route::post('registrarProveedor', 'proveedorCon@crearproveedor')->name('proveedor.crear');
 
 Route::get('consultarProveedor/{rif_proveedor?}','proveedorCon@consultar')->name('consultarProveedor');
+Route::get('consultarProveedor/','proveedorCon@consultarPerfil')->name('consultarPerfilProveedor');
 
 Route::put('consultarProveedor/{rif_proveedor?}','proveedorCon@editar')->name('editar.proveedor');
 
