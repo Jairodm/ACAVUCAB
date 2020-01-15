@@ -392,6 +392,7 @@ Route::middleware(['auth'])->group(function(){
 
                 //carnet
                 Route::get('reporteCarnet/{id?}', 'reporteController@carnet')->name('reporte.carnet')->middleware('can:reporte.carnet');
+                
                 Route::post('reporteTop10Cerveza/', 'reporteController@top10Cerveza')->name('reporte.top10.cerveza')->middleware('can:reporte.cerveza');
                 Route::get('reporteTop10Cerveza', function () {
                     return view('reporteTop10Cerveza');
