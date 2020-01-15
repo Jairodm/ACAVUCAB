@@ -32,6 +32,7 @@ class Venta extends Model
      * @var string
      */
     protected $table = 'venta';
+    public $timestamps =false; 
 
     /**
      * The primary key for the model.

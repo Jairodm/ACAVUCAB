@@ -482,6 +482,14 @@ Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@m
 Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
 Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
 
+// Venta por tienda Física 
+
+Route::get('TiendaFisica','ventaTiendaFisicaControlador@vistaVenta')->name('TiendaFisica');
+Route::get('ventaTiendaFisica/{mostrarCliente}','ventaTiendaFisicaControlador@crearVenta')->name('crearVenta');
+Route::get('ventaDetalleFisica/{numero_factura}','ventaTiendaFisicaControlador@verDetalle')->name('detalleVenta');
+Route::post('ventaDetalleFisica/{ventaActual}','ventaTiendaFisicaControlador@añadirProducto');
+
+
 //inventario
 Route::get('inventario','inventarioControlador@inventario')->name('inventario');
 
