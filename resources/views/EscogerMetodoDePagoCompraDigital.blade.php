@@ -67,29 +67,35 @@
                     </div>
                 </div>
             </nav>
-    <div class="container mt-2 pt-2">
-        <h2 class="display-4 text-center">Escoger Método de Pago </h2>
-        <hr class="bg-warning">
-            <table class="table table-hover">
-                    <thead class="bg-warning">
-                        <tr>
-                            <th scope="col" class="text-center">Número de la tarjeta de crédito</th>
-                            <th scope="col" class="text-center">Nombre del titular</th>
-                            <th scope="col" class="text-center">Fecha de vencimiento</th>
-                            <th scope="col" class="text-center"></th>
+            <div class="container mt-2 pt-2">
+                <h2 class="display-4 text-center">Mis métodos de pago </h2>
+                <hr class="bg-warning">
+                    <table class="table table-hover">
+                            <thead class="bg-warning">
+                                <tr>
+                                    <th scope="col" class="text-center">Tipo</th>
+                                    <th scope="col" class="text-center">Número de la tarjeta de crédito</th>
+                                    <th scope="col" class="text-center">Nombre del titular</th>
+                                    <th scope="col" class="text-center">Fecha de vencimiento</th>
+                                    <th scope="col" class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($metodo_pago as $item)
+                                <tr>
+                                        <th class="text-center">{{$item->tipo_tarjeta_credito}}</th>
+                                        <th class="text-center">{{$item->numero_tarjeta_credito}}</th>
+                                        <th class="text-center">{{$item->nombre_titular}}</th>
+                                        <th class="text-center">{{$item->fecha_vencimiento}}</th>    
+                                        <td class="text-center"><a href="{{route('digitalProcesar', [$item->codigo_metodo_pago, $total])}}">Escoger método</a></td>                        
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">1111222233334444</td>
-                            <td class="text-center">Pedro Rodriguez</td>
-                            <td class="text-center">25/12/2021 </td>
-                            <td class="text-center"><a href="facturacion">Escoger</a> </td>
-                        </tr>
-                    </tbody>
-                </table>
-        <a href="registrarmetodoPago"><button type="button" class="btn btn-warning">Añadir método de pago</button></a>
-    </div>
+                        @endforeach  
+                            </tbody>
+                        </table>
+                        <a href="{{route('registrarMetodoCliente', $cliente)}}">
+                            <button style="margin-right:30px" type="button" class="btn btn-warning">Agregar método de pago</button>
+                        </a>
+            </div>
 <!-- Pagination -->
     <ul class="pagination justify-content-center mt-2 pt-2">
             <li class="page-item">

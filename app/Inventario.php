@@ -34,6 +34,8 @@ class Inventario extends Model
      */
     protected $primaryKey = 'codigo_inventario';
 
+    public $timestamps = false;
+
     /**
      * The "type" of the auto-incrementing ID.
      * 

@@ -119,9 +119,9 @@ Route::get('menuRegistro', function () {
     return view('menuRegistro');
     
 })->name('menuRegistro');
-Route::get('miscompras', function () {
+/* Route::get('miscompras', function () {
     return view('miscompras');
-});
+}); */
 
 
 Route::get('nómina', 'registrarEmpleadoCon@nomina')->name('nómina');
@@ -341,7 +341,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('usuarios', 'UserController@index')->name('index.usuario')->middleware('can:index.usuario');
 
-    Route::get('consultarUsuario/{id?}','UserController@consultar')->name('consultar.usuario')                              ->middleware('can:consultar.usuario');
+    Route::get('consultarUsuario/{id?}','UserController@consultar')->name('consultar.usuario')->middleware('can:consultar.usuario');
 
     Route::put('consultarUsuario/{id?}','UserController@editar')->name('editar.usuario')->middleware('can:editar.usuario');
 
@@ -481,6 +481,29 @@ Route::post('registrarIngrediente','IngredienteControlador@crear')->name('regist
 Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@modifica')->name('modificaIngrediente');
 Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
 Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
+
+
+//Carrito
+
+Route::post('ConsultarProductoCliente/{codigo_cerveza?}', 'consultarProductoClienteControlador@registrarEnCarrito')->name('registrarEnCarrito');
+
+Route::get('carrito','consultarProductoClienteControlador@consultarCarrito')->name('carrito');
+
+Route::delete('carrito/{codigo_carrito}','consultarProductoClienteControlador@eliminarDeCarrito')->name('eliminarDeCarrito');
+
+Route::get('consultarCarrito/{codigo_carrito}','consultarProductoClienteControlador@consultarCarritoIndividual')->name('consultarCarrito');
+
+Route::put('consutlarCarrito/{codigo_carrito?}','consultarProductoClienteControlador@modificarCarrito')->name('editar.carrito');
+
+Route::get('EscogerMetodoDePagoCompraDigital/{total?}', 'consultarProductoClienteControlador@escogerMetodo')->name('escogerMetodoDigital');
+
+Route::post('digitalProcesada/{codigo_metodo_pago?}/{total?}', 'consultarProductoClienteControlador@digitalProcesada')->name('digitalProcesada');
+
+Route:: get('digitalProcesada/{codigo_metodo_pago?}/{total?}', 'consultarProductoClienteControlador@digitalProcesar')->name('digitalProcesar');
+
+Route::get('miscompras','consultarProductoClienteControlador@consultarCompras')->name('miscompras');
+
+Route::get('consultarVenta/{numero_factura?}','consultarProductoClienteControlador@consultarVenta')->name('consultarVenta');
 
 //inventario
 Route::get('inventario','inventarioControlador@inventario')->name('inventario');
