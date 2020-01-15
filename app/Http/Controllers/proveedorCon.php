@@ -145,6 +145,18 @@ class proveedorCon extends Controller
 
     }
 
+    public function consultarPerfil(){ 
+        $user = Auth::user();
+        $usuario = Usuario::where('nombre_usuario',$user->email)->first();
+        $proveedor = Proveedor::findOrFail($usuario->fk_proveedor);
+        $telefono = telefono::where('fk_proveedor', $proveedor->rif_proveedor)->get();
+        $correo = Correo_electronico::where('fk_proveedor', $proveedor->rif_proveedor)->get(); 
+        $estado = lugar::where('fk_lugar',null)->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $municipio = lugar::where('tipo_lugar', 'Municipio')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        $parroquia = lugar::where('tipo_lugar', 'Parroquia')->orderby('nombre_lugar','ASC')->pluck('nombre_lugar');
+        return view('consultarProveedor',compact('proveedor', 'telefono', 'correo', 'estado', 'municipio', 'parroquia'));
+    }
+
     public function eliminar ($rif_proveedor){
         $proveedorEliminar = Proveedor::findOrFail($rif_proveedor);
         $proveedorEliminar->delete();

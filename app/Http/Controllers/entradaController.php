@@ -42,19 +42,24 @@ class entradaController extends Controller
         $evento = Evento::findOrFail($id);
         $user = auth()->user();
 
+
+        if($request->cantidadEnt <= $evento->cantidad_entradas){ 
         $evento->cantidad_entradas = $evento->cantidad_entradas - $request->cantidadEnt;
         $venta_entrada = new Venta_entrada;
         $venta_entrada->fk_evento = $evento->codigo_evento;
         $venta_entrada->fk_cliente = DB::table('usuario')
                                     ->select(DB::raw('fk_cliente'))
                                     ->where('nombre_usuario', '=', $user->email)->value('fk_cliente');
-        $venta_entrada->total = $request->precio * $request->cantidadEnt;
-
-       
+        $venta_entrada->total = $request->precio * $request->cantidadEnt;       
         $evento->save();
         $venta_entrada->save();
         
         return redirect()->route('index.evento');
+        }
+
+        else {
+            return redirect()->back()->with('alert', 'Solicitud supera cantidad de entradas disponibles');
+        }   
 
     }
 }
