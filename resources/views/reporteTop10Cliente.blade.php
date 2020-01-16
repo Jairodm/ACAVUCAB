@@ -20,7 +20,7 @@
     @include('plantilla')
 
     <div class="container mt-2 pt-2">
-        <h1 class="display-4 text-center">Top 10 Clientes</h1>
+        <h1 class="display-4 text-center">Top 10 de clientes con más compras web en un periodo de tiempo.</h1>
         <hr class="bg-warning">
 
         <div class="col-md-8 order-md-1">

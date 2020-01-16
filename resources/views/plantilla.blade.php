@@ -53,8 +53,8 @@
                             <a class="dropdown-item" href="{{route('menuAdministrador')}}">Administrador</a>
                             @endcan
 
-                            <a class="dropdown-item" href="menuProveedor">Proveedor</a>
-            
+                        <a class="dropdown-item" href="menuProveedor">Proveedor</a>
+                            
 
         
                             <!-- Cerraaaar sesión -->
@@ -64,10 +64,11 @@
                                             {{ __('Cerrar sesión') }}
                             </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                        
+                        <a class="dropdown-item" href="{{route('menuAdministrador')}}">Crear venta</a>
 
                         @endif
                     </div>

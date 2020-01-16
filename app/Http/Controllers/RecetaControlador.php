@@ -70,6 +70,7 @@ class RecetaControlador extends Controller
         $actReceta->cantidad_ingrediente = $request->cantidad_ingrediente;
         $actReceta->unidad_ingrediente = $request->unidad_ingrediente;
         $actReceta->save();
+        
         return redirect()->route('Listadodeproductos');                               
     }
 

@@ -392,6 +392,7 @@ Route::middleware(['auth'])->group(function(){
 
                 //carnet
                 Route::get('reporteCarnet/{id?}', 'reporteController@carnet')->name('reporte.carnet')->middleware('can:reporte.carnet');
+                
                 Route::post('reporteTop10Cerveza/', 'reporteController@top10Cerveza')->name('reporte.top10.cerveza')->middleware('can:reporte.cerveza');
                 Route::get('reporteTop10Cerveza', function () {
                     return view('reporteTop10Cerveza');
@@ -518,6 +519,7 @@ Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@m
 Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
 Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
 
+<<<<<<< HEAD
 //Cuota afiliación
 
 Route::post('generarCuotas/{fecha?}', 'cuotaCon@registrarCuotas')->name('registrar.cuotaAfiliacion');
@@ -534,6 +536,15 @@ Route::get('cuotaProcesada/{codigo_metodo_pago?}/{total?}/{codigo_cuota?}', 'cuo
 
 
 Route::get('cuotasProveedor', 'cuotaCon@cuotasProveedor')->name('cuotasProveedor');
+=======
+// Venta por tienda Física 
+
+Route::get('TiendaFisica','ventaTiendaFisicaControlador@vistaVenta')->name('TiendaFisica');
+Route::get('ventaTiendaFisica/{mostrarCliente}','ventaTiendaFisicaControlador@crearVenta')->name('crearVenta');
+Route::get('ventaDetalleFisica/{numero_factura}','ventaTiendaFisicaControlador@verDetalle')->name('detalleVenta');
+Route::post('ventaDetalleFisica/{ventaActual}','ventaTiendaFisicaControlador@añadirProducto');
+
+>>>>>>> 4b36c132e439d92656fff4429d27e64c4e4d4174
 
 //Carrito
 

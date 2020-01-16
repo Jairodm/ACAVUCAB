@@ -22,7 +22,7 @@ class Detalle_venta extends Model
      * @var string
      */
     protected $table = 'detalle_venta';
-
+    public $timestamps = false;
     /**
      * The primary key for the model.
      * 
