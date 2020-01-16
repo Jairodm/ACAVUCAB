@@ -70,6 +70,7 @@
                         
                         <a class="dropdown-item" href="{{route('menuAdministrador')}}">Crear venta</a>
 
+                        
                         @endif
                     </div>
                 </li>

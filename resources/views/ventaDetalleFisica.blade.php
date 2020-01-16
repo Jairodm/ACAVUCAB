@@ -20,8 +20,28 @@
 <div class="container mt-2 pt-2">
     <h1 class="display-4 text-center">Detalles</h1>
     <h4>Factura N°:{{$ventaActual}}</h4>
+    @if(session('exito'))
+    <div class="alert alert-success" role="alert">
+        {{session('exito')}}
+      </div>
+    @endif
+    @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+        {{session('error')}}
+      </div>
+    @endif
+    @if(session('eliminado'))
+    <div class="alert alert-success" role="alert">
+        {{session('eliminado')}}
+      </div>
+    @endif
     <hr class="bg-warning">
-
+    @error('cerveza')
+    <div class="alert alert-danger">Debes escoger una cerveza</div>
+    @enderror
+    @error('cantidad_venta')
+    <div class="alert alert-danger">Debes introducir la cantidad</div>
+    @enderror
 
     <form action="/ventaDetalleFisica/{{$ventaActual}}" method="post">
         @csrf
@@ -40,11 +60,12 @@
             </div>
             <div class="col-md-6">
                 <label for="codigo_cliente">Cantidad</label>
-                <input type="text" class="form-control" name="cantidad_venta" placeholder="" value="" required>
+                <input type="text" class="form-control" name="cantidad_venta" placeholder="" value="">
             </div>
         </div>
         <button type="submit" class="btn btn-warning mt-3">Añadir</button>
     </form> 
+
     <h3 class="display-6 text-center">Detalle Venta</h3>
     <table class="table table-hover">
         <thead class="bg-warning">
@@ -63,20 +84,31 @@
             @foreach($detalleVenta as $productos)
             <tr>
                 <th class="text-center">{{$productos->cerveza}}</th>
-                <th class="text-center"></th>
+                <th class="text-center">{{$productos->cervezax->nombre_cerveza}}</th>
                 <th class="text-center" id="cantidadCer">{{$productos->cantidad_venta}}</th>
                 <th class="text-center" id="precioUnit">{{$productos->precio_unitario_venta}}</th>                                
                 <th class="text-center" id='totalProducto'>{{($productos->cantidad_venta)*($productos->precio_unitario_venta)}}</th>
-                
-                <td class="text-center"><a href="" class="btn btn-danger">Eliminar</a></td>
-                
+                <form action="{{route('eliminaDetalle',$productos->codigo_detalle_venta)}}" method="post">
+                    @method('DELETE')
+                    @csrf
+                <td class="text-center"><button class="btn btn-danger" type="submit">Eliminar</button></td>
+                </form>
                 <th></th>
             </tr>
             @endforeach
             
         </tbody>
     </table>
-    <h1 class="display-4 ">Total factura: {{$totalFactura ?? ''}} </h1> 
+    <div class="row">
+        <div class="col-md-10">
+            <h1 class="display-4 ">Total factura: {{$totalFactura}} </h1> 
+        </div>
+        <div class="col-md-2">
+        <form action="{{route('metodosPago',$ventaActual)}}" method="get">
+            <button type="submit" class="btn btn-warning btn-lg mt-2">Pagar</button>
+        </form>
+        </div>
+    </div>
 
 </div>
  <!-- Optional JavaScript -->
