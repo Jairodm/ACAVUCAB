@@ -100,10 +100,6 @@
                   </div>
                     </div>
 
-                    <h1 style="font-size:30px; margin-top:30px"class="display-4">Características del tipo de cerveza </h1>
-                    <hr class="bg-warning">    
-
-
                     <h1 style="font-size:30px; margin-top:30px"class="display-4">Receta </h1>
                     <hr class="bg-warning">
 

@@ -13,7 +13,7 @@ class inventarioControlador extends Controller
 
 
     public function inventario() {
-        $inventario = Inventario::all();
+        $inventario = Inventario::OrderBy('codigo_inventario', 'desc')->get();
         return view('inventario', compact('inventario'));
     }
 
