@@ -22,7 +22,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -51,7 +51,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -80,7 +80,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -109,7 +109,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -138,7 +138,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -171,7 +171,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -204,7 +204,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -237,7 +237,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -271,7 +271,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -306,7 +306,7 @@ class reporteController extends Controller
                     'username' => 'postgres',
                     'password' => '07diciembre',
                     'host' => '127.0.0.1',
-                    'database' => 'ProyectoACAVUCAB',
+                    'database' => 'ProyectoBDACAVUCAB',
                     'port' => '5432'
                 ]
             ];
@@ -319,6 +319,37 @@ class reporteController extends Controller
             return redirect()->route('index');
     
     }
+
+    public function reciboAfiliacion($rif_proveedor) {
+        require base_path() . '/vendor/autoload.php';
+    
+            $input = base_path() . '/vendor/geekcom/phpjasper/examples/ReciboAfiliacion.jasper';  
+            $output = base_path() . '/vendor/geekcom/phpjasper/examples/ReciboAfiliacion'.$rif_proveedor; 
+            
+        
+            $options = [ 
+                'format' => ['pdf'],
+                'locale' => 'en',
+                'params' => ["Rif_proveedor" => $rif_proveedor],
+                'db_connection' => [
+                    'driver' => 'postgres', //mysql, ....
+                    'username' => 'postgres',
+                    'password' => '07diciembre',
+                    'host' => '127.0.0.1',
+                    'database' => 'ProyectoBDACAVUCAB',
+                    'port' => '5432'
+                ]
+            ];
+            $jasper = new PHPJasper;
+            $jasper->process(
+                $input,
+                $output,
+                $options
+            )->execute();
+            return redirect()->route('index');
+    
+    }
+
 
 
 }

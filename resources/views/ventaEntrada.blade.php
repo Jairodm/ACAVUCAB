@@ -32,7 +32,7 @@
             @csrf
             <ul class="list-unstyled">
                     <li class="media">
-                        <a href="#"><img src="Cerveza5.jpg" class="mr-3" alt="" style="height: 150px; width: 120px"></a>                      
+                        <a href="#"><img src="{{asset('Cerveza5.jpg')}}"  class="mr-3" alt="" style="height: 150px; width: 120px"></a>                      
                       <div class="media-body">
                         <a href="#" style="color:black;"><h4 class="mt-0 mb-1">Nombre del Evento: {{$evento->nombre_evento}}</h4></a>
                         <h6>Fecha del Evento: {{$evento->fecha_inicio_evento}}</h6>

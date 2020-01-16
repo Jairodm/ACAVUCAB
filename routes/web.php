@@ -124,10 +124,6 @@ Route::get('menuRegistro', function () {
 }); */
 
 
-Route::get('nómina', 'registrarEmpleadoCon@nomina')->name('nómina');
-
-Route::get('divisas', 'consultarDivisa@consultar')->name('divisas');
-
 Route::get('olvidoContrasena', function () {
     return view('olvidoContrasena');
 });
@@ -165,6 +161,7 @@ Route::get('registrarClienteJuridico', function () {
 })->name('registrarClienteJuridico');
 
 /* DIVISAS */
+Route::get('divisas', 'consultarDivisa@consultar')->name('divisas');
 Route::get('divisas','consultarDivisa@consultar')->name('divisas');
 Route::get('modificarDivisa/{codigo_divisa}','consultarDivisa@modificarValor')->name('modificarDivisa');
 Route::post('registroDivisa', 'consultarDivisa@crear')->name('registrar.Divisa');
@@ -329,9 +326,10 @@ Route::post('registrarContactoJuridico/{rif_cliente?}','ContactoCon@RegistrarCon
 Route::middleware(['auth'])->group(function(){
 
     //Empleados
-    Route::post('/', 'registrarEmpleadoCon@crear')->name('registrar.crear')->middleware('can:registrar.crear');
+    Route::post('/', 'registrarEmpleadoCon@crear')->name('registrar.crear')->middleware('can:registrar.empleado');
+    Route::get('nómina', 'registrarEmpleadoCon@nomina')->name('nómina');
 
-    Route::get('ConsultarEmpleado/{cedula_empleado?}','registrarEmpleadoCon@consultar')->name('ConsultarEmpleado')->middleware('can:ConsultarEmpleado');
+    Route::get('ConsultarEmpleado/{cedula_empleado?}','registrarEmpleadoCon@consultar')->name('ConsultarEmpleado')->middleware('can:consultar.empleado');
 
     Route::put('ConsultarEmpleado/{cedula_empleado?}','registrarEmpleadoCon@editar')->name('editar.empleado')->middleware('can:editar.empleado');
 
@@ -373,7 +371,6 @@ Route::middleware(['auth'])->group(function(){
     
     Route::delete('registrarEventoProveedor/{id?}/{id2?}', 'EventoController@eliminarProveedorEvento')->name('eliminar.proveedor.evento')->middleware('can:eliminar.proveedor.evento');
 
-
     Route::get('eventos', 'EventoController@index')->name('index.evento');
     
     Route::delete('eventos/{id?}', 'EventoController@eliminar')->name('eliminar.evento')->middleware('can:eliminar.evento');
@@ -397,7 +394,10 @@ Route::middleware(['auth'])->group(function(){
 
                 //carnet
                 Route::get('reporteCarnet/{id?}', 'reporteController@carnet')->name('reporte.carnet');
-                Route::get('reporteCarnet/{id?}', 'reporteController@carnetJuridico')->name('reporte.carnet.juridico');
+                Route::get('reporteCarnetJuridico/{id?}', 'reporteController@carnetJuridico')->name('reporte.carnet.juridico');
+                                                //recibo de afiliacion
+
+                Route::get('reporteReciboAfiliacion/{id?}', 'reporteController@reciboAfiliacion')->name('reporte.reciboAfiliacion');
 
                 Route::post('reporteTop10Cerveza/', 'reporteController@top10Cerveza')->name('reporte.top10.cerveza')->middleware('can:reporte.cerveza');
                 Route::get('reporteTop10Cerveza', function () {
@@ -516,7 +516,7 @@ Route::post('/registrarProducto', 'CervezaControlador@crear')->name('cerveza.cre
 Route::get('registrarProducto','CervezaControlador@vista')->name('registrarProducto');
 Route::get('ConsultarProductoCliente/{codigo_cerveza?}','consultarProductoClienteControlador@consultar')->name('ConsultarProductoCliente');
 Route::get('Listadodeproductos','CervezaControlador@listado')->name('Listadodeproductos');
-//Route::get('registrarReceta/{codigo_cerveza}','CervezaControlador@consultar')->name('registrarReceta');
+
 
 
 /* Tipo de cerveza */
@@ -537,7 +537,6 @@ Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@m
 Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
 Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
 
-<<<<<<< HEAD
 //Cuota afiliación
 
 Route::post('generarCuotas/{fecha?}', 'cuotaCon@registrarCuotas')->name('registrar.cuotaAfiliacion');
@@ -554,7 +553,6 @@ Route::get('cuotaProcesada/{codigo_metodo_pago?}/{total?}/{codigo_cuota?}', 'cuo
 
 
 Route::get('cuotasProveedor', 'cuotaCon@cuotasProveedor')->name('cuotasProveedor');
-=======
 // Venta por tienda Física 
 
 Route::get('TiendaFisica','ventaTiendaFisicaControlador@vistaVenta')->name('TiendaFisica');
@@ -562,7 +560,6 @@ Route::get('ventaTiendaFisica/{mostrarCliente}','ventaTiendaFisicaControlador@cr
 Route::get('ventaDetalleFisica/{numero_factura}','ventaTiendaFisicaControlador@verDetalle')->name('detalleVenta');
 Route::post('ventaDetalleFisica/{ventaActual}','ventaTiendaFisicaControlador@añadirProducto');
 
->>>>>>> 4b36c132e439d92656fff4429d27e64c4e4d4174
 
 //Carrito
 

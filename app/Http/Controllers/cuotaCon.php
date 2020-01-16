@@ -97,8 +97,9 @@ class cuotaCon extends Controller
         $user = Auth::user();
         $usuario = Usuario::where('nombre_usuario',$user->email)->first();
         $proveedor = Proveedor::where('rif_proveedor',$usuario->fk_proveedor)->first();
+        $rif = $usuario->fk_proveedor;
         $nan = Proveedor_y_cuota::where('rif_proveedor', $proveedor->rif_proveedor)->where('codigo_cuota', $codigo_cuota)->first();
-        return view('consultarCuotaProveedor', compact('cuota', 'nan'));
+        return view('consultarCuotaProveedor', compact('cuota', 'nan','rif'));
     }
 
     public function escogerMetodoCuota($codigo_cuota, $monto_cuota){
