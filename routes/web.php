@@ -150,7 +150,7 @@ Route::get('presupuesto', function () {
 
 Route::get('productos', function () {
     return view('productos');
-});
+})->name('productos');
 
 Route::get('productosProveedor', function () {
     return view('productosProveedor');
@@ -374,7 +374,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('registrarEventoProveedor/{id?}/{id2?}', 'EventoController@eliminarProveedorEvento')->name('eliminar.proveedor.evento')->middleware('can:eliminar.proveedor.evento');
 
 
-    Route::get('eventos', 'EventoController@index')->name('index.evento')->middleware('can:index.evento');
+    Route::get('eventos', 'EventoController@index')->name('index.evento');
     
     Route::delete('eventos/{id?}', 'EventoController@eliminar')->name('eliminar.evento')->middleware('can:eliminar.evento');
 
@@ -388,11 +388,17 @@ Route::middleware(['auth'])->group(function(){
     Route::get('ventaEntrada/{id?}', 'entradaController@comprarView')->name('comprar.entradas')->middleware('can:comprar.entradas');
     Route::post('EscogerMetodoDePagoEntrada/{id?}', 'entradaController@asociarEntrada')->name('pagar.entrada')->middleware('can:comprar.entradas');
 
+    Route::get('EscogerMetodoDePagoEntrada/{total?}', 'entradaController@escogerMetodo')->name('escogerMetodoDigitalEntrada');
+
+    Route:: get('digitalProcesadaEntrada/{codigo_metodo_pago?}/{total?}', 'entradaController@digitalProcesarEntrada')->name('digitalProcesarEntrada');
+
+
     // Reportes
 
                 //carnet
-                Route::get('reporteCarnet/{id?}', 'reporteController@carnet')->name('reporte.carnet')->middleware('can:reporte.carnet');
-                
+                Route::get('reporteCarnet/{id?}', 'reporteController@carnet')->name('reporte.carnet');
+                Route::get('reporteCarnet/{id?}', 'reporteController@carnetJuridico')->name('reporte.carnet.juridico');
+
                 Route::post('reporteTop10Cerveza/', 'reporteController@top10Cerveza')->name('reporte.top10.cerveza')->middleware('can:reporte.cerveza');
                 Route::get('reporteTop10Cerveza', function () {
                     return view('reporteTop10Cerveza');
@@ -422,9 +428,21 @@ Route::middleware(['auth'])->group(function(){
                  });
                         
                  Route::post('reporteTipoCerveza/', 'reporteController@tipoCerveza')->name('reporte.tipoCerveza')->middleware('can:reporte.tipoCerveza');
+
+                    //top evento
+
+                    Route::get('reporteTop5Evento', function () {
+                        return view('reporteTop5Evento');
+                     });
+                
+                     Route::post('reporteTop5Evento/', 'reporteController@top5evento')->name('reporte.top5.evento');
+                 
             
                             //reporte asistencia 
                   Route::get('reporteAsistencia/', 'reporteController@asistencia')->name('reporte.asistencia');
+
+                            //factura
+                  Route::get('reporteFactura/{id?}', 'reporteController@factura')->name('reporte.factura');
 });
 
 

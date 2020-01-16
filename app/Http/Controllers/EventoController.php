@@ -53,11 +53,13 @@ class EventoController extends Controller
         $evento->hora_fin_evento = $request->finalEvento;
 
         $evento->precio_entrada = $request->precioEvento;
+        $evento->cantidad_entradas = $request->cantidadEntradas;
 
         $variable = $request->get('parroquia');
        
         $evento->fk_lugar= DB::table('lugar')
                          ->select(DB::raw('codigo_lugar'))
+                         ->where('tipo_lugar', 'Parroquia')
                          ->where('nombre_lugar', '=', $variable)->value('codigo_lugar');;
 
         $evento->direccion_evento = $request->detalleDireccionEvento;
@@ -98,7 +100,9 @@ class EventoController extends Controller
        
         $evento->fk_lugar= DB::table('lugar')
                          ->select(DB::raw('codigo_lugar'))
-                         ->where('nombre_lugar', '=', $variable)->value('codigo_lugar');;
+                         ->where('nombre_lugar', '=', $variable)
+                         ->where('tipo_lugar', 'Parroquia')
+                         ->value('codigo_lugar');;
 
         $evento->direccion_evento = $request->detalleDireccionEvento;
 

@@ -71,6 +71,14 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
+                            <h5 class="row text-right">Dirección:</h5>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="row text-right"  style="font-size:20px">{{$evento->descripcion_evento}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
                             <h5 class="row text-right">Precio Entrada:</h5>
                         </div>
                         <div class="col-md-3">
@@ -109,9 +117,13 @@
             <a href="{{route('index.evento')}}">
            <button  class="btn btn-warning">Regresar</button>
             </a>
-            <a href="{{route('comprar.entradas', $evento)}}">
+            @if( $evento->precio_entrada == null)
+
+            
+            @else <a href="{{route('comprar.entradas', $evento)}}">
             <button class="btn btn-warning float-right">Comprar Entradas</button>
             </a>
+            @endif
 
         
    

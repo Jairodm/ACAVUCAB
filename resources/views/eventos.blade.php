@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/89cc030952.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="main.css"></script>
-    <title>ACAVUCAB - Usuarios</title>
+    <title>ACAVUCAB - Eventos</title>
 </head>
 
 <body>

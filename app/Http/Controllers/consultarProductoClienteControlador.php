@@ -17,6 +17,7 @@ use App\Metodo_pago;
 use App\Inventario;
 use App\Estatus;
 use App\Estatus_y_venta;
+use App\Empleado;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;

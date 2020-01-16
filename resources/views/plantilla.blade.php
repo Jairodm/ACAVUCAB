@@ -8,8 +8,8 @@
                     <span class="fas fa-bars"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="productos">Nuestros productos</a>
-                    <a class="dropdown-item" href="eventos">Eventos</a>
+                    <a class="dropdown-item" href="{{route ('productos')}}">Nuestros productos</a>
+                    <a class="dropdown-item" href="{{route ('index.evento')}}">Eventos</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="diarioCerveza">Diario de una cerveza</a>
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="carrito"><span class="fas fa-shopping-cart">
+                    <a class="nav-link" href="{{ route('carrito') }}"><span class="fas fa-shopping-cart">
                         </span>Carrito</a>
                 </li>
             </ul>

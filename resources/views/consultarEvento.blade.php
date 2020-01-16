@@ -77,6 +77,11 @@
                         <input type="text" class="form-control" name="precioEvento" placeholder="Monto en Bs."
                             value="{{$evento->precio_entrada}}">
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="precioEvento">Cantidad de Entradas(opcional)</label>
+                        <input type="text" class="form-control" name="cantidadEntradas" placeholder=""
+                            value="{{$evento->cantidad_entradas}}">
+                    </div>
                 </div>
 
                 <h1 style="font-size:30px" class="display-4">Ubicación </h1>

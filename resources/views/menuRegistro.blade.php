@@ -32,7 +32,7 @@
         <a href = "register?tipoUsuario=2">
         <button
             style="position:absolute; top:44%; left:35%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-            type="button" onclick="href = 'registrarClienteJuridico';" class="btn btn-warning">Registrar cliente jurídico
+            type="button" class="btn btn-warning">Registrar cliente jurídico
         </button>
         </a>
         <a href = "register?tipoUsuario=3">

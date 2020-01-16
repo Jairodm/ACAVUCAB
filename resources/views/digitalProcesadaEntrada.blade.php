@@ -24,9 +24,8 @@
                 
                     <div class="container center_div">
                   
-                        <form method="POST" action="{{ route('digitalProcesada', [$codigo_metodo_pago, $total] ) }}" validate>
-                            @csrf
-                      
+                        <form method="GET" action="{{ route('index.evento') }}" validate>
+                          
                       
                        
                       <hr class="mb-4">
