@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Cargo' => $baseDir . '/app/Cargo.php',
+    'App\\Carrito' => $baseDir . '/app/Carrito.php',
     'App\\Cerveza' => $baseDir . '/app/Cerveza.php',
     'App\\Cliente' => $baseDir . '/app/Cliente.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
@@ -38,6 +39,8 @@ return array(
     'App\\Http\\Controllers\\consultarProductoClienteControlador' => $baseDir . '/app/Http/Controllers/consultarProductoClienteControlador.php',
     'App\\Http\\Controllers\\inventarioControlador' => $baseDir . '/app/Http/Controllers/inventarioControlador.php',
     'App\\Http\\Controllers\\registrarEmpleadoCon' => $baseDir . '/app/Http/Controllers/registrarEmpleadoCon.php',
+    'App\\Http\\Controllers\\reporteController' => $baseDir . '/app/Http/Controllers/reporteController.php',
+    'App\\Http\\Controllers\\tipoCervezaControlador' => $baseDir . '/app/Http/Controllers/tipoCervezaControlador.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',

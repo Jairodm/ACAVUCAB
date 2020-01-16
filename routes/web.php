@@ -537,6 +537,32 @@ Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@m
 Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
 Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
 
+<<<<<<< HEAD
+//Cuota afiliación
+
+Route::post('generarCuotas/{fecha?}', 'cuotaCon@registrarCuotas')->name('registrar.cuotaAfiliacion');
+Route::get('generarCuotas', 'cuotaCon@generarCuotas')->name('generarCuotas');
+Route::put('modificarCuota/{codigo_cuota?}', 'cuotaCon@editarCuota')->name('editar.cuotaAfiliacion');
+Route::get('modificarCuota/{codigo_cuota?}', 'cuotaCon@modificarCuota')->name('modificarCuota');
+Route::delete('modificarCuota/{codigo_cuota?}', 'cuotaCon@eliminarCuota')->name('eliminar.cuotaAfiliacion');
+Route::get('cuotasEmpleado', 'cuotaCon@cuotasEmpleado')->name('cuotasEmpleado');
+Route::get('consultarCuotaProveedor/{codigo_cuota?}', 'cuotaCon@consultarCuotaProveedor')->name('consultarCuotaProveedor');
+Route::get('escogerMetodoCuota/{codigo_cuota?}/{monto_cuota?}', 'cuotaCon@escogerMetodoCuota')->name('escogerMetodoCuota');
+Route::post('escogerMetodoCuota/{codigo_cuota?}/{monto_cuota?}', 'cuotaCon@registrarMetodoCuota')->name('registrar.metodoCuota');
+Route::put('cuotaProcesada/{codigo_metodo_pago?}/{total?}/{codigo_cuota?}', 'cuotaCon@cuotaProcesada')->name('cuotaProcesada');
+Route::get('cuotaProcesada/{codigo_metodo_pago?}/{total?}/{codigo_cuota?}', 'cuotaCon@cuotaProcesar')->name('cuotaProcesar');
+
+
+Route::get('cuotasProveedor', 'cuotaCon@cuotasProveedor')->name('cuotasProveedor');
+=======
+// Venta por tienda Física 
+
+Route::get('TiendaFisica','ventaTiendaFisicaControlador@vistaVenta')->name('TiendaFisica');
+Route::get('ventaTiendaFisica/{mostrarCliente}','ventaTiendaFisicaControlador@crearVenta')->name('crearVenta');
+Route::get('ventaDetalleFisica/{numero_factura}','ventaTiendaFisicaControlador@verDetalle')->name('detalleVenta');
+Route::post('ventaDetalleFisica/{ventaActual}','ventaTiendaFisicaControlador@añadirProducto');
+
+>>>>>>> 4b36c132e439d92656fff4429d27e64c4e4d4174
 
 //Carrito
 

@@ -5,17 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property float $codigo_proveedor_y_cuota
+ * @property int $codigo_proveedor_y_cuota
  * @property string $rif_proveedor
- * @property float $codigo_cuota
- * @property float $fk_metodo_pago
+ * @property int $codigo_cuota
+ * @property int $fk_metodo_pago
  * @property string $estatus
  * @property string $fecha_pago
  * @property Proveedor $proveedor
  * @property MetodoPago $metodoPago
  * @property CuotaAfiliacion $cuotaAfiliacion
  */
-class Proveedor_y_Cuota extends Model
+class Proveedor_y_cuota extends Model
 {
     /**
      * The table associated with the model.
@@ -32,23 +32,11 @@ class Proveedor_y_Cuota extends Model
     protected $primaryKey = 'codigo_proveedor_y_cuota';
 
     /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'float';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
      * @var array
      */
     protected $fillable = ['rif_proveedor', 'codigo_cuota', 'fk_metodo_pago', 'estatus', 'fecha_pago'];
+
+    public $timestamps = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -71,6 +59,6 @@ class Proveedor_y_Cuota extends Model
      */
     public function cuotaAfiliacion()
     {
-        return $this->belongsTo('App\CuotaAfiliacion', 'codigo_cuota', 'codigo_cuota');
+        return $this->belongsTo('App\Cuota_afiliacion', 'codigo_cuota', 'codigo_cuota');
     }
 }

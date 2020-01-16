@@ -151,12 +151,9 @@ class consultarProductoClienteControlador extends Controller
         $venta->fk_cliente= $cliente->rif_cliente;
         $venta->fk_metodo_pago= $codigo_metodo_pago;
         $venta->fk_tienda_web= 2;
-        $venta->save();
-
-        
+        $venta->save(); 
 
         $ventaAux = venta::OrderBy('numero_factura', 'desc')->first();
-
         $ev= new estatus_y_venta;
         $ev->estatus= 1;
         $ev->venta=$ventaAux->numero_factura;
