@@ -71,7 +71,7 @@
                 type="button" class="btn btn-warning">Roles
             </button>
         </a>
-                <a href="ventaTiendaFisica">
+                <a href="TiendaFisica">
             <button
                 style="position:absolute; top:82%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
                 type="button" class="btn btn-warning">Venta (Tienda Fisica)

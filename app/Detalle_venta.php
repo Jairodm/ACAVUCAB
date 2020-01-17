@@ -49,6 +49,8 @@ class Detalle_venta extends Model
      */
     protected $fillable = ['cerveza', 'venta', 'cantidad_venta', 'precio_unitario_venta'];
 
+    public $timestamps = false;
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

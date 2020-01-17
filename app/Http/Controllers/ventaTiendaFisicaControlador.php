@@ -14,6 +14,11 @@ use App\Cliente;
 use App\Inventario;
 use App\Cerveza;
 use App\Divisa;
+use App\Estatus;
+use App\Estatus_y_venta;
+use App\Orden_compra;
+use App\Detalle_compra;
+use App\Estatus_y_orden;
 
 
 class ventaTiendaFisicaControlador extends Controller
@@ -86,7 +91,7 @@ class ventaTiendaFisicaControlador extends Controller
         $cantidadComprada = $request->cantidad_venta;
         $nombreCerveza = $request->cerveza;
         $buscaCodigoCerveza = Cerveza::where('nombre_cerveza','=',$nombreCerveza)->value('codigo_cerveza');
-        $cantidadEnExistencia = Inventario::where('fk_cerveza',$buscaCodigoCerveza)->orderBy('fecha_operacion','desc')->first();
+        $cantidadEnExistencia = Inventario::where('fk_cerveza',$buscaCodigoCerveza)->orderBy('codigo_inventario','desc')->first();
    
         //Comprobar inventario
         $flag=1;
@@ -168,7 +173,7 @@ class ventaTiendaFisicaControlador extends Controller
             $nuevoMetodo->numero_tarjeta_credito = $request->numero_tarjeta_credito;
             $nuevoMetodo->fecha_vencimiento = $request->fecha_vencimiento;
             $nuevoMetodo->fk_cliente = $cliente;
-            $nuevoMetodo->tipo_metodo_pago = 'Credito';
+            $nuevoMetodo->tipo_metodo_pago = 'Tarjeta de Crédito';
             $nuevoMetodo->save();
             //Descuenta inventario
             $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
@@ -181,6 +186,29 @@ class ventaTiendaFisicaControlador extends Controller
                 $inventario->fk_venta = $ventaActual;
                 $inventario->cantidad_disponible = $inventarioAux->cantidad_disponible - $item->cantidad_venta;
                 $inventario->save();
+
+                if ($inventarioAux->cantidad_disponible >= 100 && $inventario->cantidad_disponible < 100){
+
+                    $orden = new Orden_compra;
+                    $orden->fecha_orden_compra = now();
+                    $orden->monto_total_orden_compra= 10000 * $item->cervezax->precio;
+                    $orden->fk_proveedor =  $item->cervezax->fk_proveedor;
+                    $orden->save();
+    
+                    $ordenAux = Orden_compra::OrderBy('codigo_orden_compra', 'desc')->first();
+                    $detorden = new Detalle_compra;
+                    $detorden->cantidad_compra = 10000;
+                    $detorden->precio_unitario_compra = $item->cervezax->precio;
+                    $detorden->cerveza= $item->cervezax->codigo_cerveza;
+                    $detorden->orden_compra= $ordenAux->codigo_orden_compra;
+                    $detorden->save();
+    
+                    $estorden = new Estatus_y_orden;
+                    $estorden->estatus= 1; 
+                    $estorden->orden = $ordenAux->codigo_orden_compra;
+                    $estorden->fecha_estatus= now();
+                    $estorden->save();
+                }
             }
             return view('pagorealizado',compact('ventaActual'));
         }
@@ -191,7 +219,7 @@ class ventaTiendaFisicaControlador extends Controller
             $nuevoMetodo->banco = $request->banco;
             $nuevoMetodo->numero_tarjeta_debito = $request->numero_tarjeta_debito;
             $nuevoMetodo->fk_cliente = $cliente;
-            $nuevoMetodo->tipo_metodo_pago = 'Debito';
+            $nuevoMetodo->tipo_metodo_pago = 'Tarjeta de Débito';
             $nuevoMetodo->save();
             //Descuenta inventario
             $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
@@ -240,7 +268,7 @@ class ventaTiendaFisicaControlador extends Controller
             $nuevoMetodo->valor_moneda = $request->valor_moneda;
             $nuevoMetodo->fk_divisa = $codigoDivisa;
             $nuevoMetodo->fk_cliente = $cliente;
-            $nuevoMetodo->tipo_metodo_pago = 'Divisa';
+            $nuevoMetodo->tipo_metodo_pago = 'Efectivo';
             $nuevoMetodo->save();
             //Descuenta inventario
             $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
