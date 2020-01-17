@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
+class ComposerStaticInite4ead6178cd66f242ee600729bc8166f
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -459,10 +459,12 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
         'App\\Asistencia' => __DIR__ . '/../..' . '/app/Asistencia.php',
         'App\\Beneficio' => __DIR__ . '/../..' . '/app/Beneficio.php',
         'App\\Cargo' => __DIR__ . '/../..' . '/app/Cargo.php',
+        'App\\Carrito' => __DIR__ . '/../..' . '/app/Carrito.php',
         'App\\Cerveza' => __DIR__ . '/../..' . '/app/Cerveza.php',
         'App\\Cliente' => __DIR__ . '/../..' . '/app/Cliente.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Correo_electronico' => __DIR__ . '/../..' . '/app/Correo_electronico.php',
+        'App\\Cuota_afiliacion' => __DIR__ . '/../..' . '/app/Cuota_afiliacion.php',
         'App\\Detalle_venta' => __DIR__ . '/../..' . '/app/Detalle_venta.php',
         'App\\Detalle_venta_evento' => __DIR__ . '/../..' . '/app/Detalle_venta_evento.php',
         'App\\Empleado' => __DIR__ . '/../..' . '/app/Empleado.php',
@@ -497,12 +499,15 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
         'App\\Http\\Controllers\\clienteControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/clienteControlador.php',
         'App\\Http\\Controllers\\consultarDivisa' => __DIR__ . '/../..' . '/app/Http/Controllers/consultarDivisa.php',
         'App\\Http\\Controllers\\consultarProductoClienteControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/consultarProductoClienteControlador.php',
+        'App\\Http\\Controllers\\cuotaCon' => __DIR__ . '/../..' . '/app/Http/Controllers/cuotaCon.php',
         'App\\Http\\Controllers\\entradaController' => __DIR__ . '/../..' . '/app/Http/Controllers/entradaController.php',
         'App\\Http\\Controllers\\horarioAsistenciaCon' => __DIR__ . '/../..' . '/app/Http/Controllers/horarioAsistenciaCon.php',
         'App\\Http\\Controllers\\inventarioControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/inventarioControlador.php',
         'App\\Http\\Controllers\\proveedorCon' => __DIR__ . '/../..' . '/app/Http/Controllers/proveedorCon.php',
         'App\\Http\\Controllers\\registrarEmpleadoCon' => __DIR__ . '/../..' . '/app/Http/Controllers/registrarEmpleadoCon.php',
+        'App\\Http\\Controllers\\reporteController' => __DIR__ . '/../..' . '/app/Http/Controllers/reporteController.php',
         'App\\Http\\Controllers\\tipoCervezaControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/tipoCervezaControlador.php',
+        'App\\Http\\Controllers\\ventaTiendaFisicaControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/ventaTiendaFisicaControlador.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -522,7 +527,7 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
         'App\\Pasillo' => __DIR__ . '/../..' . '/app/Pasillo.php',
         'App\\Presupuesto' => __DIR__ . '/../..' . '/app/Presupuesto.php',
         'App\\Privilegio' => __DIR__ . '/../..' . '/app/Privilegio.php',
-        'App\\Proveedor_y_Cuota' => __DIR__ . '/../..' . '/app/Proveedor_y_Cuota.php',
+        'App\\Proveedor_y_cuota' => __DIR__ . '/../..' . '/app/Proveedor_y_Cuota.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -4775,10 +4780,10 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite4ead6178cd66f242ee600729bc8166f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite4ead6178cd66f242ee600729bc8166f::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite4ead6178cd66f242ee600729bc8166f::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInite4ead6178cd66f242ee600729bc8166f::$classMap;
 
         }, null, ClassLoader::class);
     }

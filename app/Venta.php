@@ -55,7 +55,6 @@ class Venta extends Model
      */
     public $incrementing = false;
 
-    public $timestamps = false;
 
     /**
      * @var array

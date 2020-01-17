@@ -24,6 +24,8 @@ class Orden_compra extends Model
      */
     protected $table = 'orden_compra';
 
+    public $timestamps = false;
+
     /**
      * The primary key for the model.
      * 
@@ -71,7 +73,7 @@ class Orden_compra extends Model
      */
     public function estatusYOrdens()
     {
-        return $this->hasMany('App\EstatusYOrden', 'orden', 'codigo_orden_compra');
+        return $this->hasMany('App\Estatus_y_orden', 'orden', 'codigo_orden_compra');
     }
 
     /**
@@ -79,6 +81,6 @@ class Orden_compra extends Model
      */
     public function detalleCompras()
     {
-        return $this->hasMany('App\DetalleCompra', 'orden_compra', 'codigo_orden_compra');
+        return $this->hasMany('App\Detalle_compra', 'orden_compra', 'codigo_orden_compra');
     }
 }

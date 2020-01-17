@@ -519,6 +519,39 @@ Route::put('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@m
 Route::get('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@vistaModificar')->name('modificarIngrediente');
 Route::delete('modificarIngrediente/{codigo_ingrediente}','IngredienteControlador@eliminar')->name('eliminaIngrediente');
 
+//Cuota afiliación
+
+Route::post('generarCuotas/{fecha?}', 'cuotaCon@registrarCuotas')->name('registrar.cuotaAfiliacion');
+Route::get('generarCuotas', 'cuotaCon@generarCuotas')->name('generarCuotas');
+Route::put('modificarCuota/{codigo_cuota?}', 'cuotaCon@editarCuota')->name('editar.cuotaAfiliacion');
+Route::get('modificarCuota/{codigo_cuota?}', 'cuotaCon@modificarCuota')->name('modificarCuota');
+Route::delete('modificarCuota/{codigo_cuota?}', 'cuotaCon@eliminarCuota')->name('eliminar.cuotaAfiliacion');
+Route::get('cuotasEmpleado', 'cuotaCon@cuotasEmpleado')->name('cuotasEmpleado');
+Route::get('consultarCuotaProveedor/{codigo_cuota?}', 'cuotaCon@consultarCuotaProveedor')->name('consultarCuotaProveedor');
+Route::get('escogerMetodoCuota/{codigo_cuota?}/{monto_cuota?}', 'cuotaCon@escogerMetodoCuota')->name('escogerMetodoCuota');
+Route::post('escogerMetodoCuota/{codigo_cuota?}/{monto_cuota?}', 'cuotaCon@registrarMetodoCuota')->name('registrar.metodoCuota');
+Route::put('cuotaProcesada/{codigo_metodo_pago?}/{total?}/{codigo_cuota?}', 'cuotaCon@cuotaProcesada')->name('cuotaProcesada');
+Route::get('cuotaProcesada/{codigo_metodo_pago?}/{total?}/{codigo_cuota?}', 'cuotaCon@cuotaProcesar')->name('cuotaProcesar');
+
+
+Route::get('cuotasProveedor', 'cuotaCon@cuotasProveedor')->name('cuotasProveedor');
+
+//Orden de compra
+
+Route::get('ordenesPendientes', 'ordenCon@ordenesPendientes')->name('ordenesPendientes');
+
+Route::get('aprobarOrden/{codigo_estatus?}', 'ordenCon@aprobarOrden')->name('aprobarOrden');
+
+// Route::post('aprobarOrden/{codigo_estatus?}', 'ordenCon@aprobarOrden')->name('aprobar.orden');
+
+Route::delete('aprobarOrden/{codigo_orden_compra?}', 'ordenCon@eliminarOrden')->name('eliminar.ordenCompra');
+
+Route::post('aprobarOrden/{codigo_estatus?}', 'ordenCon@aprobacionOrden')->name('aprobar.orden');
+
+Route::get('ordenesAprobadas', 'ordenCon@ordenesAprobadas')->name('ordenesAprobadas');
+Route::get('recibirOrden/{codigo_estatus?}', 'ordenCon@recibirOrden')->name('recibirOrden');
+Route::post('recibirOrden/{codigo_estatus?}', 'ordenCon@recepcionOrden')->name('recibir.orden');
+
 // Venta por tienda Física 
 
 Route::get('TiendaFisica','ventaTiendaFisicaControlador@vistaVenta')->name('TiendaFisica');

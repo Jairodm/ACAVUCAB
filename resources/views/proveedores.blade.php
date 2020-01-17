@@ -22,6 +22,13 @@
     <div class="container mt-2 pt-2">
         <h2 class="display-4 text-center">Proveedores</h2>
         <hr class="bg-warning">
+
+        @if($errors->any())
+        <div class="alert alert-danger">
+        <label>{{$errors->first()}}</label>
+        </div>
+        @endif
+
             <table class="table table-hover">
                     <thead class="bg-warning">
                         <tr>

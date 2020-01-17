@@ -8,6 +8,8 @@ use App\lugar;
 use App\Telefono;
 use App\Usuario;
 use App\proveedor;
+use App\Cuota_afiliacion;
+use App\Proveedor_y_cuota;
 use App\User;
 
 use Illuminate\Support\Facades\DB;
@@ -73,12 +75,28 @@ class proveedorCon extends Controller
             $correoNuevo->save();
         }
 
-     /* $user = Auth::user();
+        $user = Auth::user();
         $usuario = Usuario::where('nombre_usuario',$user->email)->first();
-        $usuario->fk_proveedor =$request->rifProveedor;
-        $usuario->save(); */
+        $usuario->fk_proveedor =$request->tipoDocumento . $request->rifProveedor;
+        $usuario->save(); 
 
-        return redirect()->route('proveedores');;
+        $first = date('Y-m-01'); 
+        $last  = date('Y-m-t');
+             
+        $code_cuota = DB::table('cuota_afiliacion')
+        ->select(DB::raw('codigo_cuota'))
+        ->where('fecha_cuota', '>', $first)
+        ->where('fecha_cuota', '<', $last)->value('codigo_cuota');
+
+        if($code_cuota){
+        $nan = new Proveedor_y_cuota;
+            $nan->rif_proveedor= $usuario->fk_proveedor;
+            $nan->codigo_cuota= $code_cuota;
+            $nan->estatus= 'Pendiente';
+            $nan->save();
+        }
+
+        return redirect()->route('index');;
 
     }
 
