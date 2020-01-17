@@ -13,6 +13,13 @@ use App\Empleado;
 use App\Cliente;
 use App\Inventario;
 use App\Cerveza;
+use App\Divisa;
+use App\Estatus;
+use App\Estatus_y_venta;
+use App\Orden_compra;
+use App\Detalle_compra;
+use App\Estatus_y_orden;
+
 
 class ventaTiendaFisicaControlador extends Controller
 {
@@ -64,29 +71,225 @@ class ventaTiendaFisicaControlador extends Controller
     public function verDetalle($ventaActual){
         $cervezas = Cerveza::all();
         $detalleVenta = Detalle_venta::where('venta','=',$ventaActual)->get();
-        $totalFactura = venta::where('numero_factura','=',$ventaActual)->value('monto_total_venta');
-        
-        return view ('ventaDetalleFisica',compact('cervezas','detalleVenta','ventaActual','totalFactura'));
+        //$totalFactura = venta::where('numero_factura','=',$ventaActual)->value('monto_total_venta');
+        $guardaTotal = Venta::findOrFail($ventaActual);
 
+
+        $totalFactura = 0;
+        
+        $productos = detalle_venta::where('venta','=',$ventaActual)->get();
+        foreach($productos as $producto){
+            $subtotal = $producto->cantidad_venta * $producto->cervezax->precio;
+            $totalFactura = $subtotal + $totalFactura;
+            $guardaTotal->monto_total_venta= $totalFactura;
+            $guardaTotal->save();
+        }
+        return view ('ventaDetalleFisica',compact('cervezas','detalleVenta','ventaActual','totalFactura'));
+       
     }
     
     public function añadirProducto(Request $request,$ventaActual){
-        
-      
-
+        $request->validate([
+            'cerveza' => 'required',
+            'cantidad_venta' => 'required'
+        ]);
+        $cantidadComprada = $request->cantidad_venta;
+        $nombreCerveza = $request->cerveza;
+        $buscaCodigoCerveza = Cerveza::where('nombre_cerveza','=',$nombreCerveza)->value('codigo_cerveza');
+        $cantidadEnExistencia = Inventario::where('fk_cerveza',$buscaCodigoCerveza)->orderBy('codigo_inventario','desc')->first();
+   
+        //Comprobar inventario
+        $flag=1;
+        if ($cantidadComprada > $cantidadEnExistencia->cantidad_disponible){
+            $flag=0;
+        }
+        //Añade el producto
+        if($flag==1){
         $nuevoDetalle = new Detalle_venta;
         $nuevoDetalle->cantidad_venta = $request->cantidad_venta;
-        $nombreCerveza = $request->cerveza;
         $nuevoDetalle->venta = $ventaActual;
-        $nuevoDetalle->cerveza = Cerveza::where('nombre_cerveza','=',$nombreCerveza)->value('codigo_cerveza');
         $nuevoDetalle->precio_unitario_venta = Cerveza::where('nombre_cerveza','=',$nombreCerveza)->value('precio');
+        $nuevoDetalle->cerveza =$buscaCodigoCerveza;
         $nuevoDetalle->save();
+        }
 
-        $totalFactura = venta::findOrFail($ventaActual);
-        $totalFactura->monto_total_venta = $totalFactura->monto_total_venta + ($nuevoDetalle->precio_unitario_venta * $nuevoDetalle->cantidad_venta);
-        $totalFactura->save();
+        if($flag==1){
+           return redirect()->back()->with('exito','Añadido con éxito');
+        }
 
-        return redirect()->back();
+        if($flag==0){
+            return redirect()->back()->with('error','Imposible añadir. Cantidad insuficiente en inventario');
+        }
+
+    }
+
+    public function eliminardelDetalle($codigo_detalle_venta){
+        $eliDetalle = detalle_venta::findOrFail($codigo_detalle_venta);
+        $eliDetalle->delete();
+        return redirect()->back()->with('eliminado','Eliminado con exito');
+    }
+
+    public function muestraMetodos($ventaActual){
+        return view ('ventaTiendaFisicaMetodoPago',compact('ventaActual'));
+    }
+
+    public function metodoPago($ventaActual,$TipoMetodoPago){
+
+        if($TipoMetodoPago == 'Divisa'){
+            $divisas = Divisa::all();
+            return view('ventaTiendaFisicaMetodoPagoDatos',compact('TipoMetodoPago','ventaActual','divisas'));
+        }else{
+        return view('ventaTiendaFisicaMetodoPagoDatos',compact('TipoMetodoPago','ventaActual'));
+        }
+    }
+
+    public function agregarMetodo(Request $request ,$ventaActual,$TipoMetodoPago){
+
+        if($TipoMetodoPago == 'Efectivo'){
+            $cliente=Venta::where('numero_factura','=',$ventaActual)->value('fk_cliente');
+            $nuevoMetodo = new Metodo_pago();
+            $nuevoMetodo->denominacion = $request->denominacion;
+            $nuevoMetodo->valor_moneda = $request->valor_moneda;
+            $nuevoMetodo->fk_cliente = $cliente;
+            $nuevoMetodo->tipo_metodo_pago = 'Efectivo';
+            $nuevoMetodo->save();
+            //descontar del inventario
+            $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
+
+            foreach($detalleVentas as $item){
+                $inventario = new Inventario;
+                $inventarioAux = inventario::where('fk_cerveza','=',$item->cerveza)->OrderBy('codigo_inventario','desc')->first();
+                $inventario->cantidad_operacion = $item->cantidad_venta;
+                $inventario->fecha_operacion = now();
+                $inventario->fk_cerveza = $item->cerveza;
+                $inventario->fk_venta = $ventaActual;
+                $inventario->cantidad_disponible = $inventarioAux->cantidad_disponible - $item->cantidad_venta;
+                $inventario->save();
+            }
+            
+            return view('pagorealizado',compact('ventaActual'));
+
+        }
+
+        if($TipoMetodoPago == 'Credito'){
+            $cliente=Venta::where('numero_factura','=',$ventaActual)->value('fk_cliente');
+            $nuevoMetodo = new Metodo_pago;
+            $nuevoMetodo->tipo_tarjeta_credito = $request->tipo_tarjeta_credito;
+            $nuevoMetodo->numero_tarjeta_credito = $request->numero_tarjeta_credito;
+            $nuevoMetodo->fecha_vencimiento = $request->fecha_vencimiento;
+            $nuevoMetodo->fk_cliente = $cliente;
+            $nuevoMetodo->tipo_metodo_pago = 'Tarjeta de Crédito';
+            $nuevoMetodo->save();
+            //Descuenta inventario
+            $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
+            foreach($detalleVentas as $item){
+                $inventario = new Inventario;
+                $inventarioAux = inventario::where('fk_cerveza','=',$item->cerveza)->OrderBy('codigo_inventario','desc')->first();
+                $inventario->cantidad_operacion = $item->cantidad_venta;
+                $inventario->fecha_operacion = now();
+                $inventario->fk_cerveza = $item->cerveza;
+                $inventario->fk_venta = $ventaActual;
+                $inventario->cantidad_disponible = $inventarioAux->cantidad_disponible - $item->cantidad_venta;
+                $inventario->save();
+
+                if ($inventarioAux->cantidad_disponible >= 100 && $inventario->cantidad_disponible < 100){
+
+                    $orden = new Orden_compra;
+                    $orden->fecha_orden_compra = now();
+                    $orden->monto_total_orden_compra= 10000 * $item->cervezax->precio;
+                    $orden->fk_proveedor =  $item->cervezax->fk_proveedor;
+                    $orden->save();
+    
+                    $ordenAux = Orden_compra::OrderBy('codigo_orden_compra', 'desc')->first();
+                    $detorden = new Detalle_compra;
+                    $detorden->cantidad_compra = 10000;
+                    $detorden->precio_unitario_compra = $item->cervezax->precio;
+                    $detorden->cerveza= $item->cervezax->codigo_cerveza;
+                    $detorden->orden_compra= $ordenAux->codigo_orden_compra;
+                    $detorden->save();
+    
+                    $estorden = new Estatus_y_orden;
+                    $estorden->estatus= 1; 
+                    $estorden->orden = $ordenAux->codigo_orden_compra;
+                    $estorden->fecha_estatus= now();
+                    $estorden->save();
+                }
+            }
+            return view('pagorealizado',compact('ventaActual'));
+        }
+
+        if ($TipoMetodoPago == 'Debito'){
+            $cliente=Venta::where('numero_factura','=',$ventaActual)->value('fk_cliente');
+            $nuevoMetodo = new Metodo_pago;
+            $nuevoMetodo->banco = $request->banco;
+            $nuevoMetodo->numero_tarjeta_debito = $request->numero_tarjeta_debito;
+            $nuevoMetodo->fk_cliente = $cliente;
+            $nuevoMetodo->tipo_metodo_pago = 'Tarjeta de Débito';
+            $nuevoMetodo->save();
+            //Descuenta inventario
+            $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
+            foreach($detalleVentas as $item){
+                $inventario = new Inventario;
+                $inventarioAux = inventario::where('fk_cerveza','=',$item->cerveza)->OrderBy('codigo_inventario','desc')->first();
+                $inventario->cantidad_operacion = $item->cantidad_venta;
+                $inventario->fecha_operacion = now();
+                $inventario->fk_cerveza = $item->cerveza;
+                $inventario->fk_venta = $ventaActual;
+                $inventario->cantidad_disponible = $inventarioAux->cantidad_disponible - $item->cantidad_venta;
+                $inventario->save();
+            }
+            return view('pagorealizado',compact('ventaActual'));
+        }
+
+        if ($TipoMetodoPago == 'Cheque'){
+            $cliente=Venta::where('numero_factura','=',$ventaActual)->value('fk_cliente');
+            $nuevoMetodo = new Metodo_pago;
+            $nuevoMetodo->banco = $request->banco;
+            $nuevoMetodo->numero_cheque = $request->numero_cheque;
+            $nuevoMetodo->numero_cuenta = $request->numero_cuenta;
+            $nuevoMetodo->fk_cliente = $cliente;
+            $nuevoMetodo->tipo_metodo_pago = 'Cheque';
+            $nuevoMetodo->save();
+            //Descuenta inventario
+            $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
+            foreach($detalleVentas as $item){
+                $inventario = new Inventario;
+                $inventarioAux = inventario::where('fk_cerveza','=',$item->cerveza)->OrderBy('codigo_inventario','desc')->first();
+                $inventario->cantidad_operacion = $item->cantidad_venta;
+                $inventario->fecha_operacion = now();
+                $inventario->fk_cerveza = $item->cerveza;
+                $inventario->fk_venta = $ventaActual;
+                $inventario->cantidad_disponible = $inventarioAux->cantidad_disponible - $item->cantidad_venta;
+                $inventario->save();
+            }
+            return view('pagorealizado',compact('ventaActual'));
+        }
+
+        if ($TipoMetodoPago == 'Divisa'){
+            $cliente=Venta::where('numero_factura','=',$ventaActual)->value('fk_cliente');
+            $codigoDivisa = Divisa::where('nombre_divisa','=',$request->nombre_divisa)->value('codigo_divisa');
+            $nuevoMetodo = new Metodo_pago;
+            $nuevoMetodo->denominacion = $request->denominacion;
+            $nuevoMetodo->valor_moneda = $request->valor_moneda;
+            $nuevoMetodo->fk_divisa = $codigoDivisa;
+            $nuevoMetodo->fk_cliente = $cliente;
+            $nuevoMetodo->tipo_metodo_pago = 'Efectivo';
+            $nuevoMetodo->save();
+            //Descuenta inventario
+            $detalleVentas = Detalle_venta::where('venta','=',$ventaActual)->get();
+            foreach($detalleVentas as $item){
+                $inventario = new Inventario;
+                $inventarioAux = inventario::where('fk_cerveza','=',$item->cerveza)->OrderBy('codigo_inventario','desc')->first();
+                $inventario->cantidad_operacion = $item->cantidad_venta;
+                $inventario->fecha_operacion = now();
+                $inventario->fk_cerveza = $item->cerveza;
+                $inventario->fk_venta = $ventaActual;
+                $inventario->cantidad_disponible = $inventarioAux->cantidad_disponible - $item->cantidad_venta;
+                $inventario->save();
+            }
+            return view('pagorealizado',compact('ventaActual'));
+        }
+
 
 
 
@@ -94,8 +297,11 @@ class ventaTiendaFisicaControlador extends Controller
     }
 
 
-
-
+    public function eliminarVenta($ventaActual){
+        $eliVenta = venta::findOrFail($ventaActual);
+        $eliVenta->delete();
+        return view ('TiendaFisica');
+    }
 
 
 

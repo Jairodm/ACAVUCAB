@@ -95,7 +95,7 @@ class clienteControlador extends Controller
          $usuario->fk_cliente =$clienteNuevo->rif_cliente;
          $usuario->save();
  
-         return redirect()->route('index');;
+         return redirect()->back();
  
      }
 

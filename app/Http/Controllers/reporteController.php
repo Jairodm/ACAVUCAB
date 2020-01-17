@@ -350,6 +350,37 @@ class reporteController extends Controller
     
     }
 
+    public function listaordenes(Request $request) {
+        require base_path() . '/vendor/autoload.php';
+    
+            $input = base_path() . '/vendor/geekcom/phpjasper/examples/ListadoOrdenes.jasper';  
+            $output = base_path() . '/vendor/geekcom/phpjasper/examples/ListadoOrdenes'; 
+            
+            
+            $fechaInicio = $request->fechaInicio;
+            $fechaFin = $request->fechaFin;
 
+            $options = [ 
+                'format' => ['pdf'],
+                'locale' => 'en',
+                'params' => ["Fecha_Inicio" => $fechaInicio , "Fecha_Fin" => $fechaFin],
+                'db_connection' => [
+                    'driver' => 'postgres', //mysql, ....
+                    'username' => 'postgres',
+                    'password' => '07diciembre',
+                    'host' => '127.0.0.1',
+                    'database' => 'ProyectoBDACAVUCAB',
+                    'port' => '5432'
+                ]
+            ];
+            $jasper = new PHPJasper;
+            $jasper->process(
+                $input,
+                $output,
+                $options
+            )->execute();
+            return redirect()->route('index');
+    
+    }
 
 }

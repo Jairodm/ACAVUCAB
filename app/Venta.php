@@ -32,7 +32,7 @@ class Venta extends Model
      * @var string
      */
     protected $table = 'venta';
-    public $timestamps =false; 
+    
 
     /**
      * The primary key for the model.
@@ -54,6 +54,8 @@ class Venta extends Model
      * @var bool
      */
     public $incrementing = false;
+
+    public $timestamps = false;
 
 
     /**

@@ -63,14 +63,15 @@
             </button>
         </a>
         @endcan
-        @can('')
-        <a href="RegistrarEvento">
+   
+        
+        <a href="{{route ('vista.reporte.listaordenes')}}">
                 <button
                     style="position:absolute; top:63%; left:54%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                    type="button" class="btn btn-warning">Registrar evento
+                    type="button" class="btn btn-warning">Lista de ordenes
                 </button>
         </a>
-        @endcan
+
         
 
     </div>

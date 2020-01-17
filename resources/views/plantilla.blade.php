@@ -72,9 +72,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                        @can('vender.tienda')
+                        <a class="dropdown-item" href="{{route('TiendaFisica')}}">Crear venta</a>
+                        @endcan
                         
-                        <a class="dropdown-item" href="{{route('menuAdministrador')}}">Crear venta</a>
-
                         @endif
                     </div>
                 </li>

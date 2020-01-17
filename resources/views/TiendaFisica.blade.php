@@ -36,8 +36,8 @@
             </div>
         </div>
     </form>
-    <a href="" class="btn btn-success float-right">Añadir nuevo cliente</a> 
-    @if($mostrarCliente == 'El cliente no está registrado')
+    <a href="{{route('registrarClienteNatural')}}" class="btn btn-success float-right">Añadir nuevo cliente</a> 
+    @if($mostrarCliente == 'El cliente no está registrado' ?? '')
     @else
     <form action="{{route('crearVenta',$mostrarCliente)}}" method="get">
         @csrf

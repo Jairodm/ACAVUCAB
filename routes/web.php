@@ -438,6 +438,13 @@ Route::middleware(['auth'])->group(function(){
 
                             //factura
                   Route::get('reporteFactura/{id?}', 'reporteController@factura')->name('reporte.factura');
+
+                            //listado ordenes
+                            Route::get('reporteListaOrdenes', function () {
+                                return view('reporteordenes');
+                             })->name('vista.reporte.listaordenes');
+                        
+                             Route::post('reporteListaOrdenes/', 'reporteController@listaordenes')->name('reporte.listaordenes');
 });
 
 
@@ -569,6 +576,17 @@ Route::get('TiendaFisica','ventaTiendaFisicaControlador@vistaVenta')->name('Tien
 Route::get('ventaTiendaFisica/{mostrarCliente}','ventaTiendaFisicaControlador@crearVenta')->name('crearVenta');
 Route::get('ventaDetalleFisica/{numero_factura}','ventaTiendaFisicaControlador@verDetalle')->name('detalleVenta');
 Route::post('ventaDetalleFisica/{ventaActual}','ventaTiendaFisicaControlador@añadirProducto');
+Route::delete('ventaDetalleFisica/{codigo_detalle_venta}','ventaTiendaFisicaControlador@eliminardelDetalle')->name('eliminaDetalle');
+route::get('ventaTiendaFisicaMetodoPago/{ventaActual}','ventaTiendaFisicaControlador@muestraMetodos')->name('metodosPago');
+
+route::get('metodoPagoVentaFisica/{ventaActual}/{Efectivo}','ventaTiendaFisicaControlador@metodoPago')->name('metodoPagoVentaFisica');
+route::post('metodoPagoVentaFisica/{ventaActual}/{Efectivo}','ventaTiendaFisicaControlador@agregarMetodo')->name('agregarMetodo');
+route::delete('metodoPagoVentaFisica/{ventaActual}','ventaTiendaFisicaControlador@eliminarVenta')->name('eliminarVenta');
+//route::get('metodoPagoVentaFisica/Cheque','ventaTiendaFisicaControlador@metodoPago')->name('metodoPagoVentaFisicaCheque');
+//route::get('metodoPagoVentaFisica/Divisa','ventaTiendaFisicaControlador@metodoPago')->name('metodoPagoVentaFisicaDivisa');
+//route::get('metodoPagoVentaFisica/Debito','ventaTiendaFisicaControlador@metodoPago')->name('metodoPagoVentaFisicaDebito');
+//route::get('metodoPagoVentaFisica/Credito','ventaTiendaFisicaControlador@metodoPago')->name('metodoPagoVentaFisicaCredito');
+
 
 
 //Carrito

@@ -2054,7 +2054,6 @@ return array(
     'PHPJasper\\Exception\\InvalidInputFile' => $vendorDir . '/geekcom/phpjasper/src/Exception/InvalidInputFile.php',
     'PHPJasper\\Exception\\InvalidResourceDirectory' => $vendorDir . '/geekcom/phpjasper/src/Exception/InvalidResourceDirectory.php',
     'PHPJasper\\PHPJasper' => $vendorDir . '/geekcom/phpjasper/src/PHPJasper.php',
-    'PHPJasper\\PHPJasperServiceProvider' => $vendorDir . '/geekcom/phpjasper-laravel/src/PHPJasperServiceProvider.php',
     'PHPUnit\\Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert.php',
     'PHPUnit\\Framework\\AssertionFailedError' => $vendorDir . '/phpunit/phpunit/src/Framework/Exception/AssertionFailedError.php',

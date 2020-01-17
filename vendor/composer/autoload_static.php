@@ -296,7 +296,6 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
         'PHPJasper\\' => 
         array (
             0 => __DIR__ . '/..' . '/geekcom/phpjasper/src',
-            1 => __DIR__ . '/..' . '/geekcom/phpjasper-laravel/src',
         ),
         'Opis\\Closure\\' => 
         array (
@@ -2477,7 +2476,6 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
         'PHPJasper\\Exception\\InvalidInputFile' => __DIR__ . '/..' . '/geekcom/phpjasper/src/Exception/InvalidInputFile.php',
         'PHPJasper\\Exception\\InvalidResourceDirectory' => __DIR__ . '/..' . '/geekcom/phpjasper/src/Exception/InvalidResourceDirectory.php',
         'PHPJasper\\PHPJasper' => __DIR__ . '/..' . '/geekcom/phpjasper/src/PHPJasper.php',
-        'PHPJasper\\PHPJasperServiceProvider' => __DIR__ . '/..' . '/geekcom/phpjasper-laravel/src/PHPJasperServiceProvider.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Exception/AssertionFailedError.php',

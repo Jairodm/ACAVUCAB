@@ -22,7 +22,7 @@ class Detalle_venta extends Model
      * @var string
      */
     protected $table = 'detalle_venta';
-    public $timestamps = false;
+    
     /**
      * The primary key for the model.
      * 
@@ -48,6 +48,8 @@ class Detalle_venta extends Model
      * @var array
      */
     protected $fillable = ['cerveza', 'venta', 'cantidad_venta', 'precio_unitario_venta'];
+
+    public $timestamps = false;
 
 
     /**

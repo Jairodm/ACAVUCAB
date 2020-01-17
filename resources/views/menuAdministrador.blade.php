@@ -91,7 +91,7 @@
         <a href="eventos">
             <button
                 style="position:absolute; top:101%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Usuarios
+                type="button" class="btn btn-warning">Eventos
             </button>
         </a>
         @endcan
