@@ -29,7 +29,9 @@
                             <th class="text-center" width='300px'>Nombre del Evento</th>
                             <th class="text-center" width='200px'>Precio Entrada</th>
                             <th width ='150px'>
+                              @can('registrar.evento')
                               <a href="{{ route('registrar.get.evento')}}" class="btn btn-md btn-warning pull-right" style="background-color:greenyellow">Crear Evento</a>
+                              @endcan
                           
                              </th>
                             <th colspan="2">&nbsp;</th>
@@ -51,7 +53,7 @@
                                 @endif
 
 
-                          @can('consultar.entradas')                           <!-- Consultar de cliente -->
+                          @can('comprar.entradas')                           <!-- Consultar de cliente -->
                                 <td class="text-center"><a href="{{route('consultar.entradas', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar Evento</a></td>
                           @endcan 
                             @can('consultar.evento')                           <!-- Consultar de administrador -->
@@ -59,7 +61,7 @@
                             @endcan 
                             
                             <td>
-                                @can('eliminar.usuario')
+                                @can('eliminar.evento')
                                 <form action="{{route ('eliminar.evento',     $item->codigo_evento)}}" method="POST" class="d-inline">
 
                                     @method('DELETE')
@@ -75,31 +77,6 @@
                 </table>
                 {{ $eventos->links() }}
     </div>
-    
-<!-- Pagination -->
-    <ul class="pagination justify-content-center mt-2 pt-2">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous" style="color:#fab700;">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" style="color:#fab700;">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next" style="color:#fab700;">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-    </ul>
 
       
     <!-- Optional JavaScript -->

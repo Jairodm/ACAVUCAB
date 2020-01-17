@@ -160,17 +160,6 @@ Route::get('registrarClienteJuridico', function () {
     return view('registrarClienteJuridico');
 })->name('registrarClienteJuridico');
 
-/* DIVISAS */
-Route::get('divisas', 'consultarDivisa@consultar')->name('divisas');
-Route::get('divisas','consultarDivisa@consultar')->name('divisas');
-Route::get('modificarDivisa/{codigo_divisa}','consultarDivisa@modificarValor')->name('modificarDivisa');
-Route::post('registroDivisa', 'consultarDivisa@crear')->name('registrar.Divisa');
-Route::get('registrarDivisa','consultarDivisa@index')->name('registrarDivisa');
-Route::put('modificarDivisa/{codigo_divisa}','consultarDivisa@actualizaValor')->name('actualizaDivisa');
-Route::delete('modificarDivisa/{codigo_divisa}','consultarDivisa@eliminaDivisa')->name('eliminaDivisa');
-
-
-
 Route::get('registrarEmpleado', function () {
     return view('registrarEmpleado');
 });
@@ -215,115 +204,119 @@ Route::get('contactoProveedor', function () {
     return view('contactoProveedor');
 });
 
-
-
-// Crud de empleado
-
-// Beneficios y vacaciones
-
-Route::get('beneficiosYVacaciones/{cedula_empleado?}','beneficiosYVacacionesCon@consultar')->name('beneficiosYVacaciones');
-
-Route::delete('consultarBeneficio/{codigo_beneficio?}', 'beneficiosYVacacionesCon@eliminarBeneficio')->name('eliminar.beneficio');
-
-Route::get('consultarBeneficio/{codigo_beneficio?}','beneficiosYVacacionesCon@consultarBeneficio')->name('consultarBeneficio');
-
-Route::put('consultarBeneficio/{codigo_beneficio?}','beneficiosYVacacionesCon@editarBeneficio')->name('editar.beneficio');
-
-Route::get('registrarBeneficio/{cedula_empleado?}','beneficiosYVacacionesCon@regBeneficio')->name('registrarBeneficio');
-
-Route::get('RegistrarVacacion/{cedula_empleado?}','beneficiosYVacacionesCon@regVacacion')->name('RegistrarVacacion');
-
-Route::delete('ConsultarVacacion/{codigo_vacacion?}', 'beneficiosYVacacionesCon@eliminarVacacion')->name('eliminar.vacacion');
-
-Route::get('ConsultarVacacion/{codigo_vacacion?}','beneficiosYVacacionesCon@consultarVacacion')->name('ConsultarVacacion');
-
-Route::put('ConsultarVacacion/{codigo_vacacion?}','beneficiosYVacacionesCon@editarVacacion')->name('editar.vacacion');
-
-Route::post('RegistrarVacacion/{cedula_empleado?}', 'beneficiosYVacacionesCon@RegistrarVacacion')->name('registrar.vacacion');
-
-Route::post('RegistrarBeneficio/{cedula_empleado?}','beneficiosYVacacionesCon@RegistrarBeneficio')->name('registrar.beneficio');
-
-// Horario y asistencias
-
-Route::get('registrarHorario', function () {
-    return view('registrarHorario');
-});
-
-Route::post('registrarHorario','horarioAsistenciaCon@registrarHorario')->name('registrar.horario');
-
-Route::get('registrarHorarioEmpleado', function () {
-    return view('registrarHorarioEmpleado');
-});
-
-Route::get('registrarHorarioEmpleado/{cedula_empleado?}','horarioAsistenciaCon@regHorarioEmpleado')->name('registrarHorarioEmpleado');
-
-Route::post('registrarHorarioEmpleado/{cedula_empleado?}/{codigo_horario?}','horarioAsistenciaCon@registrarHorarioEmpleado')->name('registrar.horarioEmpleado');
-
-Route::get('horariosEmpleado', function () {
-    return view('horariosEmpleado');
-});
-
-Route::get('horariosEmpleado/{cedula_empleado?}','horarioAsistenciaCon@horariosEmpleado')->name('horariosEmpleado');
-
-Route::delete('horariosEmpleado/{codigo_horario_y_empleado?}','horarioAsistenciaCon@eliminarHorarioEmpleado')->name('eliminar.horarioEmpleado');
-
-Route::get('asistenciasEmpleado/{cedula_empleado?}', 'horarioAsistenciaCon@consultarAsistenciasEmpleado')->name('asistenciasEmpleado');
-
-Route::get('registrarEmpleado','registrarEmpleadoCon@vista')->name('registrarEmpleado');
-Route::post('nómina', 'registrarEmpleadoCon@leerAsistencias')->name('leerAsistencias');
-
-//Correos y teléfonos
-
-Route::delete('consultarTelefono/{codigo_telefono?}', 'CorreoTelefonoCon@eliminarTelefono')->name('eliminar.telefono');
-
-Route::get('consultarTelefono/{codigo_telefono?}','CorreoTelefonoCon@consultarTelefono')->name('consultarTelefono');
-
-Route::put('consultarTelefono/{codigo_telefono?}','CorreoTelefonoCon@editarTelefono')->name('editar.telefono');
-
-Route::delete('consultarCorreo/{codigo_correo?}', 'CorreoTelefonoCon@eliminarCorreo')->name('eliminar.correo');
-
-Route::get('consultarCorreo/{codigo_correo?}','CorreoTelefonoCon@consultarCorreo')->name('consultarCorreo');
-
-Route::put('consultarCorreo/{codigo_correo?}','CorreoTelefonoCon@editarCorreo')->name('editar.correo');
-
-//Método de pago
-
-Route::get('ConsultarMetodosDePago/{rif_cliente?}','MetodoPagoCon@consultarMetodosDePago')->name('ConsultarMetodosDePago');
-
-Route::get('consultarMetodoCliente/{codigo_metodo_pago?}','MetodoPagoCon@consultarMetodoCliente')->name('consultarMetodoCliente');
-
-Route::get('registrarMetodoPago/{rif_cliente?}','MetodoPagoCon@regMetodoCliente')->name('registrarMetodoCliente');
-
-Route::post('registrarMetodoPago/{rif_cliente?}','MetodoPagoCon@RegistrarMetodoCliente')->name('registrar.metodoCliente');
-
-Route::delete('consultarMetodoCliente/{codigo_metodo_pago?}', 'MetodoPagoCon@eliminarMetodoCliente')->name('eliminar.metodoCliente');
-
-Route::put('consultarMetodoCliente/{codigo_metodo_pago?}','MetodoPagoCon@editarMetodoCliente')->name('editar.metodoCliente');
-
-//Persona de contacto
-
-Route::get('contactoProveedor/{rif_proveedor?}','ContactoCon@consultarProveedor')->name('ContactoProveedor');
-
-Route::get('consultarContactoProveedor/{codigo_persona_contacto?}','ContactoCon@consultarContactoProveedor')->name('consultarContactoProveedor');
-
-Route::get('registrarContactoProveedor/{rif_proveedor?}','ContactoCon@regContactoProveedor')->name('registrarContactoProveedor');
-
-Route::post('registrarContactoProveedor/{rif_proveedor?}','ContactoCon@RegistrarContactoProveedor')->name('registrar.contactoProveedor');
-
-Route::delete('consultarContactoProveedor/{codigo_persona_contacto?}', 'ContactoCon@eliminarContactoProveedor')->name('eliminar.contactoProveedor');
-
-Route::put('consultarContactoProveedor/{codigo_persona_contacto?}','ContactoCon@editarContactoProveedor')->name('editar.contactoProveedor');
-
-
-Route::get('contactoJuridico/{rif_cliente?}','ContactoCon@consultarJuridico')->name('ContactoJuridico');
-
-Route::get('registrarContactoJuridico/{rif_cliente?}','ContactoCon@regContactoJuridico')->name('registrarContactoJuridico');
-
-Route::post('registrarContactoJuridico/{rif_cliente?}','ContactoCon@RegistrarContactoJuridico')->name('registrar.contactoJuridico');
-
-
-
 Route::middleware(['auth'])->group(function(){
+    /* DIVISAS */
+    Route::get('divisas', 'consultarDivisa@consultar')->name('divisas');
+    Route::get('divisas','consultarDivisa@consultar')->name('divisas');
+    Route::get('modificarDivisa/{codigo_divisa}','consultarDivisa@modificarValor')->name('modificarDivisa');
+    Route::post('registroDivisa', 'consultarDivisa@crear')->name('registrar.Divisa');
+    Route::get('registrarDivisa','consultarDivisa@index')->name('registrarDivisa');
+    Route::put('modificarDivisa/{codigo_divisa}','consultarDivisa@actualizaValor')->name('actualizaDivisa');
+    Route::delete('modificarDivisa/{codigo_divisa}','consultarDivisa@eliminaDivisa')->name('eliminaDivisa');
+
+    // Beneficios y vacaciones
+
+    Route::get('beneficiosYVacaciones/{cedula_empleado?}','beneficiosYVacacionesCon@consultar')->name('beneficiosYVacaciones');
+
+    Route::delete('consultarBeneficio/{codigo_beneficio?}', 'beneficiosYVacacionesCon@eliminarBeneficio')->name('eliminar.beneficio');
+
+    Route::get('consultarBeneficio/{codigo_beneficio?}','beneficiosYVacacionesCon@consultarBeneficio')->name('consultarBeneficio');
+
+    Route::put('consultarBeneficio/{codigo_beneficio?}','beneficiosYVacacionesCon@editarBeneficio')->name('editar.beneficio');
+
+    Route::get('registrarBeneficio/{cedula_empleado?}','beneficiosYVacacionesCon@regBeneficio')->name('registrarBeneficio');
+
+    Route::get('RegistrarVacacion/{cedula_empleado?}','beneficiosYVacacionesCon@regVacacion')->name('RegistrarVacacion');
+
+    Route::delete('ConsultarVacacion/{codigo_vacacion?}', 'beneficiosYVacacionesCon@eliminarVacacion')->name('eliminar.vacacion');
+
+    Route::get('ConsultarVacacion/{codigo_vacacion?}','beneficiosYVacacionesCon@consultarVacacion')->name('ConsultarVacacion');
+
+    Route::put('ConsultarVacacion/{codigo_vacacion?}','beneficiosYVacacionesCon@editarVacacion')->name('editar.vacacion');
+
+    Route::post('RegistrarVacacion/{cedula_empleado?}', 'beneficiosYVacacionesCon@RegistrarVacacion')->name('registrar.vacacion');
+
+    Route::post('RegistrarBeneficio/{cedula_empleado?}','beneficiosYVacacionesCon@RegistrarBeneficio')->name('registrar.beneficio');
+
+    // Horario y asistencias
+
+    Route::get('registrarHorario', function () {
+        return view('registrarHorario');
+    });
+
+    Route::post('registrarHorario','horarioAsistenciaCon@registrarHorario')->name('registrar.horario');
+
+    Route::get('registrarHorarioEmpleado', function () {
+        return view('registrarHorarioEmpleado');
+    });
+
+    Route::get('registrarHorarioEmpleado/{cedula_empleado?}','horarioAsistenciaCon@regHorarioEmpleado')->name('registrarHorarioEmpleado');
+
+    Route::post('registrarHorarioEmpleado/{cedula_empleado?}/{codigo_horario?}','horarioAsistenciaCon@registrarHorarioEmpleado')->name('registrar.horarioEmpleado');
+
+    Route::get('horariosEmpleado', function () {
+        return view('horariosEmpleado');
+    });
+
+    Route::get('horariosEmpleado/{cedula_empleado?}','horarioAsistenciaCon@horariosEmpleado')->name('horariosEmpleado');
+
+    Route::delete('horariosEmpleado/{codigo_horario_y_empleado?}','horarioAsistenciaCon@eliminarHorarioEmpleado')->name('eliminar.horarioEmpleado');
+
+    Route::get('asistenciasEmpleado/{cedula_empleado?}', 'horarioAsistenciaCon@consultarAsistenciasEmpleado')->name('asistenciasEmpleado');
+
+    Route::get('registrarEmpleado','registrarEmpleadoCon@vista')->name('registrarEmpleado');
+    Route::post('nómina', 'registrarEmpleadoCon@leerAsistencias')->name('leerAsistencias');
+
+    //Correos y teléfonos
+
+    Route::delete('consultarTelefono/{codigo_telefono?}', 'CorreoTelefonoCon@eliminarTelefono')->name('eliminar.telefono');
+
+    Route::get('consultarTelefono/{codigo_telefono?}','CorreoTelefonoCon@consultarTelefono')->name('consultarTelefono');
+
+    Route::put('consultarTelefono/{codigo_telefono?}','CorreoTelefonoCon@editarTelefono')->name('editar.telefono');
+
+    Route::delete('consultarCorreo/{codigo_correo?}', 'CorreoTelefonoCon@eliminarCorreo')->name('eliminar.correo');
+
+    Route::get('consultarCorreo/{codigo_correo?}','CorreoTelefonoCon@consultarCorreo')->name('consultarCorreo');
+
+    Route::put('consultarCorreo/{codigo_correo?}','CorreoTelefonoCon@editarCorreo')->name('editar.correo');
+
+    //Método de pago
+
+    Route::get('ConsultarMetodosDePago/{rif_cliente?}','MetodoPagoCon@consultarMetodosDePago')->name('ConsultarMetodosDePago');
+
+    Route::get('consultarMetodoCliente/{codigo_metodo_pago?}','MetodoPagoCon@consultarMetodoCliente')->name('consultarMetodoCliente');
+
+    Route::get('registrarMetodoPago/{rif_cliente?}','MetodoPagoCon@regMetodoCliente')->name('registrarMetodoCliente');
+
+    Route::post('registrarMetodoPago/{rif_cliente?}','MetodoPagoCon@RegistrarMetodoCliente')->name('registrar.metodoCliente');
+
+    Route::delete('consultarMetodoCliente/{codigo_metodo_pago?}', 'MetodoPagoCon@eliminarMetodoCliente')->name('eliminar.metodoCliente');
+
+    Route::put('consultarMetodoCliente/{codigo_metodo_pago?}','MetodoPagoCon@editarMetodoCliente')->name('editar.metodoCliente');
+
+    //Persona de contacto
+
+    Route::get('contactoProveedor/{rif_proveedor?}','ContactoCon@consultarProveedor')->name('ContactoProveedor');
+
+    Route::get('consultarContactoProveedor/{codigo_persona_contacto?}','ContactoCon@consultarContactoProveedor')->name('consultarContactoProveedor');
+
+    Route::get('registrarContactoProveedor/{rif_proveedor?}','ContactoCon@regContactoProveedor')->name('registrarContactoProveedor');
+
+    Route::post('registrarContactoProveedor/{rif_proveedor?}','ContactoCon@RegistrarContactoProveedor')->name('registrar.contactoProveedor');
+
+    Route::delete('consultarContactoProveedor/{codigo_persona_contacto?}', 'ContactoCon@eliminarContactoProveedor')->name('eliminar.contactoProveedor');
+
+    Route::put('consultarContactoProveedor/{codigo_persona_contacto?}','ContactoCon@editarContactoProveedor')->name('editar.contactoProveedor');
+
+
+    Route::get('contactoJuridico/{rif_cliente?}','ContactoCon@consultarJuridico')->name('ContactoJuridico');
+
+    Route::get('registrarContactoJuridico/{rif_cliente?}','ContactoCon@regContactoJuridico')->name('registrarContactoJuridico');
+
+    Route::post('registrarContactoJuridico/{rif_cliente?}','ContactoCon@RegistrarContactoJuridico')->name('registrar.contactoJuridico');
+
+
 
     //Empleados
     Route::post('/', 'registrarEmpleadoCon@crear')->name('registrar.crear')->middleware('can:registrar.empleado');
@@ -400,16 +393,18 @@ Route::middleware(['auth'])->group(function(){
                 Route::get('reporteReciboAfiliacion/{id?}', 'reporteController@reciboAfiliacion')->name('reporte.reciboAfiliacion');
 
                 Route::post('reporteTop10Cerveza/', 'reporteController@top10Cerveza')->name('reporte.top10.cerveza')->middleware('can:reporte.cerveza');
+
                 Route::get('reporteTop10Cerveza', function () {
                     return view('reporteTop10Cerveza');
-                });
+                })->name('vista.reporte.top10.cerveza');
+
                             //ficha de afiliacion
                 Route::get('reporteFicha/{id?}', 'reporteController@ficha')->name('reporte.ficha');
             
                             //top 10 cliente
                 Route::get('reporteTop10Cliente', function () {
                     return view('reporteTop10Cliente');
-                });
+                })->name('vista.reporte.top10.cliente');
             
                 Route::post('reporteTop10Cliente/', 'reporteController@top10Cliente')->name('reporte.top10.cliente')->middleware('can:reporte.cliente');
             
@@ -417,7 +412,7 @@ Route::middleware(['auth'])->group(function(){
                     
                  Route::get('reporteInventario', function () {
                                 return view('reporteInventario');
-                 });
+                 })->name('vista.reporte.inventario');
                         
                  Route::post('reporteInventario/', 'reporteController@inventario')->name('reporte.inventario')->middleware('can:reporte.inventario');
             
@@ -425,7 +420,7 @@ Route::middleware(['auth'])->group(function(){
             
                  Route::get('reporteTipoCerveza', function () {
                                 return view('reporteTipoCerveza');
-                 });
+                 })->name('vista.reporte.tipoCerveza');
                         
                  Route::post('reporteTipoCerveza/', 'reporteController@tipoCerveza')->name('reporte.tipoCerveza')->middleware('can:reporte.tipoCerveza');
 
@@ -433,7 +428,7 @@ Route::middleware(['auth'])->group(function(){
 
                     Route::get('reporteTop5Evento', function () {
                         return view('reporteTop5Evento');
-                     });
+                     })->name('vista.reporte.top5.evento');
                 
                      Route::post('reporteTop5Evento/', 'reporteController@top5evento')->name('reporte.top5.evento');
                  
@@ -507,8 +502,6 @@ Route::delete('consultarProveedor/{rif_proveedor?}', 'proveedorCon@eliminar')->n
 Route::get('proveedores', 'proveedorCon@proveedores')->name('proveedores');
 
 
-
-
 //cervezaa
 
 Route::get('productos','CatalogoControlador@productos')->name('productos');
@@ -553,6 +546,23 @@ Route::get('cuotaProcesada/{codigo_metodo_pago?}/{total?}/{codigo_cuota?}', 'cuo
 
 
 Route::get('cuotasProveedor', 'cuotaCon@cuotasProveedor')->name('cuotasProveedor');
+
+//Orden de compra
+
+Route::get('ordenesPendientes', 'ordenCon@ordenesPendientes')->name('ordenesPendientes');
+
+Route::get('aprobarOrden/{codigo_estatus?}', 'ordenCon@aprobarOrden')->name('aprobarOrden');
+
+// Route::post('aprobarOrden/{codigo_estatus?}', 'ordenCon@aprobarOrden')->name('aprobar.orden');
+
+Route::delete('aprobarOrden/{codigo_orden_compra?}', 'ordenCon@eliminarOrden')->name('eliminar.ordenCompra');
+
+Route::post('aprobarOrden/{codigo_estatus?}', 'ordenCon@aprobacionOrden')->name('aprobar.orden');
+
+Route::get('ordenesAprobadas', 'ordenCon@ordenesAprobadas')->name('ordenesAprobadas');
+Route::get('recibirOrden/{codigo_estatus?}', 'ordenCon@recibirOrden')->name('recibirOrden');
+Route::post('recibirOrden/{codigo_estatus?}', 'ordenCon@recepcionOrden')->name('recibir.orden');
+
 // Venta por tienda Física 
 
 Route::get('TiendaFisica','ventaTiendaFisicaControlador@vistaVenta')->name('TiendaFisica');
@@ -587,31 +597,7 @@ Route::get('consultarVenta/{numero_factura?}','consultarProductoClienteControlad
 Route::get('inventario','inventarioControlador@inventario')->name('inventario');
 
 
+Route::get('menuReportes', function () {
+    return view('menuReportes');
+})->name('menuReportes');
 
-Route::get('/reporte', function () {
-    require base_path() . '/vendor/autoload.php';
-
-        $input = base_path() . '/vendor/geekcom/phpjasper-laravel/examples/carnet.jasper';  
-        $output = base_path() . '/vendor/geekcom/phpjasper-laravel/examples/ejemplo2';    
-
-        $options = [ 
-            'format' => ['pdf'],
-            'locale' => 'en',
-            'params' => ["rif" => '22222'],
-            'db_connection' => [
-                'driver' => 'postgres', //mysql, ....
-                'username' => 'postgres',
-                'password' => '07diciembre',
-                'host' => '127.0.0.1',
-                'database' => 'ProyectoACAVUCAB',
-                'port' => '5432'
-            ]
-        ];
-$jasper = new PHPJasper;
-        $jasper->process(
-            $input,
-            $output,
-            $options
-        )->execute();
-
-});

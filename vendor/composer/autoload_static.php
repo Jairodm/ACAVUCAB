@@ -430,7 +430,6 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
 
     public static $classMap = array (
         'App\\Cargo' => __DIR__ . '/../..' . '/app/Cargo.php',
-        'App\\Carrito' => __DIR__ . '/../..' . '/app/Carrito.php',
         'App\\Cerveza' => __DIR__ . '/../..' . '/app/Cerveza.php',
         'App\\Cliente' => __DIR__ . '/../..' . '/app/Cliente.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
@@ -462,8 +461,6 @@ class ComposerStaticInitdc1095e3c5cfc5376ff181095209ad57
         'App\\Http\\Controllers\\consultarProductoClienteControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/consultarProductoClienteControlador.php',
         'App\\Http\\Controllers\\inventarioControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/inventarioControlador.php',
         'App\\Http\\Controllers\\registrarEmpleadoCon' => __DIR__ . '/../..' . '/app/Http/Controllers/registrarEmpleadoCon.php',
-        'App\\Http\\Controllers\\reporteController' => __DIR__ . '/../..' . '/app/Http/Controllers/reporteController.php',
-        'App\\Http\\Controllers\\tipoCervezaControlador' => __DIR__ . '/../..' . '/app/Http/Controllers/tipoCervezaControlador.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',

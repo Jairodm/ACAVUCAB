@@ -43,7 +43,7 @@
                                 <th class="text-center">{{$item->fecha_nacimiento}}</th>                                
                                 <th class="text-center">{{$item->cargo->nombre_cargo}}</th>
 
-                            @can('ConsultarEmpleado')
+                            @can('Consultar.empleado')
                             <td class="text-center"><a href="{{route('ConsultarEmpleado', $item)}}" class="btn btn-warning" style="background-color: greenyellow" >Consultar datos</a></td>
                             @endcan 
                         </tr>
@@ -61,11 +61,14 @@
           <button class="btn btn-warning btn-lg " type="submit">Leer asistencias</button>
           </div>
      </form>
+
+     @can('reporte.asistencia')
      <div  class="col md-4 text-center" style="margin-bottom:50px">
       <a href="{{route('reporte.asistencia')}}">
       <button style="" type="button" class="btn btn-warning btn-lg ">Generar Reporte de asistencia</button>
       </a>
     </div>
+    @endcan
 
       
     <!-- Optional JavaScript -->

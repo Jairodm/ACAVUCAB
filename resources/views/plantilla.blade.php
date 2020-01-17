@@ -8,10 +8,13 @@
                     <span class="fas fa-bars"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @can('index.cerveza')
                     <a class="dropdown-item" href="{{route ('productos')}}">Nuestros productos</a>
+                    @endcan
+                    @can('comprar.entradas')
                     <a class="dropdown-item" href="{{route ('index.evento')}}">Eventos</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="diarioCerveza">Diario de una cerveza</a>
+                    @endcan
+                    
                 </div>
             </li>
         </ul>
@@ -47,14 +50,16 @@
                             <!--Aquí iría una comprobación del tipo de usuario logeado
                             para saber si mandarlo a ConsultarClienteNatural, ConsultarClientejuridico,
                             ConsultarEmpleado o ConsultarProveedor-->
+                            @can('nv.miscompras')
                             <a class="dropdown-item" href="miscompras">Mis compras</a>
-
-                            @can('ConsultarEmpleado')
-                            <a class="dropdown-item" href="{{route('menuAdministrador')}}">Administrador</a>
                             @endcan
 
-                        <a class="dropdown-item" href="menuProveedor">Proveedor</a>
-                            
+                            @can('nv.menu')
+                            <a class="dropdown-item" href="{{route('menuAdministrador')}}">Menu</a>
+                            @endcan
+                            @can('nv.proveedor')
+                            <a class="dropdown-item" href="menuProveedor">Proveedor</a>
+                            @endcan
 
         
                             <!-- Cerraaaar sesión -->
@@ -73,10 +78,12 @@
                         @endif
                     </div>
                 </li>
+                @can('carrito')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('carrito') }}"><span class="fas fa-shopping-cart">
                         </span>Carrito</a>
                 </li>
+                @endcan
             </ul>
         </div>
     </div>

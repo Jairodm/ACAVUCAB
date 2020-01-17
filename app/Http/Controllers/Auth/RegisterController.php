@@ -78,9 +78,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        
+        if($user->name == 1 or $user->name == 2)
         $user->roles()->attach(Role::where('name', 'Cliente')->first());
-
+        else if($user->name == 3)
+        $user->roles()->attach(Role::where('name', 'Proveedor')->first());
         return $user;
     }
 

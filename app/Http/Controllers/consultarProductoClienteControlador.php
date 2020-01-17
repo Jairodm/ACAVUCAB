@@ -18,6 +18,9 @@ use App\Inventario;
 use App\Estatus;
 use App\Estatus_y_venta;
 use App\Empleado;
+use App\Orden_compra;
+use App\Detalle_compra;
+use App\Estatus_y_orden;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -136,12 +139,11 @@ class consultarProductoClienteControlador extends Controller
         //Comprobar inventario
         $flag=1;
         foreach ($carrito as $item){
-            $inventarioAux=Inventario::where('fk_cerveza', $item->fk_cerveza)->OrderBy('fecha_operacion', 'desc')->first();
+            $inventarioAux=Inventario::where('fk_cerveza', $item->fk_cerveza)->OrderBy('codigo_inventario', 'desc')->first();
             if ($inventarioAux->cantidad_disponible < $item->cantidad){
                 $flag=0;
             }
         }
-
 
         //Procesar compra
         if($flag==1){
@@ -168,13 +170,55 @@ class consultarProductoClienteControlador extends Controller
             $detalle_venta->save();
 
             $inventario = new inventario;
-            $inventarioAux=Inventario::where('fk_cerveza', $item->fk_cerveza)->OrderBy('fecha_operacion', 'desc')->first();
+            $inventarioAux=Inventario::where('fk_cerveza', $item->fk_cerveza)->OrderBy('codigo_inventario', 'desc')->first();
             $inventario->cantidad_operacion= $item->cantidad;
             $inventario->cantidad_disponible= $inventarioAux->cantidad_disponible - $item->cantidad;
             $inventario->fecha_operacion= now();
             $inventario->fk_cerveza= $item->fk_cerveza;
             $inventario->fk_venta= $ventaAux->numero_factura;
             $inventario->save();
+
+            //Generar orden de compra
+
+            if ($inventario->cantidad_disponible < 100){
+
+                $aprobadas= DB::table('estatus_y_orden')->select('orden')->where ('estatus', 4)->pluck('orden');
+                $pendientes= DB::table('estatus_y_orden')->select('orden')->where ('estatus', 1)->pluck('orden');
+                $entregadas= DB::table('estatus_y_orden')->select('orden')->where ('estatus', 3)->pluck('orden');
+
+                $ests=null;
+                $ords=null;
+                $dets= Detalle_compra::where ('cerveza', $item->fk_cerveza)->OrderBy('codigo_detalle_compra', 'desc')->first();
+                if($dets){
+                $ords= Orden_compra:: where ('codigo_orden_compra', $dets->orden_compra)->first();
+                }
+                if($ords){
+                    $ests= Estatus_y_orden::whereIn('orden', $pendientes)->whereNotIn('orden', $entregadas)->
+                    where('orden', $ords->codigo_orden_compra)->distinct('orden')->get();
+                }
+                
+                if (is_null($ests)){
+                    $orden = new Orden_compra;
+                $orden->fecha_orden_compra = now();
+                $orden->monto_total_orden_compra= 10000 * $item->cerveza->precio;
+                $orden->fk_proveedor =  $item->cerveza->fk_proveedor;
+                $orden->save();
+
+                $ordenAux = Orden_compra::OrderBy('codigo_orden_compra', 'desc')->first();
+                $detorden = new Detalle_compra;
+                $detorden->cantidad_compra = 10000;
+                $detorden->precio_unitario_compra = $item->cerveza->precio;
+                $detorden->cerveza= $item->cerveza->codigo_cerveza;
+                $detorden->orden_compra= $ordenAux->codigo_orden_compra;
+                $detorden->save();
+
+                $estorden = new Estatus_y_orden;
+                $estorden->estatus= 1; 
+                $estorden->orden = $ordenAux->codigo_orden_compra;
+                $estorden->fecha_estatus= now();
+                $estorden->save();
+                }
+            }
         }
         foreach ($carrito as $item){
             $item->delete();
@@ -219,6 +263,8 @@ class consultarProductoClienteControlador extends Controller
         return view('miscompras',compact('venta',  'cliente'));
 
     }
+
+
 
 
 }

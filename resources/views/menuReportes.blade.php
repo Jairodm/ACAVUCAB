@@ -23,80 +23,54 @@
        @include('plantilla')
 
     <div>
-        @can('registrar.empleado')
-        <a href="registrarEmpleado">
+        @can('reporte.top10cerveza')
+        <a href="{{route ('vista.reporte.top10.cerveza')}}">
             <button
                 style="position:absolute; top:25%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Registrar empleado
+                type="button" class="btn btn-warning">Top 10 Cervezas 
             </button>
         </a>
         @endcan
-        @can('consultar.inventario')
-        <a href="inventario">
+        @can('reporte.top5evento')
+        <a href="{{route ('vista.reporte.top5.evento')}}">
             <button
                 style="position:absolute; top:25%; left:54%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" onclick="href = 'registrarClienteJuridico';" class="btn btn-warning">Inventario
+                type="button" class="btn btn-warning">Top 5 Cervezas eventos
             </button>
         </a>
         @endcan
-        @can('index.empleado')
-        <a href="nómina">
+        @can('reporte.top10cliente')
+        <a href="{{route ('vista.reporte.top10.cliente')}}">
             <button
                 style="position:absolute; top:44%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Nómina
+                type="button" class="btn btn-warning">Top 10 clientes
             </button>
         </a>
         @endcan
-        @can('index.divisa')
-        <a href="divisas">
+        @can('reporte.inventario')
+        <a href="{{route ('vista.reporte.inventario')}}">
             <button
                 style="position:absolute; top:44%; left:54%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Divisas
+                type="button" class="btn btn-warning">Movimiento Inventario
             </button>
         </a>
         @endcan
-        @can('reporte.menu')
-        <a href="{{route ('menuReportes')}}">
+        @can('reporte.tipocerveza')
+        <a href="{{route ('vista.reporte.tipoCerveza')}}">
             <button
                 style="position:absolute; top:63%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Reportes
+                type="button" class="btn btn-warning">Tipo de cerveza más vendido
             </button>
         </a>
         @endcan
-        @can('registrar.empleado')
-        <a href="{{route('registrarUsuario')}}">
+        @can('')
+        <a href="RegistrarEvento">
                 <button
                     style="position:absolute; top:63%; left:54%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                    type="button" class="btn btn-warning">Registrar usuario empleado
+                    type="button" class="btn btn-warning">Registrar evento
                 </button>
         </a>
         @endcan
-        @can('index.usuario')
-        <a href="usuarios">
-            <button
-                style="position:absolute; top:82%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Usuarios
-            </button>
-        </a>
-        @endcan
-        @can('index.rol')
-        <a href="roles">
-            <button
-                style="position:absolute; top:82%; left:54%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Roles
-            </button>
-        </a>
-        @endcan
-        @can('index.evento')
-        <a href="eventos">
-            <button
-                style="position:absolute; top:101%; left:16%; height:100px; width:450px; font-size:30px; border-radius:20px;"
-                type="button" class="btn btn-warning">Usuarios
-            </button>
-        </a>
-        @endcan
-        
-      
         
 
     </div>

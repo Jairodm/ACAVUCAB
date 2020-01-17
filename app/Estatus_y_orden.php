@@ -21,6 +21,8 @@ class Estatus_y_orden extends Model
      */
     protected $table = 'estatus_y_orden';
 
+    public $timestamps = false;
+
     /**
      * The primary key for the model.
      * 
@@ -50,7 +52,7 @@ class Estatus_y_orden extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function estatus()
+    public function estatusx()
     {
         return $this->belongsTo('App\Estatus', 'estatus', 'codigo_estatus');
     }
@@ -60,6 +62,6 @@ class Estatus_y_orden extends Model
      */
     public function ordenCompra()
     {
-        return $this->belongsTo('App\OrdenCompra', 'orden', 'codigo_orden_compra');
+        return $this->belongsTo('App\Orden_compra', 'orden', 'codigo_orden_compra');
     }
 }

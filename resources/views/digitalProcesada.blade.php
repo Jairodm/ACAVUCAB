@@ -24,7 +24,7 @@
                 
                     <div class="container center_div">
                   
-                        <form method="POST" action="{{ route('digitalProcesada', [$codigo_metodo_pago, $monto_cuota, $codigo_cuota] ) }}" validate>
+                        <form method="POST" action="{{ route('digitalProcesada', [$codigo_metodo_pago, $total] ) }}" validate>
                             @csrf
                       
                       
@@ -33,7 +33,7 @@
                     
                         <div class="col-md-6 mb-3">
                           <label for="vencimiento">Monto a pagar:</label>
-                        <input type="text" class="form-control" name="totals" placeholder="" value='{{$monto_cuota}}' readonly>
+                        <input type="text" class="form-control" name="totals" placeholder="" value='{{$total}}' readonly>
 
                        
                         </div>
