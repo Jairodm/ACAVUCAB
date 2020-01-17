@@ -34,19 +34,18 @@
     </div>
 <br>
     <div style="width:90%; margin:auto">
-    <h1 style="font-size:30px"class="display-4">Nuestras últimas ofertas </h1>
+    <h1 style="font-size:30px"class="display-4">Últimos</h1>
     <hr class="bg-warning">
     <div class="row mb-2">
         <div class="col-md-6">
             <div
                 class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary">World</strong>
-                    <h3 class="mb-0">Featured post</h3>
+                    <strong class="d-inline-block mb-2 text-primary">Eventos</strong>
+                    <h3 class="mb-0">Evento de la cerveza artesanal</h3>
                     <div class="mb-1 text-muted">Nov 12</div>
-                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to
-                        additional content.</p>
-                    <a href="#" class="stretched-link">Continue reading</a>
+                    <p class="card-text mb-auto">Este evento se realizará en la Universidad Católica Andrés Bello.</p>
+                    <a href="#" class="stretched-link">Continuar leyendo</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                     <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
@@ -63,12 +62,11 @@
             <div
                 class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-success">Design</strong>
-                    <h3 class="mb-0">Post title</h3>
+                    <strong class="d-inline-block mb-2 text-success">cervezas</strong>
+                    <h3 class="mb-0">Nuestras Cervezas</h3>
                     <div class="mb-1 text-muted">Nov 11</div>
-                    <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to
-                        additional content.</p>
-                    <a href="#" class="stretched-link">Continue reading</a>
+                    <p class="mb-auto">En ACAVUCAB podrás encontrar una gran cantidad de cervezas artesanales.</p>
+                    <a href="#" class="stretched-link">Continuar leyendo</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                     <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
